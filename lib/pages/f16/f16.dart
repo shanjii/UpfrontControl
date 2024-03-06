@@ -1,6 +1,6 @@
-import 'package:app/layouts/f16/layout/f16_keypad_layout.dart';
-import 'package:app/layouts/f16/layout/f16_top_buttons.dart';
-import 'package:app/layouts/providers/audio.dart';
+import 'package:app/pages/f16/layout/f16_keypad_layout.dart';
+import 'package:app/pages/f16/layout/f16_top_buttons.dart';
+import 'package:app/providers/audio.dart';
 import 'package:app/values/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

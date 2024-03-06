@@ -1,5 +1,5 @@
-import 'package:app/layouts/f16/f16.dart';
-import 'package:app/layouts/providers/audio.dart';
+import 'package:app/pages/f16/f16.dart';
+import 'package:app/providers/audio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';

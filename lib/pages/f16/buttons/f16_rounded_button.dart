@@ -1,5 +1,5 @@
 import 'package:app/api.dart';
-import 'package:app/layouts/providers/audio.dart';
+import 'package:app/providers/audio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_vibrate/flutter_vibrate.dart';
 import 'package:provider/provider.dart';
