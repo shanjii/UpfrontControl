@@ -1,6 +1,8 @@
-import 'package:app/pages/f16/layout/f16_keypad_layout.dart';
-import 'package:app/pages/f16/layout/f16_top_buttons.dart';
-import 'package:app/providers/audio.dart';
+import 'package:app/pages/f16/layout/f16_keypad.dart';
+import 'package:app/pages/f16/layout/f16_left.dart';
+import 'package:app/pages/f16/layout/f16_right.dart';
+import 'package:app/pages/f16/layout/f16_top.dart';
+import 'package:app/providers/providers.dart';
 import 'package:app/values/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -10,17 +12,49 @@ class F16 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    context.read<AudioProvider>().initSoundF16();
-    double height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
+    context.read<Sounds>().initSoundF16();
     return Scaffold(
-      backgroundColor: DefaultColors.background,
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
+      backgroundColor: DefaultColors.backgroundOled,
+      body: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          SizedBox(height: height * 0.2, child: const F16TopButtons()),
-          SizedBox(height: height * 0.6, child: const F16KeypadRegion()),
+          ConstrainedBox(
+            constraints: BoxConstraints(maxWidth: width * 0.20),
+            child: _leftArea(),
+          ),
+          ConstrainedBox(
+            constraints: BoxConstraints(maxWidth: width * 0.6),
+            child: _centerArea(),
+          ),
+          ConstrainedBox(
+            constraints: BoxConstraints(maxWidth: width * 0.20),
+            child: _rightArea(),
+          ),
         ],
       ),
+    );
+  }
+
+  _leftArea() {
+    return const Placeholder(
+      child: F16Left(),
+    );
+  }
+
+  _centerArea() {
+    return const Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Placeholder(child: F16Top()),
+        Placeholder(child: F16Keypad()),
+      ],
+    );
+  }
+
+  _rightArea() {
+    return const Placeholder(
+      child: F16Right(),
     );
   }
 }

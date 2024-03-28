@@ -1,11 +1,12 @@
 import 'package:app/api.dart';
-import 'package:app/providers/audio.dart';
+import 'package:app/providers/providers.dart';
+import 'package:app/values/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_vibrate/flutter_vibrate.dart';
 import 'package:provider/provider.dart';
 
-class F16Keypad extends StatefulWidget {
-  const F16Keypad({
+class F16KeypadButton extends StatefulWidget {
+  const F16KeypadButton({
     super.key,
     required this.sentValue,
     this.topLabel,
@@ -21,17 +22,18 @@ class F16Keypad extends StatefulWidget {
   final bool functionButton;
 
   @override
-  State<F16Keypad> createState() => _F16KeypadState();
+  State<F16KeypadButton> createState() => _F16KeypadState();
 }
 
-class _F16KeypadState extends State<F16Keypad> {
+class _F16KeypadState extends State<F16KeypadButton> {
   bool isPressed = false;
-  late AudioProvider provider;
+  late Sounds provider;
 
   @override
   Widget build(BuildContext context) {
-    provider = context.read<AudioProvider>();
-    return Expanded(
+    provider = context.read<Sounds>();
+    return AspectRatio(
+      aspectRatio: 1,
       child: GestureDetector(
         onTapDown: (details) {
           _feedbackDown(widget.sentValue);
@@ -40,7 +42,7 @@ class _F16KeypadState extends State<F16Keypad> {
           margin: const EdgeInsets.all(5),
           padding: const EdgeInsets.all(2),
           decoration: BoxDecoration(
-            color: const Color.fromARGB(255, 182, 182, 182),
+            color: DefaultColors.f16KeypadInnerColor,
             border: _buttonBorder(),
             borderRadius: BorderRadius.circular(5),
           ),
@@ -55,7 +57,7 @@ class _F16KeypadState extends State<F16Keypad> {
       return null;
     } else {
       return Border.all(
-        color: const Color.fromARGB(255, 236, 236, 236),
+        color: DefaultColors.f16KeypadOuterColor,
         width: 3,
       );
     }
@@ -106,10 +108,12 @@ class _F16KeypadState extends State<F16Keypad> {
                 ),
               ),
             if (cornerLabel != null)
-              Align(
-                alignment: Alignment.bottomRight,
+              Positioned(
+                bottom: 0,
+                right: 1,
                 child: Text(
                   cornerLabel,
+                  textAlign: TextAlign.center,
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: constraints.maxHeight / 3.5,
@@ -125,7 +129,7 @@ class _F16KeypadState extends State<F16Keypad> {
   }
 
   _feedbackDown(String value) {
-    Vibrate.feedback(FeedbackType.medium);
+    Vibrate.feedback(FeedbackType.heavy);
     provider.pool.play(provider.activeSound);
     sendInput(value);
   }

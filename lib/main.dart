@@ -1,32 +1,35 @@
 import 'package:app/pages/f16/f16.dart';
-import 'package:app/providers/audio.dart';
+import 'package:app/providers/providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:wakelock/wakelock.dart';
 
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-
+_displaySettings() {
+  Wakelock.enable();
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.landscapeLeft,
     DeviceOrientation.landscapeRight,
   ]);
-
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
-  runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  _displaySettings();
+
+  runApp(const App());
+}
+
+class App extends StatelessWidget {
+  const App({super.key});
 
   @override
   Widget build(BuildContext context) {
-    Wakelock.enable();
     return Provider(
-      create: (context) => AudioProvider(),
+      create: (_) => Sounds(),
       child: MaterialApp(
-        title: 'Flutter Demo',
+        title: 'Mobile ICP',
         theme: ThemeData(
           useMaterial3: true,
         ),

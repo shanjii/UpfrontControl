@@ -27,23 +27,25 @@ class _F16RoundedButtonState extends State<F16RoundedButton> {
   @override
   Widget build(BuildContext context) {
     provider = context.read<Sounds>();
-    return AspectRatio(
-      aspectRatio: 1,
-      child: GestureDetector(
-        onTapDown: (details) {
-          _feedbackDown(widget.sentValue);
-        },
-        child: Container(
-          margin: const EdgeInsets.all(5),
-          padding: const EdgeInsets.all(5),
-          decoration: BoxDecoration(
-            color: const Color.fromARGB(255, 77, 77, 77),
-            border: _buttonBorder(),
-            borderRadius: BorderRadius.circular(500),
-          ),
-          child: _labels(
-            widget.label,
-            widget.secondLabel,
+    return Expanded(
+      child: AspectRatio(
+        aspectRatio: 1,
+        child: GestureDetector(
+          onTapDown: (details) {
+            _feedbackDown(widget.sentValue);
+          },
+          child: Container(
+            margin: const EdgeInsets.all(5),
+            padding: const EdgeInsets.all(5),
+            decoration: BoxDecoration(
+              color: const Color.fromARGB(255, 77, 77, 77),
+              border: _buttonBorder(),
+              borderRadius: BorderRadius.circular(500),
+            ),
+            child: _labels(
+              widget.label,
+              widget.secondLabel,
+            ),
           ),
         ),
       ),
