@@ -1,8 +1,7 @@
-import 'package:app/api.dart';
-import 'package:app/providers/providers.dart';
+import 'package:app/providers/network.dart';
+import 'package:app/providers/feedbacks.dart';
 import 'package:app/values/colors.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_vibrate/flutter_vibrate.dart';
 import 'package:provider/provider.dart';
 
 class F16KeypadButton extends StatefulWidget {
@@ -27,22 +26,34 @@ class F16KeypadButton extends StatefulWidget {
 
 class _F16KeypadState extends State<F16KeypadButton> {
   bool isPressed = false;
-  late Sounds provider;
+  late Feedbacks feedbacks;
+  late Network network;
 
   @override
   Widget build(BuildContext context) {
-    provider = context.read<Sounds>();
+    feedbacks = context.read<Feedbacks>();
+    network = context.read<Network>();
+
     return AspectRatio(
       aspectRatio: 1,
       child: GestureDetector(
         onTapDown: (details) {
-          _feedbackDown(widget.sentValue);
+          setState(() {
+            isPressed = true;
+          });
+          _onPress(widget.sentValue);
         },
+        onTapUp: (details) => setState(() {
+          isPressed = false;
+        }),
+        onTapCancel: () => setState(() {
+          isPressed = false;
+        }),
         child: Container(
           margin: const EdgeInsets.all(5),
           padding: const EdgeInsets.all(2),
           decoration: BoxDecoration(
-            color: DefaultColors.f16KeypadInnerColor,
+            color: _buttonInnerColor(),
             border: _buttonBorder(),
             borderRadius: BorderRadius.circular(5),
           ),
@@ -57,9 +68,25 @@ class _F16KeypadState extends State<F16KeypadButton> {
       return null;
     } else {
       return Border.all(
-        color: DefaultColors.f16KeypadOuterColor,
+        color: _buttonOuterColor(),
         width: 3,
       );
+    }
+  }
+
+  _buttonInnerColor() {
+    if (isPressed) {
+      return DefaultColors.f16KeypadInnerDepressedColor;
+    } else {
+      return DefaultColors.f16KeypadInnerColor;
+    }
+  }
+
+  _buttonOuterColor() {
+    if (isPressed) {
+      return DefaultColors.f16KeypadOuterDepressedColor;
+    } else {
+      return DefaultColors.f16KeypadOuterColor;
     }
   }
 
@@ -128,9 +155,9 @@ class _F16KeypadState extends State<F16KeypadButton> {
     );
   }
 
-  _feedbackDown(String value) {
-    Vibrate.feedback(FeedbackType.heavy);
-    provider.pool.play(provider.activeSound);
-    sendInput(value);
+  _onPress(String value) {
+    feedbacks.tapVibration();
+    feedbacks.tapSound();
+    network.sendInput(value);
   }
 }

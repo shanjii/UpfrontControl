@@ -1,7 +1,7 @@
-import 'package:app/api.dart';
-import 'package:app/providers/providers.dart';
+import 'package:app/providers/feedbacks.dart';
+import 'package:app/providers/network.dart';
+import 'package:app/values/colors.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_vibrate/flutter_vibrate.dart';
 import 'package:provider/provider.dart';
 
 class F16RoundedButton extends StatefulWidget {
@@ -22,22 +22,34 @@ class F16RoundedButton extends StatefulWidget {
 
 class _F16RoundedButtonState extends State<F16RoundedButton> {
   bool isPressed = false;
-  late Sounds provider;
+  late Feedbacks feedbacks;
+  late Network network;
 
   @override
   Widget build(BuildContext context) {
-    provider = context.read<Sounds>();
+    feedbacks = context.read<Feedbacks>();
+    network = context.read<Network>();
+
     return AspectRatio(
       aspectRatio: 1,
       child: GestureDetector(
         onTapDown: (details) {
-          _feedbackDown(widget.sentValue);
+          setState(() {
+            isPressed = true;
+          });
+          _onPress(widget.sentValue);
         },
+        onTapUp: (details) => setState(() {
+          isPressed = false;
+        }),
+        onTapCancel: () => setState(() {
+          isPressed = false;
+        }),
         child: Container(
           margin: const EdgeInsets.all(5),
           padding: const EdgeInsets.all(5),
           decoration: BoxDecoration(
-            color: const Color.fromARGB(255, 77, 77, 77),
+            color: _buttonInnerColor(),
             border: _buttonBorder(),
             borderRadius: BorderRadius.circular(500),
           ),
@@ -52,9 +64,25 @@ class _F16RoundedButtonState extends State<F16RoundedButton> {
 
   _buttonBorder() {
     return Border.all(
-      color: const Color.fromARGB(255, 236, 236, 236),
+      color: _buttonOuterColor(),
       width: 3,
     );
+  }
+
+  _buttonInnerColor() {
+    if (isPressed) {
+      return DefaultColors.f16RoundButtonDepressedColor;
+    } else {
+      return DefaultColors.f16RoundButtonColor;
+    }
+  }
+
+  _buttonOuterColor() {
+    if (isPressed) {
+      return DefaultColors.f16RoundButtonOuterDepressedColor;
+    } else {
+      return DefaultColors.f16RoundButtonOuterColor;
+    }
   }
 
   _labels(String label, String? secondLabel) {
@@ -88,9 +116,9 @@ class _F16RoundedButtonState extends State<F16RoundedButton> {
     );
   }
 
-  _feedbackDown(String value) {
-    Vibrate.feedback(FeedbackType.heavy);
-    provider.pool.play(provider.activeSound);
-    sendInput(value);
+  _onPress(String value) {
+    feedbacks.tapVibration();
+    feedbacks.tapSound();
+    network.sendInput(value);
   }
 }

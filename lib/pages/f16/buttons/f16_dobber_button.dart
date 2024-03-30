@@ -1,7 +1,6 @@
-import 'package:app/api.dart';
-import 'package:app/providers/providers.dart';
+import 'package:app/providers/network.dart';
+import 'package:app/providers/feedbacks.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_vibrate/flutter_vibrate.dart';
 import 'package:provider/provider.dart';
 
 class F16DobberButton extends StatefulWidget {
@@ -15,11 +14,14 @@ class F16DobberButton extends StatefulWidget {
 
 class _F16DobberButtonState extends State<F16DobberButton> {
   bool isPressed = false;
-  late Sounds provider;
+  late Feedbacks feedbacks;
+  late Network network;
 
   @override
   Widget build(BuildContext context) {
-    provider = context.read<Sounds>();
+    feedbacks = context.read<Feedbacks>();
+    network = context.read<Network>();
+
     return AspectRatio(
       aspectRatio: 1,
       child: Container(
@@ -28,9 +30,9 @@ class _F16DobberButtonState extends State<F16DobberButton> {
     );
   }
 
-  _feedbackDown(String value) {
-    Vibrate.feedback(FeedbackType.heavy);
-    provider.pool.play(provider.activeSound);
-    sendInput(value);
+  _onPress(String value) {
+    feedbacks.tapVibration();
+    feedbacks.tapSound();
+    network.sendInput(value);
   }
 }

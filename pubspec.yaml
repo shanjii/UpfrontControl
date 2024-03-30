@@ -39,6 +39,7 @@ dependencies:
   wakelock: ^0.6.2
   soundpool: ^2.4.1
   provider: ^6.1.2
+  shared_preferences: ^2.2.2
 
 dev_dependencies:
   flutter_test:

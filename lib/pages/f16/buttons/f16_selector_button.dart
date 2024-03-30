@@ -1,8 +1,7 @@
-import 'package:app/api.dart';
-import 'package:app/providers/providers.dart';
+import 'package:app/providers/feedbacks.dart';
+import 'package:app/providers/network.dart';
 import 'package:app/values/colors.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_vibrate/flutter_vibrate.dart';
 import 'package:provider/provider.dart';
 
 class F16SelectorButton extends StatefulWidget {
@@ -24,44 +23,69 @@ class F16SelectorButton extends StatefulWidget {
 }
 
 class _F16SelectorButtonState extends State<F16SelectorButton> {
-  bool isPressed = false;
-  late Sounds provider;
+  late Feedbacks feedbacks;
+  late Network network;
+  bool pressedUp = false;
+  bool pressedDown = false;
 
   @override
   Widget build(BuildContext context) {
-    provider = context.read<Sounds>();
+    feedbacks = context.read<Feedbacks>();
+    network = context.read<Network>();
+
     return AspectRatio(
-      aspectRatio: 1 / 2, 
-      child: Column(
-        children: [
-          AspectRatio(
-            aspectRatio: 1,
-            child: GestureDetector(
-              onTapDown: (details) {
-                _feedbackDown(widget.sentValueUp);
-              },
-              child: _button(widget.labelUp),
+      aspectRatio: 1 / 2,
+      child: Container(
+        decoration: _buttonDecoration(),
+        child: Column(
+          children: [
+            AspectRatio(
+              aspectRatio: 1,
+              child: GestureDetector(
+                onTapDown: (details) {
+                  setState(() {
+                    pressedUp = true;
+                  });
+                  _onPress(widget.sentValueUp);
+                },
+                onTapUp: (details) => setState(() {
+                  pressedUp = false;
+                }),
+                onTapCancel: () => setState(() {
+                  pressedUp = false;
+                }),
+                child: _button(widget.labelUp, widget.sentValueUp),
+              ),
             ),
-          ),
-          AspectRatio(
-            aspectRatio: 1,
-            child: GestureDetector(
-              onTapDown: (details) {
-                _feedbackDown(widget.sentValueDown);
-              },
-              child: _button(widget.labelDown),
+            AspectRatio(
+              aspectRatio: 1,
+              child: GestureDetector(
+                onTapDown: (details) {
+                  setState(() {
+                    pressedDown = true;
+                  });
+                  _onPress(widget.sentValueDown);
+                },
+                onTapUp: (details) => setState(() {
+                  pressedDown = false;
+                }),
+                onTapCancel: () => setState(() {
+                  pressedDown = false;
+                }),
+                child: _button(widget.labelDown, widget.sentValueDown),
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
 
-  _button(String label) {
+  _button(String label, String sentValue) {
     return LayoutBuilder(builder: (context, constraints) {
       return Container(
         padding: const EdgeInsets.all(5),
-        color: DefaultColors.f16KeypadInnerColor,
+        color: Colors.transparent,
         child: Center(
           child: Text(
             label,
@@ -75,9 +99,44 @@ class _F16SelectorButtonState extends State<F16SelectorButton> {
     });
   }
 
-  _feedbackDown(String value) {
-    Vibrate.feedback(FeedbackType.heavy);
-    provider.pool.play(provider.activeSound);
-    sendInput(value);
+  _buttonDecoration() {
+    return BoxDecoration(
+      gradient: LinearGradient(
+        begin: Alignment.topCenter,
+        end: Alignment.bottomCenter,
+        colors: _setGradientType(),
+      ),
+    );
+  }
+
+  _setGradientType() {
+    if (pressedUp) {
+      return [
+        DefaultColors.f16KeypadInnerDepressedColor,
+        DefaultColors.f16KeypadInnerElevatedColor,
+      ];
+    } else if (pressedDown) {
+      return [
+        DefaultColors.f16KeypadInnerElevatedColor,
+        DefaultColors.f16KeypadInnerDepressedColor,
+      ];
+    } else {
+      return [
+        DefaultColors.f16KeypadInnerColor,
+        DefaultColors.f16KeypadInnerColor
+      ];
+    }
+  }
+
+  _onPress(String value) {
+    feedbacks.tapVibration();
+    feedbacks.tapSound();
+    network.sendInput(value);
+  }
+
+  _onRelease(bool pressed) {
+    setState(() {
+      pressedUp = false;
+    });
   }
 }
