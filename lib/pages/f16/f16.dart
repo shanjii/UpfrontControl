@@ -17,7 +17,7 @@ class F16 extends StatelessWidget {
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: DefaultColors.backgroundOled,
+      backgroundColor: DefaultColors.backgroundBlack,
       body: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -39,7 +39,14 @@ class F16 extends StatelessWidget {
   }
 
   _left() {
-    return const F16Left();
+    return const F16Left(
+      dobberUp: "g",
+      dobberLeft: "h",
+      dobberDown: "i",
+      dobberRight: "j",
+      switchUp: "k",
+      switchDown: "l",
+    );
   }
 
   _center() {
@@ -73,6 +80,12 @@ class F16 extends StatelessWidget {
   }
 
   _right() {
-    return const F16Right();
+    return const F16Right(
+      switchUp: "m",
+      switchDown: "n",
+      drift: "o",
+      norm: "p",
+      warnReset: "q",
+    );
   }
 }

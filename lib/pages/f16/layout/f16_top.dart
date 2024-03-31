@@ -1,5 +1,7 @@
 import 'package:app/pages/f16/buttons/f16_rounded_button.dart';
+import 'package:app/providers/tools.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class F16Top extends StatelessWidget {
   final String com1;
@@ -21,8 +23,10 @@ class F16Top extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
+    var devMode = context.read<Tools>().devMode;
 
     return Placeholder(
+      color: devMode ? Colors.grey : Colors.transparent,
       child: ConstrainedBox(
         constraints: BoxConstraints(maxHeight: height * 0.3),
         child: Align(
@@ -30,7 +34,7 @@ class F16Top extends StatelessWidget {
           child: AspectRatio(
             aspectRatio: 19 / 4,
             child: Placeholder(
-              color: Colors.red,
+              color: devMode ? Colors.red : Colors.transparent,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [

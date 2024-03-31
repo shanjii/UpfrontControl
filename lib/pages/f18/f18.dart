@@ -13,7 +13,7 @@ class F18 extends StatelessWidget {
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: DefaultColors.backgroundOled,
+      backgroundColor: DefaultColors.backgroundBlack,
       body: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [],

@@ -1,81 +1,53 @@
 import 'package:app/pages/f16/f16.dart';
 import 'package:app/pages/f18/f18.dart';
-import 'package:app/providers/feedbacks.dart';
-import 'package:app/providers/network.dart';
+import 'package:app/pages/settings/settings.dart';
 import 'package:app/values/colors.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_vibrate/flutter_vibrate.dart';
-import 'package:provider/provider.dart';
 
 class Home extends StatelessWidget {
   const Home({super.key});
 
   @override
   Widget build(BuildContext context) {
-    var network = context.read<Network>();
-    var feedbacks = context.read<Feedbacks>();
-
-    TextEditingController ipController = TextEditingController(
-      text: network.localIp,
-    );
-
     return Scaffold(
-      backgroundColor: DefaultColors.backgroundOled,
+      backgroundColor: DefaultColors.background,
       resizeToAvoidBottomInset: false,
-      body: Column(
+      appBar: AppBar(
+        backgroundColor: DefaultColors.backgroundLight,
+        actions: [_settingsButton(context)],
+      ),
+      body: Stack(
         children: [
-          SizedBox(
-            height: 50,
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Expanded(
-                  child: _ipInput(ipController),
-                ),
-                SizedBox(
-                  width: 100,
-                  child: Material(
-                    color: Colors.green,
-                    child: InkWell(
-                      onTap: () {
-                        network.setLocalIp(ipController.value.text);
-                      },
-                      child: const Center(
-                        child: Text("Apply"),
-                      ),
-                    ),
-                  ),
-                )
-              ],
-            ),
-          ),
-          Expanded(
+          Align(
+            alignment: Alignment.center,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                SizedBox(
-                  width: 100,
-                  height: 100,
-                  child: Material(
-                    color: Colors.green,
-                    child: InkWell(
-                      onTap: () => goToF16(context),
-                      child: const Center(
-                        child: Text("F16"),
+                Expanded(
+                  child: Container(
+                    padding: const EdgeInsets.all(50),
+                    child: Material(
+                      color: const Color.fromARGB(255, 53, 53, 53),
+                      child: InkWell(
+                        onTap: () => goToF16(context),
+                        child: Center(
+                          child: _buttonTitle("F16"),
+                        ),
                       ),
                     ),
                   ),
                 ),
-                SizedBox(
-                  width: 100,
-                  height: 100,
-                  child: Material(
-                    color: Colors.green,
-                    child: InkWell(
-                      onTap: () => goToF18(context),
-                      child: const Center(
-                        child: Text("F18"),
+                Expanded(
+                  child: Container(
+                    padding: const EdgeInsets.all(50),
+                    child: Material(
+                      color: const Color.fromARGB(255, 53, 53, 53),
+                      child: InkWell(
+                        onTap: () => goToF18(context),
+                        child: Center(
+                          child: _buttonTitle("F18"),
+                        ),
                       ),
                     ),
                   ),
@@ -83,100 +55,36 @@ class Home extends StatelessWidget {
               ],
             ),
           ),
-          SizedBox(
-            height: 50,
-            child: Row(children: [
-              Expanded(
-                child: Material(
-                  color: Colors.red,
-                  child: InkWell(
-                    onTap: () {
-                      feedbacks.muted = true;
-                    },
-                    child: const Center(
-                      child: Text("Muted"),
-                    ),
-                  ),
-                ),
-              ),
-              Expanded(
-                child: Material(
-                  color: Colors.green,
-                  child: InkWell(
-                    onTap: () {
-                      feedbacks.muted = false;
-                    },
-                    child: const Center(
-                      child: Text("Unmuted"),
-                    ),
-                  ),
-                ),
-              ),
-            ]),
-          ),
-          SizedBox(
-            height: 50,
-            child: Row(children: [
-              Expanded(
-                child: Material(
-                  color: Colors.green,
-                  child: InkWell(
-                    onTap: () {
-                      feedbacks.hapticFeedback = FeedbackType.light;
-                    },
-                    child: const Center(
-                      child: Text("Light vibration"),
-                    ),
-                  ),
-                ),
-              ),
-              Expanded(
-                child: Material(
-                  color: Colors.yellow,
-                  child: InkWell(
-                    onTap: () {
-                      feedbacks.hapticFeedback = FeedbackType.medium;
-                    },
-                    child: const Center(
-                      child: Text("Medium vibration"),
-                    ),
-                  ),
-                ),
-              ),
-              Expanded(
-                child: Material(
-                  color: Colors.red,
-                  child: InkWell(
-                    onTap: () {
-                      feedbacks.hapticFeedback = FeedbackType.heavy;
-                    },
-                    child: const Center(
-                      child: Text("Heavy vibration"),
-                    ),
-                  ),
-                ),
-              ),
-            ]),
-          )
         ],
       ),
     );
   }
 
-  _ipInput(TextEditingController ipController) {
-    return TextField(
+  _buttonTitle(String title) {
+    return Text(
+      title,
       style: const TextStyle(
         color: Colors.white,
-        fontSize: 25,
+        fontSize: 32,
       ),
-      decoration: const InputDecoration(
-        hintText: "Your machine IP address",
-        hintStyle: TextStyle(
-          color: Colors.white,
-          fontSize: 25,
-        ),
+    );
+  }
+
+  _settingsButton(BuildContext context) {
+    return IconButton(
+      onPressed: () => goToSettings(context),
+      icon: const Icon(
+        Icons.settings,
+        color: Colors.white,
+        size: 40,
       ),
-      controller: ipController,
+    );
+  }
+
+  goToSettings(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const Settings()),
     );
   }
 

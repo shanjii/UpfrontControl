@@ -13,19 +13,31 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await _setDisplaySettings();
-  String savedIp = await _getSavedIp();
+  final prefs = await SharedPreferences.getInstance();
+  String savedIp = await _getSavedIp(prefs);
+  bool isMuted = await _getMutedSetting(prefs);
+  FeedbackType haptic = await _getHapticSetting(prefs);
 
   runApp(
     App(
       savedIp: savedIp,
+      isMuted: isMuted,
+      haptic: haptic,
     ),
   );
 }
 
 class App extends StatelessWidget {
   final String savedIp;
+  final bool isMuted;
+  final FeedbackType haptic;
 
-  const App({super.key, required this.savedIp});
+  const App({
+    super.key,
+    required this.savedIp,
+    required this.isMuted,
+    required this.haptic,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -33,12 +45,12 @@ class App extends StatelessWidget {
       providers: [
         Provider(
           create: (context) => Feedbacks(
-            muted: false,
-            hapticFeedback: FeedbackType.heavy,
+            muted: isMuted,
+            haptic: haptic,
           ),
         ),
         Provider(
-          create: (context) => Tools(),
+          create: (context) => Tools(devMode: false),
         ),
         Provider(
           create: (context) => Network(localIp: savedIp),
@@ -56,10 +68,21 @@ class App extends StatelessWidget {
   }
 }
 
-_getSavedIp() async {
-  final prefs = await SharedPreferences.getInstance();
-  var localIp = prefs.getString('ip') ?? "";
-  return localIp;
+_getSavedIp(SharedPreferences prefs) async {
+  return prefs.getString('ip') ?? "";
+}
+
+_getMutedSetting(SharedPreferences prefs) async {
+  return prefs.getBool('muted') ?? false;
+}
+
+_getHapticSetting(SharedPreferences prefs) async {
+  var value = prefs.getString("haptic");
+  if (value != null) {
+    return FeedbackType.values.byName(value);
+  } else {
+    return FeedbackType.medium;
+  }
 }
 
 _setDisplaySettings() async {

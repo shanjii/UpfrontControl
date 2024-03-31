@@ -133,10 +133,4 @@ class _F16SelectorButtonState extends State<F16SelectorButton> {
     feedbacks.tapSound();
     network.sendInput(value);
   }
-
-  _onRelease(bool pressed) {
-    setState(() {
-      pressedUp = false;
-    });
-  }
 }

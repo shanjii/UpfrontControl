@@ -1,5 +1,7 @@
 import 'package:app/pages/f16/buttons/f16_keypad_button.dart';
+import 'package:app/providers/tools.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class F16Keypad extends StatelessWidget {
   final String num1;
@@ -34,8 +36,10 @@ class F16Keypad extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
+    var devMode = context.read<Tools>().devMode;
 
     return Placeholder(
+      color: devMode ? Colors.grey : Colors.transparent,
       child: ConstrainedBox(
         constraints: BoxConstraints(maxHeight: height * 0.7),
         child: Align(
@@ -43,7 +47,7 @@ class F16Keypad extends StatelessWidget {
           child: AspectRatio(
             aspectRatio: 8 / 4,
             child: Placeholder(
-              color: Colors.red,
+              color: devMode ? Colors.red : Colors.transparent,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
