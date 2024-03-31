@@ -104,7 +104,7 @@ class _ButtonState extends State<_Button> {
             title,
             style: TextStyle(
               color: Colors.white,
-              fontSize: constraints.maxHeight / 3.5,
+              fontSize: constraints.maxHeight / 3,
             ),
           ),
         );

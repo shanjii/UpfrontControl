@@ -13,10 +13,12 @@ class Settings extends StatefulWidget {
 }
 
 class _SettingsState extends State<Settings> {
+  late Feedbacks feedbacks;
+  late Network network;
   @override
   Widget build(BuildContext context) {
-    var feedbacks = context.read<Feedbacks>();
-    var network = context.read<Network>();
+    feedbacks = context.read<Feedbacks>();
+    network = context.read<Network>();
 
     TextEditingController ipController = TextEditingController(
       text: network.localIp,
@@ -62,6 +64,11 @@ class _SettingsState extends State<Settings> {
             height: 60,
             child: Row(
               children: [
+                _button(
+                  title: "No vibration",
+                  onTap: () => feedbacks.setHaptic(null),
+                  condition: feedbacks.haptic == null,
+                ),
                 _button(
                   title: "Light vibration",
                   onTap: () => feedbacks.setHaptic(FeedbackType.light),
@@ -136,6 +143,7 @@ class _SettingsState extends State<Settings> {
           fontSize: 25,
         ),
         keyboardType: TextInputType.number,
+        onChanged: (value) => network.setLocalIp(value),
         decoration: InputDecoration(
           filled: true,
           suffix: const Text(":3000"),

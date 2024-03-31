@@ -41,47 +41,49 @@ class _F16DobberButtonState extends State<F16DobberButton> {
     feedbacks = context.read<Feedbacks>();
     network = context.read<Network>();
 
-    return LayoutBuilder(builder: (context, constraints) {
-      return GestureDetector(
-        onTapDown: (details) => _getTapLocation(
-          constraints: constraints,
-          details: details,
-          topPress: () => _onPress(widget.sentValueUp),
-          rightPress: () => _onPress(widget.sentValueRight),
-          leftPress: () => _onPress(widget.sentValueLeft),
-          bottomPress: () => _onPress(widget.sentValueDown),
-        ),
-        onTapUp: (details) => setState(() {
-          pressedButton = _PressedButton.none;
-        }),
-        onTapCancel: () => setState(() {
-          pressedButton = _PressedButton.none;
-        }),
-        child: AspectRatio(
-          aspectRatio: 1,
-          child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 10),
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: DefaultColors.f16KeypadInnerColor,
-              gradient: _gradient(),
-            ),
-            child: Stack(
-              children: [
-                Align(
-                  alignment: Alignment.center,
-                  child: _verticalAxis(),
-                ),
-                Align(
-                  alignment: Alignment.center,
-                  child: _horizontalAxis(),
-                )
-              ],
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        return GestureDetector(
+          onTapDown: (details) => _getTapLocation(
+            constraints: constraints,
+            details: details,
+            topPress: () => _onPress(widget.sentValueUp),
+            rightPress: () => _onPress(widget.sentValueRight),
+            leftPress: () => _onPress(widget.sentValueLeft),
+            bottomPress: () => _onPress(widget.sentValueDown),
+          ),
+          onTapUp: (details) => setState(() {
+            pressedButton = _PressedButton.none;
+          }),
+          onTapCancel: () => setState(() {
+            pressedButton = _PressedButton.none;
+          }),
+          child: AspectRatio(
+            aspectRatio: 1,
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: DefaultColors.f16KeypadInnerColor,
+                gradient: _gradient(),
+              ),
+              child: Stack(
+                children: [
+                  Align(
+                    alignment: Alignment.center,
+                    child: _verticalAxis(),
+                  ),
+                  Align(
+                    alignment: Alignment.center,
+                    child: _horizontalAxis(),
+                  )
+                ],
+              ),
             ),
           ),
-        ),
-      );
-    });
+        );
+      },
+    );
   }
 
   _horizontalAxis() {

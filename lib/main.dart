@@ -16,7 +16,7 @@ void main() async {
   final prefs = await SharedPreferences.getInstance();
   String savedIp = await _getSavedIp(prefs);
   bool isMuted = await _getMutedSetting(prefs);
-  FeedbackType haptic = await _getHapticSetting(prefs);
+  FeedbackType? haptic = await _getHapticSetting(prefs);
 
   runApp(
     App(
@@ -30,7 +30,7 @@ void main() async {
 class App extends StatelessWidget {
   final String savedIp;
   final bool isMuted;
-  final FeedbackType haptic;
+  final FeedbackType? haptic;
 
   const App({
     super.key,
@@ -79,6 +79,9 @@ _getMutedSetting(SharedPreferences prefs) async {
 _getHapticSetting(SharedPreferences prefs) async {
   var value = prefs.getString("haptic");
   if (value != null) {
+    if (value == "null") {
+      return null;
+    }
     return FeedbackType.values.byName(value);
   } else {
     return FeedbackType.medium;
