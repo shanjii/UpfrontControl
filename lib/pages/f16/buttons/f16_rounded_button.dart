@@ -71,17 +71,17 @@ class _F16RoundedButtonState extends State<F16RoundedButton> {
 
   _buttonInnerColor() {
     if (isPressed) {
-      return DefaultColors.f16RoundButtonDepressedColor;
+      return DefaultColors.f16RoundButtonDepress;
     } else {
-      return DefaultColors.f16RoundButtonColor;
+      return DefaultColors.f16RoundButton;
     }
   }
 
   _buttonOuterColor() {
     if (isPressed) {
-      return DefaultColors.f16RoundButtonOuterDepressedColor;
+      return DefaultColors.f16RoundButtonOuterDepress;
     } else {
-      return DefaultColors.f16RoundButtonOuterColor;
+      return DefaultColors.f16RoundButtonOuter;
     }
   }
 
@@ -94,7 +94,7 @@ class _F16RoundedButtonState extends State<F16RoundedButton> {
             Text(
               label,
               style: TextStyle(
-                color: Colors.white,
+                color: DefaultColors.label,
                 fontSize: constraints.maxHeight / 3,
                 letterSpacing: 0,
                 height: 1,
@@ -104,7 +104,7 @@ class _F16RoundedButtonState extends State<F16RoundedButton> {
               Text(
                 secondLabel!,
                 style: TextStyle(
-                  color: Colors.white,
+                  color: DefaultColors.label,
                   fontSize: constraints.maxHeight / 3,
                   letterSpacing: 0,
                   height: 1,

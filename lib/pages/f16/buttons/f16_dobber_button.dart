@@ -64,7 +64,7 @@ class _F16DobberButtonState extends State<F16DobberButton> {
               padding: const EdgeInsets.symmetric(horizontal: 10),
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: DefaultColors.f16KeypadInnerColor,
+                color: DefaultColors.f16ButtonInner,
                 gradient: _gradient(),
               ),
               child: Stack(
@@ -95,14 +95,14 @@ class _F16DobberButtonState extends State<F16DobberButton> {
             Text(
               "RTN",
               style: TextStyle(
-                color: Colors.white,
+                color: DefaultColors.label,
                 fontSize: constraints.maxWidth / 6.5,
               ),
             ),
             Text(
               "SEQ",
               style: TextStyle(
-                color: Colors.white,
+                color: DefaultColors.label,
                 fontSize: constraints.maxWidth / 6.5,
               ),
             ),
@@ -121,14 +121,14 @@ class _F16DobberButtonState extends State<F16DobberButton> {
             Text(
               "▲",
               style: TextStyle(
-                color: Colors.white,
+                color: DefaultColors.label,
                 fontSize: constraints.maxWidth / 5,
               ),
             ),
             Text(
               "▼",
               style: TextStyle(
-                color: Colors.white,
+                color: DefaultColors.label,
                 fontSize: constraints.maxWidth / 5,
               ),
             ),
@@ -159,19 +159,21 @@ class _F16DobberButtonState extends State<F16DobberButton> {
     if (pressedButton == _PressedButton.left ||
         pressedButton == _PressedButton.top) {
       return [
-        DefaultColors.f16KeypadInnerDepressedColor,
-        DefaultColors.f16KeypadInnerElevatedColor,
+        DefaultColors.f16ButtonInnerDepress,
+        DefaultColors.f16ButtonInner,
+        DefaultColors.f16ButtonInnerElevated,
       ];
     } else if (pressedButton == _PressedButton.right ||
         pressedButton == _PressedButton.bottom) {
       return [
-        DefaultColors.f16KeypadInnerElevatedColor,
-        DefaultColors.f16KeypadInnerDepressedColor,
+        DefaultColors.f16ButtonInnerElevated,
+        DefaultColors.f16ButtonInner,
+        DefaultColors.f16ButtonInnerDepress,
       ];
     } else {
       return [
-        DefaultColors.f16KeypadInnerColor,
-        DefaultColors.f16KeypadInnerColor,
+        DefaultColors.f16ButtonInner,
+        DefaultColors.f16ButtonInner,
       ];
     }
   }

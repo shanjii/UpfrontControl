@@ -76,17 +76,17 @@ class _F16KeypadState extends State<F16KeypadButton> {
 
   _buttonInnerColor() {
     if (isPressed) {
-      return DefaultColors.f16KeypadInnerDepressedColor;
+      return DefaultColors.f16ButtonInnerDepress;
     } else {
-      return DefaultColors.f16KeypadInnerColor;
+      return DefaultColors.f16ButtonInner;
     }
   }
 
   _buttonOuterColor() {
     if (isPressed) {
-      return DefaultColors.f16KeypadOuterDepressedColor;
+      return DefaultColors.f16ButtonOuterDepress;
     } else {
-      return DefaultColors.f16KeypadOuterColor;
+      return DefaultColors.f16ButtonOuter;
     }
   }
 
@@ -101,7 +101,7 @@ class _F16KeypadState extends State<F16KeypadButton> {
                 child: Text(
                   topLabel,
                   style: TextStyle(
-                    color: Colors.white,
+                    color: DefaultColors.label,
                     fontSize: constraints.maxHeight / 3,
                     letterSpacing: 0,
                     height: 1,
@@ -114,7 +114,7 @@ class _F16KeypadState extends State<F16KeypadButton> {
                 child: Text(
                   label,
                   style: TextStyle(
-                    color: Colors.white,
+                    color: DefaultColors.label,
                     fontSize: constraints.maxHeight / 3,
                     letterSpacing: 0,
                     height: 1,
@@ -127,7 +127,7 @@ class _F16KeypadState extends State<F16KeypadButton> {
                 child: Text(
                   label,
                   style: TextStyle(
-                    color: Colors.white,
+                    color: DefaultColors.label,
                     fontSize: constraints.maxHeight / 2,
                     letterSpacing: 0,
                     height: 1,
@@ -142,7 +142,7 @@ class _F16KeypadState extends State<F16KeypadButton> {
                   cornerLabel,
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    color: Colors.white,
+                    color: DefaultColors.label,
                     fontSize: constraints.maxHeight / 3.5,
                     letterSpacing: 0,
                     height: 1,

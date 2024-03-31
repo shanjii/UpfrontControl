@@ -30,19 +30,22 @@ class _F16SwitchState extends State<F16Switch> {
     network = context.read<Network>();
 
     return Container(
-      color: DefaultColors.f16KeypadInnerColor,
+      color: DefaultColors.f16ButtonInner,
       child: Column(
         children: [
           _Button(
             title: "DRIFT C/O",
+            color: DefaultColors.f16ButtonInner,
             onPress: () => _onPress(widget.sentValueDrift),
           ),
           _Button(
             title: "NORM",
+            color: DefaultColors.f16ButtonInner,
             onPress: () => _onPress(widget.sentValueNorm),
           ),
           _Button(
             title: "WRN RST",
+            color: DefaultColors.f16RoundButton,
             onPress: () => _onPress(widget.sentValueWrnRst),
           ),
         ],
@@ -59,9 +62,14 @@ class _F16SwitchState extends State<F16Switch> {
 
 class _Button extends StatefulWidget {
   final String title;
+  final Color color;
   final Function() onPress;
 
-  const _Button({required this.title, required this.onPress});
+  const _Button({
+    required this.title,
+    required this.onPress,
+    required this.color,
+  });
 
   @override
   State<_Button> createState() => _ButtonState();
@@ -87,9 +95,7 @@ class _ButtonState extends State<_Button> {
           pressed = false;
         }),
         child: Container(
-          color: pressed
-              ? DefaultColors.f16KeypadInnerDepressedColor
-              : DefaultColors.f16KeypadInnerColor,
+          color: pressed ? DefaultColors.f16ButtonInnerDepress : widget.color,
           child: _buttonLabel(widget.title),
         ),
       ),
@@ -103,7 +109,7 @@ class _ButtonState extends State<_Button> {
           child: Text(
             title,
             style: TextStyle(
-              color: Colors.white,
+              color: DefaultColors.label,
               fontSize: constraints.maxHeight / 3,
             ),
           ),

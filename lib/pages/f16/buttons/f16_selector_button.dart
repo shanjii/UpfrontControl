@@ -91,7 +91,7 @@ class _F16SelectorButtonState extends State<F16SelectorButton> {
             label,
             style: TextStyle(
               fontSize: constraints.maxHeight / 3,
-              color: Colors.white,
+              color: DefaultColors.label,
             ),
           ),
         ),
@@ -112,18 +112,20 @@ class _F16SelectorButtonState extends State<F16SelectorButton> {
   _setGradientType() {
     if (pressedUp) {
       return [
-        DefaultColors.f16KeypadInnerDepressedColor,
-        DefaultColors.f16KeypadInnerElevatedColor,
+        DefaultColors.f16ButtonInnerDepress,
+        DefaultColors.f16ButtonInner,
+        DefaultColors.f16ButtonInnerElevated,
       ];
     } else if (pressedDown) {
       return [
-        DefaultColors.f16KeypadInnerElevatedColor,
-        DefaultColors.f16KeypadInnerDepressedColor,
+        DefaultColors.f16ButtonInnerElevated,
+        DefaultColors.f16ButtonInner,
+        DefaultColors.f16ButtonInnerDepress,
       ];
     } else {
       return [
-        DefaultColors.f16KeypadInnerColor,
-        DefaultColors.f16KeypadInnerColor
+        DefaultColors.f16ButtonInner,
+        DefaultColors.f16ButtonInner,
       ];
     }
   }

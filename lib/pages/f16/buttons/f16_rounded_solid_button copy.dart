@@ -63,9 +63,9 @@ class _F16RoundedSolidButtonState extends State<F16RoundedSolidButton> {
 
   _buttonInnerColor() {
     if (isPressed) {
-      return DefaultColors.f16RoundButtonDepressedColor;
+      return DefaultColors.f16RoundButtonDepress;
     } else {
-      return DefaultColors.f16RoundButtonColor;
+      return DefaultColors.f16RoundButton;
     }
   }
 
@@ -78,7 +78,7 @@ class _F16RoundedSolidButtonState extends State<F16RoundedSolidButton> {
             Text(
               label,
               style: TextStyle(
-                color: Colors.white,
+                color: DefaultColors.label,
                 fontSize: constraints.maxHeight / 3,
                 letterSpacing: 0,
                 height: 1,
@@ -88,7 +88,7 @@ class _F16RoundedSolidButtonState extends State<F16RoundedSolidButton> {
               Text(
                 secondLabel!,
                 style: TextStyle(
-                  color: Colors.white,
+                  color: DefaultColors.label,
                   fontSize: constraints.maxHeight / 3,
                   letterSpacing: 0,
                   height: 1,
