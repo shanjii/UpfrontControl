@@ -1,14 +1,15 @@
 import 'package:app/providers/network.dart';
 import 'package:app/providers/feedbacks.dart';
+import 'package:app/values/buttons.dart';
 import 'package:app/values/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class F16DobberButton extends StatefulWidget {
-  final String sentValueUp;
-  final String sentValueLeft;
-  final String sentValueDown;
-  final String sentValueRight;
+  final Keyboard sentValueUp;
+  final Keyboard sentValueLeft;
+  final Keyboard sentValueDown;
+  final Keyboard sentValueRight;
 
   const F16DobberButton({
     super.key,
@@ -259,7 +260,7 @@ class _F16DobberButtonState extends State<F16DobberButton> {
     }
   }
 
-  _onPress(String value) {
+  _onPress(Keyboard value) {
     feedbacks.tapVibration();
     feedbacks.tapSound();
     network.sendInput(value);

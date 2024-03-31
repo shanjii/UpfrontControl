@@ -1,15 +1,16 @@
 import 'package:app/pages/f16/buttons/f16_rounded_button.dart';
 import 'package:app/providers/tools.dart';
+import 'package:app/values/buttons.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class F16Top extends StatelessWidget {
-  final String com1;
-  final String com2;
-  final String iff;
-  final String list;
-  final String ag;
-  final String aa;
+  final Keyboard com1;
+  final Keyboard com2;
+  final Keyboard iff;
+  final Keyboard list;
+  final Keyboard aa;
+  final Keyboard ag;
   const F16Top({
     super.key,
     required this.com1,
@@ -66,14 +67,14 @@ class F16Top extends StatelessWidget {
                   ),
                   Expanded(
                     child: F16RoundedButton(
-                      sentValue: ag,
-                      label: "A-G",
+                      sentValue: aa,
+                      label: "A-A",
                     ),
                   ),
                   Expanded(
                     child: F16RoundedButton(
-                      sentValue: aa,
-                      label: "A-A",
+                      sentValue: ag,
+                      label: "A-G",
                     ),
                   ),
                 ],

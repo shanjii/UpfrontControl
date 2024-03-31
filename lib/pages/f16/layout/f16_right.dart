@@ -2,15 +2,17 @@ import 'package:app/pages/f16/buttons/f16_rounded_solid_button%20copy.dart';
 import 'package:app/pages/f16/buttons/f16_selector_button.dart';
 import 'package:app/pages/f16/buttons/f16_switch.dart';
 import 'package:app/providers/tools.dart';
+import 'package:app/values/buttons.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class F16Right extends StatelessWidget {
-  final String switchUp;
-  final String switchDown;
-  final String drift;
-  final String norm;
-  final String warnReset;
+  final Keyboard switchUp;
+  final Keyboard switchDown;
+  final Keyboard drift;
+  final Keyboard norm;
+  final Keyboard warnReset;
+  final Keyboard wx;
 
   const F16Right({
     super.key,
@@ -19,6 +21,7 @@ class F16Right extends StatelessWidget {
     required this.drift,
     required this.norm,
     required this.warnReset,
+    required this.wx,
   });
 
   @override
@@ -43,8 +46,8 @@ class F16Right extends StatelessWidget {
                       maxWidth: constraints.maxWidth * 0.4,
                       maxHeight: height * 0.33,
                     ),
-                    child: const F16RoundedSolidButton(
-                      sentValue: "a",
+                    child: F16RoundedSolidButton(
+                      sentValue: wx,
                       label: "WX",
                     ),
                   ),

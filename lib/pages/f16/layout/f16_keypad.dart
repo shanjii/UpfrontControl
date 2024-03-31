@@ -1,21 +1,22 @@
 import 'package:app/pages/f16/buttons/f16_keypad_button.dart';
 import 'package:app/providers/tools.dart';
+import 'package:app/values/buttons.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class F16Keypad extends StatelessWidget {
-  final String num1;
-  final String num2;
-  final String num3;
-  final String num4;
-  final String num5;
-  final String num6;
-  final String num7;
-  final String num8;
-  final String num9;
-  final String num0;
-  final String rcl;
-  final String entr;
+  final Keyboard num1;
+  final Keyboard num2;
+  final Keyboard num3;
+  final Keyboard num4;
+  final Keyboard num5;
+  final Keyboard num6;
+  final Keyboard num7;
+  final Keyboard num8;
+  final Keyboard num9;
+  final Keyboard num0;
+  final Keyboard rcl;
+  final Keyboard entr;
 
   const F16Keypad({
     super.key,

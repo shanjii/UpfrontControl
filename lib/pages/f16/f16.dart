@@ -3,6 +3,7 @@ import 'package:app/pages/f16/layout/f16_left.dart';
 import 'package:app/pages/f16/layout/f16_right.dart';
 import 'package:app/pages/f16/layout/f16_top.dart';
 import 'package:app/providers/feedbacks.dart';
+import 'package:app/values/buttons.dart';
 import 'package:app/values/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -40,12 +41,12 @@ class F16 extends StatelessWidget {
 
   _left() {
     return const F16Left(
-      dobberUp: "g",
-      dobberLeft: "h",
-      dobberDown: "i",
-      dobberRight: "j",
-      switchUp: "k",
-      switchDown: "l",
+      dobberUp: Keyboard.Up,
+      dobberLeft: Keyboard.Left,
+      dobberDown: Keyboard.Down,
+      dobberRight: Keyboard.Right,
+      switchUp: Keyboard.A,
+      switchDown: Keyboard.A,
     );
   }
 
@@ -54,26 +55,26 @@ class F16 extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         F16Top(
-          com1: "a",
-          com2: "b",
-          iff: "c",
-          list: "d",
-          ag: "e",
-          aa: "f",
+          com1: Keyboard.A,
+          com2: Keyboard.A,
+          iff: Keyboard.A,
+          list: Keyboard.A,
+          aa: Keyboard.A,
+          ag: Keyboard.A,
         ),
         F16Keypad(
-          num0: "0",
-          num1: "1",
-          num2: "2",
-          num3: "3",
-          num4: "4",
-          num5: "5",
-          num6: "6",
-          num7: "7",
-          num8: "8",
-          num9: "9",
-          entr: "q",
-          rcl: "w",
+          num0: Keyboard.A,
+          num1: Keyboard.A,
+          num2: Keyboard.A,
+          num3: Keyboard.A,
+          num4: Keyboard.A,
+          num5: Keyboard.A,
+          num6: Keyboard.A,
+          num7: Keyboard.A,
+          num8: Keyboard.A,
+          num9: Keyboard.A,
+          entr: Keyboard.A,
+          rcl: Keyboard.A,
         ),
       ],
     );
@@ -81,11 +82,12 @@ class F16 extends StatelessWidget {
 
   _right() {
     return const F16Right(
-      switchUp: "m",
-      switchDown: "n",
-      drift: "o",
-      norm: "p",
-      warnReset: "q",
+      switchUp: Keyboard.A,
+      switchDown: Keyboard.A,
+      drift: Keyboard.A,
+      norm: Keyboard.A,
+      warnReset: Keyboard.A,
+      wx: Keyboard.A,
     );
   }
 }

@@ -1,5 +1,6 @@
 import 'package:app/providers/feedbacks.dart';
 import 'package:app/providers/network.dart';
+import 'package:app/values/buttons.dart';
 import 'package:app/values/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -12,7 +13,7 @@ class F16RoundedButton extends StatefulWidget {
     this.secondLabel,
   });
 
-  final String sentValue;
+  final Keyboard sentValue;
   final String label;
   final String? secondLabel;
 
@@ -116,7 +117,7 @@ class _F16RoundedButtonState extends State<F16RoundedButton> {
     );
   }
 
-  _onPress(String value) {
+  _onPress(Keyboard value) {
     feedbacks.tapVibration();
     feedbacks.tapSound();
     network.sendInput(value);

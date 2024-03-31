@@ -1,13 +1,14 @@
 import 'package:app/providers/feedbacks.dart';
 import 'package:app/providers/network.dart';
+import 'package:app/values/buttons.dart';
 import 'package:app/values/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class F16Switch extends StatefulWidget {
-  final String sentValueDrift;
-  final String sentValueNorm;
-  final String sentValueWrnRst;
+  final Keyboard sentValueDrift;
+  final Keyboard sentValueNorm;
+  final Keyboard sentValueWrnRst;
 
   const F16Switch({
     super.key,
@@ -53,7 +54,7 @@ class _F16SwitchState extends State<F16Switch> {
     );
   }
 
-  _onPress(String value) {
+  _onPress(Keyboard value) {
     feedbacks.tapVibration();
     feedbacks.tapSound();
     network.sendInput(value);

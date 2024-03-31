@@ -1,5 +1,6 @@
 import 'package:app/providers/feedbacks.dart';
 import 'package:app/providers/network.dart';
+import 'package:app/values/buttons.dart';
 import 'package:app/values/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -13,8 +14,8 @@ class F16SelectorButton extends StatefulWidget {
     required this.labelDown,
   });
 
-  final String sentValueUp;
-  final String sentValueDown;
+  final Keyboard sentValueUp;
+  final Keyboard sentValueDown;
   final String labelUp;
   final String labelDown;
 
@@ -81,7 +82,7 @@ class _F16SelectorButtonState extends State<F16SelectorButton> {
     );
   }
 
-  _button(String label, String sentValue) {
+  _button(String label, Keyboard sentValue) {
     return LayoutBuilder(builder: (context, constraints) {
       return Container(
         padding: const EdgeInsets.all(5),
@@ -130,7 +131,7 @@ class _F16SelectorButtonState extends State<F16SelectorButton> {
     }
   }
 
-  _onPress(String value) {
+  _onPress(Keyboard value) {
     feedbacks.tapVibration();
     feedbacks.tapSound();
     network.sendInput(value);

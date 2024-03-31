@@ -1,16 +1,17 @@
 import 'package:app/pages/f16/buttons/f16_dobber_button.dart';
 import 'package:app/pages/f16/buttons/f16_selector_button.dart';
 import 'package:app/providers/tools.dart';
+import 'package:app/values/buttons.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class F16Left extends StatelessWidget {
-  final String switchUp;
-  final String switchDown;
-  final String dobberUp;
-  final String dobberLeft;
-  final String dobberDown;
-  final String dobberRight;
+  final Keyboard switchUp;
+  final Keyboard switchDown;
+  final Keyboard dobberUp;
+  final Keyboard dobberLeft;
+  final Keyboard dobberDown;
+  final Keyboard dobberRight;
 
   const F16Left({
     super.key,
@@ -58,7 +59,7 @@ class F16Left extends StatelessWidget {
                     ),
                     child: F16DobberButton(
                       sentValueUp: dobberUp,
-                      sentValueDown: switchDown,
+                      sentValueDown: dobberDown,
                       sentValueLeft: dobberLeft,
                       sentValueRight: dobberRight,
                     ),

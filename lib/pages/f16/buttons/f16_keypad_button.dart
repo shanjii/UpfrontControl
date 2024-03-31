@@ -1,5 +1,6 @@
 import 'package:app/providers/network.dart';
 import 'package:app/providers/feedbacks.dart';
+import 'package:app/values/buttons.dart';
 import 'package:app/values/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -14,7 +15,7 @@ class F16KeypadButton extends StatefulWidget {
     this.functionButton = false,
   });
 
-  final String sentValue;
+  final Keyboard sentValue;
   final String? topLabel;
   final String label;
   final String? cornerLabel;
@@ -155,7 +156,7 @@ class _F16KeypadState extends State<F16KeypadButton> {
     );
   }
 
-  _onPress(String value) {
+  _onPress(Keyboard value) {
     feedbacks.tapVibration();
     feedbacks.tapSound();
     network.sendInput(value);

@@ -1,3 +1,4 @@
+import 'package:app/values/buttons.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
@@ -14,14 +15,14 @@ class Network {
     await prefs.setString('ip', ip);
   }
 
-  sendInput(String key) async {
+  sendInput(Keyboard key) async {
     try {
       var result = await http
           .post(
             Uri.parse('http://$localIp:3000/action'),
             headers: {'Content-Type': 'application/json'},
             body: json.encode(
-              {"key": key},
+              {"key": key.value},
             ),
           )
           .timeout(const Duration(seconds: 2));
