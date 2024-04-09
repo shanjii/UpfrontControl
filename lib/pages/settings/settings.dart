@@ -1,3 +1,4 @@
+import 'package:app/providers/activity.dart';
 import 'package:app/providers/feedbacks.dart';
 import 'package:app/providers/network.dart';
 import 'package:app/values/colors.dart';
@@ -15,10 +16,13 @@ class Settings extends StatefulWidget {
 class _SettingsState extends State<Settings> {
   late Feedbacks feedbacks;
   late Network network;
+  late Activity activity;
+
   @override
   Widget build(BuildContext context) {
     feedbacks = context.read<Feedbacks>();
     network = context.read<Network>();
+    activity = context.read<Activity>();
 
     TextEditingController ipController = TextEditingController(
       text: network.localIp,
@@ -41,7 +45,7 @@ class _SettingsState extends State<Settings> {
           _ipInput(ipController),
           _title("Button sounds"),
           Container(
-            margin: const EdgeInsets.symmetric(vertical: 5),
+            margin: const EdgeInsets.symmetric(vertical: 10),
             height: 60,
             child: Row(
               children: [
@@ -60,7 +64,7 @@ class _SettingsState extends State<Settings> {
           ),
           _title("Button vibration"),
           Container(
-            margin: const EdgeInsets.symmetric(vertical: 5),
+            margin: const EdgeInsets.symmetric(vertical: 10),
             height: 60,
             child: Row(
               children: [
@@ -87,6 +91,28 @@ class _SettingsState extends State<Settings> {
               ],
             ),
           ),
+          _title("Turn screen black on innactivity"),
+          _subTitle(
+            "(Useful on OLED screens to prevent burn-in, touch screen to restore)",
+          ),
+          Container(
+            margin: const EdgeInsets.symmetric(vertical: 10),
+            height: 60,
+            child: Row(
+              children: [
+                _button(
+                  title: "OFF",
+                  onTap: () => activity.disable(),
+                  condition: !activity.manageActivity,
+                ),
+                _button(
+                  title: "ON",
+                  onTap: () => activity.enable(),
+                  condition: activity.manageActivity,
+                ),
+              ],
+            ),
+          ),
         ],
       ),
     );
@@ -95,12 +121,26 @@ class _SettingsState extends State<Settings> {
   _title(String title) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10),
-      margin: const EdgeInsets.only(top: 10),
+      margin: const EdgeInsets.only(top: 15),
       child: Text(
         title,
         style: const TextStyle(
           color: Colors.white,
           fontSize: 24,
+        ),
+      ),
+    );
+  }
+
+  _subTitle(String title) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 10),
+      margin: const EdgeInsets.only(top: 5),
+      child: Text(
+        title,
+        style: const TextStyle(
+          color: Colors.white,
+          fontSize: 16,
         ),
       ),
     );
@@ -136,14 +176,14 @@ class _SettingsState extends State<Settings> {
 
   _ipInput(TextEditingController ipController) {
     return Container(
-      margin: const EdgeInsets.only(top: 6),
+      margin: const EdgeInsets.only(top: 10),
       child: TextField(
         style: const TextStyle(
           color: Colors.white,
           fontSize: 25,
         ),
         keyboardType: TextInputType.number,
-        onChanged: (value) => network.setLocalIp(value),
+        onChanged: (value) => context.read<Network>().setLocalIp(value),
         decoration: InputDecoration(
           filled: true,
           suffix: const Text(":3000"),

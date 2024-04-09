@@ -1,8 +1,11 @@
 import 'package:app/pages/f16/f16.dart';
 import 'package:app/pages/f18/f18.dart';
 import 'package:app/pages/settings/settings.dart';
+import 'package:app/providers/activity.dart';
+import 'package:app/providers/feedbacks.dart';
 import 'package:app/values/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class Home extends StatelessWidget {
   const Home({super.key});
@@ -30,6 +33,7 @@ class Home extends StatelessWidget {
                     child: Material(
                       color: const Color.fromARGB(255, 53, 53, 53),
                       child: InkWell(
+                        enableFeedback: false,
                         onTap: () => goToF16(context),
                         child: Center(
                           child: _buttonTitle("F16"),
@@ -89,6 +93,8 @@ class Home extends StatelessWidget {
   }
 
   goToF16(BuildContext context) {
+    context.read<Activity>().start();
+    context.read<Feedbacks>().cacheSound();
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => const F16()),
@@ -96,6 +102,8 @@ class Home extends StatelessWidget {
   }
 
   goToF18(BuildContext context) {
+    context.read<Activity>().start();
+    context.read<Feedbacks>().cacheSound();
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => const F18()),

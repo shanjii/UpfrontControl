@@ -1,15 +1,28 @@
-import 'package:app/providers/feedbacks.dart';
+import 'package:app/providers/activity.dart';
 import 'package:app/values/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class F18 extends StatelessWidget {
+class F18 extends StatefulWidget {
   const F18({super.key});
+
+  @override
+  State<F18> createState() => _F18State();
+}
+
+class _F18State extends State<F18> {
+  late Activity activity;
+
+  @override
+  void dispose() {
+    activity.timer.cancel();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     // double width = MediaQuery.of(context).size.width;
-    context.read<Feedbacks>().initSoundF18();
+    activity = context.read<Activity>();
 
     return Scaffold(
       resizeToAvoidBottomInset: false,

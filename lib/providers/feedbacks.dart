@@ -29,8 +29,8 @@ class Feedbacks {
     await prefs.setString('haptic', type?.name.toString() ?? "null");
   }
 
-  initSoundF16() async {
-    AudioPlayer(playerId: "1").play(
+  cacheSound() async {
+    await AudioPlayer().play(
       AssetSource('click1.ogg'),
       volume: 0,
       mode: PlayerMode.lowLatency,
@@ -43,18 +43,10 @@ class Feedbacks {
   }
 
   tapSound() {
-    AudioPlayer(playerId: "1").play(
+    AudioPlayer().play(
       AssetSource('click1.ogg'),
       volume: muted ? 0 : 100,
       mode: PlayerMode.lowLatency,
     );
-  }
-
-  initSoundF18() async {
-    // activeSound = await rootBundle.load("assets/click1.ogg").then(
-    //   (ByteData soundData) {
-    //     return player.load(soundData);
-    //   },
-    // );
   }
 }

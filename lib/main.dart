@@ -1,4 +1,5 @@
 import 'package:app/pages/home/home.dart';
+import 'package:app/providers/activity.dart';
 import 'package:app/providers/network.dart';
 import 'package:app/providers/feedbacks.dart';
 import 'package:app/providers/tools.dart';
@@ -14,15 +15,20 @@ void main() async {
 
   await _setDisplaySettings();
   final prefs = await SharedPreferences.getInstance();
+
   String savedIp = await _getSavedIp(prefs);
   bool isMuted = await _getMutedSetting(prefs);
-  FeedbackType? haptic = await _getHapticSetting(prefs);
+  FeedbackType haptic = await _getHapticSetting(prefs);
+  bool manageActivity = await _getActivitySetting(prefs);
+  int innactivityTime = 15;
 
   runApp(
     App(
       savedIp: savedIp,
       isMuted: isMuted,
       haptic: haptic,
+      innactivityTime: innactivityTime,
+      manageActivity: manageActivity,
     ),
   );
 }
@@ -30,13 +36,17 @@ void main() async {
 class App extends StatelessWidget {
   final String savedIp;
   final bool isMuted;
-  final FeedbackType? haptic;
+  final int innactivityTime;
+  final FeedbackType haptic;
+  final bool manageActivity;
 
   const App({
     super.key,
     required this.savedIp,
     required this.isMuted,
     required this.haptic,
+    required this.innactivityTime,
+    required this.manageActivity,
   });
 
   @override
@@ -55,12 +65,25 @@ class App extends StatelessWidget {
         Provider(
           create: (context) => Network(localIp: savedIp),
         ),
+        ChangeNotifierProvider(
+          create: (context) => Activity(
+            innactivityTime: innactivityTime,
+            manageActivity: manageActivity,
+          ),
+        ),
       ],
       child: MaterialApp(
         title: 'Mobile ICP',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           useMaterial3: true,
+          pageTransitionsTheme: const PageTransitionsTheme(
+            builders: <TargetPlatform, PageTransitionsBuilder>{
+              TargetPlatform.android: ZoomPageTransitionsBuilder(
+                allowEnterRouteSnapshotting: false,
+              ),
+            },
+          ),
         ),
         home: const Home(),
       ),
@@ -76,12 +99,13 @@ _getMutedSetting(SharedPreferences prefs) async {
   return prefs.getBool('muted') ?? false;
 }
 
+_getActivitySetting(SharedPreferences prefs) async {
+  return prefs.getBool('manage-activity') ?? false;
+}
+
 _getHapticSetting(SharedPreferences prefs) async {
   var value = prefs.getString("haptic");
   if (value != null) {
-    if (value == "null") {
-      return null;
-    }
     return FeedbackType.values.byName(value);
   } else {
     return FeedbackType.medium;

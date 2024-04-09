@@ -2,39 +2,62 @@ import 'package:app/pages/f16/layout/f16_keypad.dart';
 import 'package:app/pages/f16/layout/f16_left.dart';
 import 'package:app/pages/f16/layout/f16_right.dart';
 import 'package:app/pages/f16/layout/f16_top.dart';
-import 'package:app/providers/feedbacks.dart';
+import 'package:app/providers/activity.dart';
 import 'package:app/values/buttons.dart';
 import 'package:app/values/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class F16 extends StatelessWidget {
+class F16 extends StatefulWidget {
   const F16({super.key});
+
+  @override
+  State<F16> createState() => _F16State();
+}
+
+class _F16State extends State<F16> {
+  late Activity activity;
+
+  @override
+  void dispose() {
+    activity.timer.cancel();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
-    context.read<Feedbacks>().initSoundF16();
+    activity = context.read<Activity>();
 
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      backgroundColor: DefaultColors.backgroundBlack,
-      body: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          ConstrainedBox(
-            constraints: BoxConstraints(maxWidth: width * 0.20),
-            child: _left(),
+    return Listener(
+      onPointerDown: (event) => activity.resetTimer(),
+      child: Scaffold(
+        resizeToAvoidBottomInset: false,
+        backgroundColor: DefaultColors.backgroundBlack,
+        body: IgnorePointer(
+          ignoring: !activity.isActive,
+          child: AnimatedOpacity(
+            duration: const Duration(milliseconds: 200),
+            opacity: context.watch<Activity>().isActive ? 1 : 0,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ConstrainedBox(
+                  constraints: BoxConstraints(maxWidth: width * 0.20),
+                  child: _left(),
+                ),
+                ConstrainedBox(
+                  constraints: BoxConstraints(maxWidth: width * 0.6),
+                  child: _center(),
+                ),
+                ConstrainedBox(
+                  constraints: BoxConstraints(maxWidth: width * 0.20),
+                  child: _right(),
+                ),
+              ],
+            ),
           ),
-          ConstrainedBox(
-            constraints: BoxConstraints(maxWidth: width * 0.6),
-            child: _center(),
-          ),
-          ConstrainedBox(
-            constraints: BoxConstraints(maxWidth: width * 0.20),
-            child: _right(),
-          ),
-        ],
+        ),
       ),
     );
   }
@@ -45,8 +68,8 @@ class F16 extends StatelessWidget {
       dobberLeft: Keyboard.Left,
       dobberDown: Keyboard.Down,
       dobberRight: Keyboard.Right,
-      switchUp: Keyboard.A,
-      switchDown: Keyboard.A,
+      switchUp: Keyboard.PageUp,
+      switchDown: Keyboard.PageDown,
     );
   }
 
@@ -55,26 +78,26 @@ class F16 extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         F16Top(
-          com1: Keyboard.A,
-          com2: Keyboard.A,
-          iff: Keyboard.A,
-          list: Keyboard.A,
-          aa: Keyboard.A,
-          ag: Keyboard.A,
+          com1: Keyboard.D1,
+          com2: Keyboard.D2,
+          iff: Keyboard.D3,
+          list: Keyboard.D4,
+          aa: Keyboard.D5,
+          ag: Keyboard.D6,
         ),
         F16Keypad(
-          num0: Keyboard.A,
-          num1: Keyboard.A,
-          num2: Keyboard.A,
-          num3: Keyboard.A,
-          num4: Keyboard.A,
-          num5: Keyboard.A,
-          num6: Keyboard.A,
-          num7: Keyboard.A,
-          num8: Keyboard.A,
-          num9: Keyboard.A,
-          entr: Keyboard.A,
-          rcl: Keyboard.A,
+          num0: Keyboard.NumPad0,
+          num1: Keyboard.NumPad1,
+          num2: Keyboard.NumPad2,
+          num3: Keyboard.NumPad3,
+          num4: Keyboard.NumPad4,
+          num5: Keyboard.NumPad5,
+          num6: Keyboard.NumPad6,
+          num7: Keyboard.NumPad7,
+          num8: Keyboard.NumPad8,
+          num9: Keyboard.NumPad9,
+          entr: Keyboard.Enter,
+          rcl: Keyboard.Backspace,
         ),
       ],
     );
@@ -82,12 +105,12 @@ class F16 extends StatelessWidget {
 
   _right() {
     return const F16Right(
-      switchUp: Keyboard.A,
-      switchDown: Keyboard.A,
-      drift: Keyboard.A,
-      norm: Keyboard.A,
-      warnReset: Keyboard.A,
-      wx: Keyboard.A,
+      switchUp: Keyboard.Subtract,
+      switchDown: Keyboard.Add,
+      drift: Keyboard.J,
+      norm: Keyboard.K,
+      warnReset: Keyboard.L,
+      wx: Keyboard.Multiply,
     );
   }
 }
