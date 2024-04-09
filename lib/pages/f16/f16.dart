@@ -105,8 +105,8 @@ class _F16State extends State<F16> {
 
   _right() {
     return const F16Right(
-      switchUp: Keyboard.Subtract,
-      switchDown: Keyboard.Add,
+      switchUp: Keyboard.Add,
+      switchDown: Keyboard.Subtract,
       drift: Keyboard.J,
       norm: Keyboard.K,
       warnReset: Keyboard.L,
