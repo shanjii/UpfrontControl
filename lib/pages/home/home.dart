@@ -1,11 +1,6 @@
-import 'package:app/pages/f16/f16.dart';
-import 'package:app/pages/f18/f18.dart';
-import 'package:app/pages/settings/settings.dart';
-import 'package:app/providers/activity.dart';
-import 'package:app/providers/feedbacks.dart';
+import 'package:app/pages/home/functions.dart';
 import 'package:app/values/colors.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class Home extends StatelessWidget {
   const Home({super.key});
@@ -82,31 +77,6 @@ class Home extends StatelessWidget {
         color: Colors.white,
         size: 40,
       ),
-    );
-  }
-
-  goToSettings(BuildContext context) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => const Settings()),
-    );
-  }
-
-  goToF16(BuildContext context) {
-    context.read<Activity>().start();
-    context.read<Feedbacks>().cacheSound();
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => const F16()),
-    );
-  }
-
-  goToF18(BuildContext context) {
-    context.read<Activity>().start();
-    context.read<Feedbacks>().cacheSound();
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => const F18()),
     );
   }
 }

@@ -1,4 +1,4 @@
-import 'package:app/pages/f16/buttons/f16_rounded_solid_button%20copy.dart';
+import 'package:app/pages/f16/buttons/f16_rounded_solid_button.dart';
 import 'package:app/pages/f16/buttons/f16_selector_button.dart';
 import 'package:app/pages/f16/buttons/f16_switch.dart';
 import 'package:app/providers/tools.dart';

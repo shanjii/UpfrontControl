@@ -27,7 +27,7 @@ class _F18State extends State<F18> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: DefaultColors.backgroundBlack,
-      body: Row(
+      body: const Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [],
       ),

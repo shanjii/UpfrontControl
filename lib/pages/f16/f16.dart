@@ -20,7 +20,7 @@ class _F16State extends State<F16> {
 
   @override
   void dispose() {
-    activity.timer.cancel();
+    activity.stop();
     super.dispose();
   }
 
@@ -42,16 +42,16 @@ class _F16State extends State<F16> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                ConstrainedBox(
-                  constraints: BoxConstraints(maxWidth: width * 0.20),
+                SizedBox(
+                  width: width * 0.20,
                   child: _left(),
                 ),
-                ConstrainedBox(
-                  constraints: BoxConstraints(maxWidth: width * 0.6),
+                SizedBox(
+                  width: width * 0.60,
                   child: _center(),
                 ),
-                ConstrainedBox(
-                  constraints: BoxConstraints(maxWidth: width * 0.20),
+                SizedBox(
+                  width: width * 0.20,
                   child: _right(),
                 ),
               ],

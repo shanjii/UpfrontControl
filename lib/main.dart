@@ -8,7 +8,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_vibrate/flutter_vibrate.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:wakelock/wakelock.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -113,7 +112,6 @@ _getHapticSetting(SharedPreferences prefs) async {
 }
 
 _setDisplaySettings() async {
-  await Wakelock.enable();
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.landscapeLeft,
     DeviceOrientation.landscapeRight,
