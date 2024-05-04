@@ -1,7 +1,7 @@
-import 'package:app/pages/f16/layout/f16_keypad.dart';
-import 'package:app/pages/f16/layout/f16_left.dart';
-import 'package:app/pages/f16/layout/f16_right.dart';
-import 'package:app/pages/f16/layout/f16_top.dart';
+import 'package:app/pages/f16/button_groups/f16_keypad.dart';
+import 'package:app/pages/f16/button_groups/f16_left.dart';
+import 'package:app/pages/f16/button_groups/f16_right.dart';
+import 'package:app/pages/f16/button_groups/f16_top.dart';
 import 'package:app/providers/activity.dart';
 import 'package:app/values/buttons.dart';
 import 'package:app/values/colors.dart';
@@ -44,15 +44,15 @@ class _F16State extends State<F16> {
               children: [
                 SizedBox(
                   width: width * 0.20,
-                  child: _left(),
+                  child: _leftGroup(),
                 ),
                 SizedBox(
                   width: width * 0.60,
-                  child: _center(),
+                  child: _centerGroup(),
                 ),
                 SizedBox(
                   width: width * 0.20,
-                  child: _right(),
+                  child: _rightGroup(),
                 ),
               ],
             ),
@@ -62,7 +62,7 @@ class _F16State extends State<F16> {
     );
   }
 
-  _left() {
+  _leftGroup() {
     return const F16Left(
       dobberUp: Keyboard.Up,
       dobberLeft: Keyboard.Left,
@@ -73,7 +73,7 @@ class _F16State extends State<F16> {
     );
   }
 
-  _center() {
+  _centerGroup() {
     return const Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -103,7 +103,7 @@ class _F16State extends State<F16> {
     );
   }
 
-  _right() {
+  _rightGroup() {
     return const F16Right(
       switchUp: Keyboard.Add,
       switchDown: Keyboard.Subtract,

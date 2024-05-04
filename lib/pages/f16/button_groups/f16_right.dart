@@ -1,6 +1,6 @@
-import 'package:app/pages/f16/buttons/f16_rounded_solid_button.dart';
-import 'package:app/pages/f16/buttons/f16_selector_button.dart';
-import 'package:app/pages/f16/buttons/f16_switch.dart';
+import 'package:app/pages/f16/unique_buttons/f16_rounded_solid_button.dart';
+import 'package:app/pages/f16/unique_buttons/f16_selector_button.dart';
+import 'package:app/pages/f16/unique_buttons/f16_switch.dart';
 import 'package:app/providers/tools.dart';
 import 'package:app/values/buttons.dart';
 import 'package:flutter/material.dart';
