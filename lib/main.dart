@@ -1,8 +1,8 @@
-import 'package:app/pages/home/home.dart';
-import 'package:app/providers/activity.dart';
-import 'package:app/providers/network.dart';
-import 'package:app/providers/feedbacks.dart';
-import 'package:app/providers/tools.dart';
+import 'package:ICPApp/pages/home/home.dart';
+import 'package:ICPApp/providers/activity.dart';
+import 'package:ICPApp/providers/network.dart';
+import 'package:ICPApp/providers/feedbacks.dart';
+import 'package:ICPApp/providers/tools.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_vibrate/flutter_vibrate.dart';
