@@ -1,5 +1,5 @@
-import 'package:ICPApp/providers/activity.dart';
-import 'package:ICPApp/values/colors.dart';
+import 'package:icp_app/providers/activity.dart';
+import 'package:icp_app/values/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

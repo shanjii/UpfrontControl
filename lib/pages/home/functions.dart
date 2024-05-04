@@ -1,8 +1,8 @@
-import 'package:ICPApp/pages/f16/f16_layout.dart';
-import 'package:ICPApp/pages/f18/f18.dart';
-import 'package:ICPApp/pages/settings/settings.dart';
-import 'package:ICPApp/providers/activity.dart';
-import 'package:ICPApp/providers/feedbacks.dart';
+import 'package:icp_app/pages/f16/f16_layout.dart';
+import 'package:icp_app/pages/f18/f18.dart';
+import 'package:icp_app/pages/settings/settings.dart';
+import 'package:icp_app/providers/activity.dart';
+import 'package:icp_app/providers/feedbacks.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

@@ -1,5 +1,5 @@
-import 'package:ICPApp/pages/home/functions.dart';
-import 'package:ICPApp/values/colors.dart';
+import 'package:icp_app/pages/home/functions.dart';
+import 'package:icp_app/values/colors.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatelessWidget {

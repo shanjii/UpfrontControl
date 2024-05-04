@@ -1,7 +1,7 @@
-import 'package:ICPApp/providers/feedbacks.dart';
-import 'package:ICPApp/providers/network.dart';
-import 'package:ICPApp/values/buttons.dart';
-import 'package:ICPApp/values/colors.dart';
+import 'package:icp_app/providers/feedbacks.dart';
+import 'package:icp_app/providers/network.dart';
+import 'package:icp_app/values/buttons.dart';
+import 'package:icp_app/values/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

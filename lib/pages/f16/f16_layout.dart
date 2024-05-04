@@ -1,10 +1,10 @@
-import 'package:ICPApp/pages/f16/button_groups/f16_keypad.dart';
-import 'package:ICPApp/pages/f16/button_groups/f16_left.dart';
-import 'package:ICPApp/pages/f16/button_groups/f16_right.dart';
-import 'package:ICPApp/pages/f16/button_groups/f16_top.dart';
-import 'package:ICPApp/providers/activity.dart';
-import 'package:ICPApp/values/buttons.dart';
-import 'package:ICPApp/values/colors.dart';
+import 'package:icp_app/pages/f16/button_groups/f16_keypad.dart';
+import 'package:icp_app/pages/f16/button_groups/f16_left.dart';
+import 'package:icp_app/pages/f16/button_groups/f16_right.dart';
+import 'package:icp_app/pages/f16/button_groups/f16_top.dart';
+import 'package:icp_app/providers/activity.dart';
+import 'package:icp_app/values/buttons.dart';
+import 'package:icp_app/values/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

@@ -1,6 +1,6 @@
-import 'package:ICPApp/pages/f16/unique_buttons/f16_rounded_button.dart';
-import 'package:ICPApp/providers/tools.dart';
-import 'package:ICPApp/values/buttons.dart';
+import 'package:icp_app/pages/f16/unique_buttons/f16_rounded_button.dart';
+import 'package:icp_app/providers/tools.dart';
+import 'package:icp_app/values/buttons.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
