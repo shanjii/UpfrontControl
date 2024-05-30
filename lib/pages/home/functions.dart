@@ -1,4 +1,4 @@
-import 'package:icp_app/pages/f16/f16_layout.dart';
+import 'package:icp_app/pages/f16/f16_page.dart';
 import 'package:icp_app/pages/f18/f18.dart';
 import 'package:icp_app/pages/settings/settings.dart';
 import 'package:icp_app/providers/activity.dart';

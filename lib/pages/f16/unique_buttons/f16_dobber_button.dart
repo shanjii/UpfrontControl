@@ -1,3 +1,4 @@
+import 'package:icp_app/pages/f16/f16_actions.dart';
 import 'package:icp_app/values/buttons.dart';
 import 'package:icp_app/providers/network.dart';
 import 'package:icp_app/providers/feedbacks.dart';
@@ -34,13 +35,14 @@ enum _PressedButton {
 class _F16DobberButtonState extends State<F16DobberButton> {
   _PressedButton pressedButton = _PressedButton.none;
 
-  late Feedbacks feedbacks;
-  late Network network;
+  late F16Actions f16actions;
 
   @override
   Widget build(BuildContext context) {
-    feedbacks = context.read<Feedbacks>();
-    network = context.read<Network>();
+    f16actions = F16Actions(
+      feedbacks: context.read<Feedbacks>(),
+      network: context.read<Network>(),
+    );
 
     return LayoutBuilder(
       builder: (context, constraints) {
@@ -48,17 +50,13 @@ class _F16DobberButtonState extends State<F16DobberButton> {
           onTapDown: (details) => _getTapLocation(
             constraints: constraints,
             details: details,
-            topPress: () => _onPress(widget.sentValueUp),
-            rightPress: () => _onPress(widget.sentValueRight),
-            leftPress: () => _onPress(widget.sentValueLeft),
-            bottomPress: () => _onPress(widget.sentValueDown),
+            topPress: () => f16actions.onPress(widget.sentValueUp),
+            rightPress: () => f16actions.onPress(widget.sentValueRight),
+            leftPress: () => f16actions.onPress(widget.sentValueLeft),
+            bottomPress: () => f16actions.onPress(widget.sentValueDown),
           ),
-          onTapUp: (details) => setState(() {
-            pressedButton = _PressedButton.none;
-          }),
-          onTapCancel: () => setState(() {
-            pressedButton = _PressedButton.none;
-          }),
+          onTapUp: (details) => _releaseButton(),
+          onTapCancel: () => _releaseButton(),
           child: AspectRatio(
             aspectRatio: 1,
             child: Container(
@@ -260,9 +258,24 @@ class _F16DobberButtonState extends State<F16DobberButton> {
     }
   }
 
-  _onPress(Keyboard value) {
-    feedbacks.tapVibration();
-    feedbacks.tapSound();
-    network.sendInput(value);
+  _releaseButton() {
+    switch (pressedButton) {
+      case _PressedButton.top:
+        f16actions.onRelease(widget.sentValueUp);
+        break;
+      case _PressedButton.left:
+        f16actions.onRelease(widget.sentValueLeft);
+        break;
+      case _PressedButton.right:
+        f16actions.onRelease(widget.sentValueRight);
+        break;
+      case _PressedButton.bottom:
+        f16actions.onRelease(widget.sentValueDown);
+        break;
+      default:
+    }
+    setState(() {
+      pressedButton = _PressedButton.none;
+    });
   }
 }

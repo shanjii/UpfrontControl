@@ -1,3 +1,4 @@
+import 'package:icp_app/pages/f16/f16_actions.dart';
 import 'package:icp_app/providers/feedbacks.dart';
 import 'package:icp_app/providers/network.dart';
 import 'package:icp_app/values/buttons.dart';
@@ -22,13 +23,14 @@ class F16Switch extends StatefulWidget {
 }
 
 class _F16SwitchState extends State<F16Switch> {
-  late Feedbacks feedbacks;
-  late Network network;
+  late F16Actions f16actions;
 
   @override
   Widget build(BuildContext context) {
-    feedbacks = context.read<Feedbacks>();
-    network = context.read<Network>();
+    f16actions = F16Actions(
+      feedbacks: context.read<Feedbacks>(),
+      network: context.read<Network>(),
+    );
 
     return Container(
       color: DefaultColors.f16ButtonInner,
@@ -37,27 +39,24 @@ class _F16SwitchState extends State<F16Switch> {
           _Button(
             title: "DRIFT C/O",
             color: DefaultColors.f16ButtonInner,
-            onPress: () => _onPress(widget.sentValueDrift),
+            onPress: () => f16actions.onPress(widget.sentValueDrift),
+            onRelease: () => f16actions.onRelease(widget.sentValueDrift),
           ),
           _Button(
             title: "NORM",
             color: DefaultColors.f16ButtonInner,
-            onPress: () => _onPress(widget.sentValueNorm),
+            onPress: () => f16actions.onPress(widget.sentValueNorm),
+            onRelease: () => f16actions.onRelease(widget.sentValueNorm),
           ),
           _Button(
             title: "WRN RST",
             color: DefaultColors.f16RoundButton,
-            onPress: () => _onPress(widget.sentValueWrnRst),
+            onPress: () => f16actions.onPress(widget.sentValueWrnRst),
+            onRelease: () => f16actions.onRelease(widget.sentValueWrnRst),
           ),
         ],
       ),
     );
-  }
-
-  _onPress(Keyboard value) {
-    feedbacks.tapVibration();
-    feedbacks.tapSound();
-    network.sendInput(value);
   }
 }
 
@@ -65,10 +64,12 @@ class _Button extends StatefulWidget {
   final String title;
   final Color color;
   final Function() onPress;
+  final Function() onRelease;
 
   const _Button({
     required this.title,
     required this.onPress,
+    required this.onRelease,
     required this.color,
   });
 
@@ -89,12 +90,18 @@ class _ButtonState extends State<_Button> {
           });
           widget.onPress();
         },
-        onTapUp: (details) => setState(() {
-          pressed = false;
-        }),
-        onTapCancel: () => setState(() {
-          pressed = false;
-        }),
+        onTapUp: (details) {
+          setState(() {
+            pressed = false;
+          });
+          widget.onRelease();
+        },
+        onTapCancel: () {
+          setState(() {
+            pressed = false;
+          });
+          widget.onRelease();
+        },
         child: Container(
           color: pressed ? DefaultColors.f16ButtonInnerDepress : widget.color,
           child: _buttonLabel(widget.title),

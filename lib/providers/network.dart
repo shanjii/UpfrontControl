@@ -1,12 +1,12 @@
+import 'package:icp_app/datasource/input_datasource.dart';
 import 'package:icp_app/values/buttons.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'dart:convert';
-import 'package:http/http.dart' as http;
 
 class Network {
-  late String localIp;
-
   Network({required this.localIp});
+
+  late String localIp;
+  InputDatasource inputDatasource = InputDatasource();
 
   setLocalIp(String ip) async {
     localIp = ip;
@@ -15,23 +15,11 @@ class Network {
     await prefs.setString('ip', ip);
   }
 
-  sendInput(Keyboard key) async {
-    try {
-      var result = await http
-          .post(
-            Uri.parse('http://$localIp:3000/action'),
-            headers: {'Content-Type': 'application/json'},
-            body: json.encode(
-              {"key": key.value},
-            ),
-          )
-          .timeout(const Duration(seconds: 2));
+  pressKey(Keyboard key) async {
+    inputDatasource.pressKey(key, localIp);
+  }
 
-      if (result.statusCode != 200) {
-        print(result.statusCode);
-      }
-    } catch (e) {
-      print(e);
-    }
+  releaseKey(Keyboard key) async {
+    inputDatasource.releaseKey(key, localIp);
   }
 }

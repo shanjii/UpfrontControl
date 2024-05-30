@@ -1,3 +1,4 @@
+import 'package:icp_app/pages/f16/f16_actions.dart';
 import 'package:icp_app/providers/feedbacks.dart';
 import 'package:icp_app/providers/network.dart';
 import 'package:icp_app/values/buttons.dart';
@@ -23,13 +24,15 @@ class F16RoundedButton extends StatefulWidget {
 
 class _F16RoundedButtonState extends State<F16RoundedButton> {
   bool isPressed = false;
-  late Feedbacks feedbacks;
-  late Network network;
+
+  late F16Actions f16actions;
 
   @override
   Widget build(BuildContext context) {
-    feedbacks = context.read<Feedbacks>();
-    network = context.read<Network>();
+    f16actions = F16Actions(
+      feedbacks: context.read<Feedbacks>(),
+      network: context.read<Network>(),
+    );
 
     return AspectRatio(
       aspectRatio: 1,
@@ -38,14 +41,20 @@ class _F16RoundedButtonState extends State<F16RoundedButton> {
           setState(() {
             isPressed = true;
           });
-          _onPress(widget.sentValue);
+          f16actions.onPress(widget.sentValue);
         },
-        onTapUp: (details) => setState(() {
-          isPressed = false;
-        }),
-        onTapCancel: () => setState(() {
-          isPressed = false;
-        }),
+        onTapUp: (details) {
+          setState(() {
+            isPressed = false;
+          });
+          f16actions.onRelease(widget.sentValue);
+        },
+        onTapCancel: () {
+          setState(() {
+            isPressed = false;
+          });
+          f16actions.onRelease(widget.sentValue);
+        },
         child: Container(
           margin: const EdgeInsets.all(5),
           padding: const EdgeInsets.all(5),
@@ -115,11 +124,5 @@ class _F16RoundedButtonState extends State<F16RoundedButton> {
         );
       },
     );
-  }
-
-  _onPress(Keyboard value) {
-    feedbacks.tapVibration();
-    feedbacks.tapSound();
-    network.sendInput(value);
   }
 }

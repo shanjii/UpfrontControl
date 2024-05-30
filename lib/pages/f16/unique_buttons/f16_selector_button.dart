@@ -1,3 +1,4 @@
+import 'package:icp_app/pages/f16/f16_actions.dart';
 import 'package:icp_app/providers/feedbacks.dart';
 import 'package:icp_app/providers/network.dart';
 import 'package:icp_app/values/buttons.dart';
@@ -24,15 +25,17 @@ class F16SelectorButton extends StatefulWidget {
 }
 
 class _F16SelectorButtonState extends State<F16SelectorButton> {
-  late Feedbacks feedbacks;
-  late Network network;
+  late F16Actions f16actions;
+
   bool pressedUp = false;
   bool pressedDown = false;
 
   @override
   Widget build(BuildContext context) {
-    feedbacks = context.read<Feedbacks>();
-    network = context.read<Network>();
+    f16actions = F16Actions(
+      feedbacks: context.read<Feedbacks>(),
+      network: context.read<Network>(),
+    );
 
     return AspectRatio(
       aspectRatio: 1 / 2,
@@ -47,14 +50,20 @@ class _F16SelectorButtonState extends State<F16SelectorButton> {
                   setState(() {
                     pressedUp = true;
                   });
-                  _onPress(widget.sentValueUp);
+                  f16actions.onPress(widget.sentValueUp);
                 },
-                onTapUp: (details) => setState(() {
-                  pressedUp = false;
-                }),
-                onTapCancel: () => setState(() {
-                  pressedUp = false;
-                }),
+                onTapUp: (details) {
+                  setState(() {
+                    pressedUp = false;
+                  });
+                  f16actions.onRelease(widget.sentValueUp);
+                },
+                onTapCancel: () {
+                  setState(() {
+                    pressedUp = false;
+                  });
+                  f16actions.onRelease(widget.sentValueUp);
+                },
                 child: _button(widget.labelUp, widget.sentValueUp),
               ),
             ),
@@ -65,14 +74,20 @@ class _F16SelectorButtonState extends State<F16SelectorButton> {
                   setState(() {
                     pressedDown = true;
                   });
-                  _onPress(widget.sentValueDown);
+                  f16actions.onPress(widget.sentValueDown);
                 },
-                onTapUp: (details) => setState(() {
-                  pressedDown = false;
-                }),
-                onTapCancel: () => setState(() {
-                  pressedDown = false;
-                }),
+                onTapUp: (details) {
+                  setState(() {
+                    pressedDown = false;
+                  });
+                  f16actions.onRelease(widget.sentValueDown);
+                },
+                onTapCancel: () {
+                  setState(() {
+                    pressedDown = false;
+                  });
+                  f16actions.onRelease(widget.sentValueDown);
+                },
                 child: _button(widget.labelDown, widget.sentValueDown),
               ),
             ),
@@ -129,11 +144,5 @@ class _F16SelectorButtonState extends State<F16SelectorButton> {
         DefaultColors.f16ButtonInner,
       ];
     }
-  }
-
-  _onPress(Keyboard value) {
-    feedbacks.tapVibration();
-    feedbacks.tapSound();
-    network.sendInput(value);
   }
 }
