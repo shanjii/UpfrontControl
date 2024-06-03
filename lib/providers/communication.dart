@@ -7,7 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class Communication {
   Communication({required this.connection, required this.f16keysModel});
 
-  late ConnectionModel connection;
+  ConnectionModel connection;
   F16KeysModel f16keysModel;
   InputDatasource inputDatasource = InputDatasource();
 

@@ -18,7 +18,7 @@ class _F16KeybindsState extends State<F18KeybindsPage> {
         scrolledUnderElevation: 0,
         iconTheme: const IconThemeData(color: Colors.white),
         title: const Text(
-          "F16 Keybinds",
+          "F18 Keybinds",
           style: TextStyle(color: Colors.white),
         ),
       ),

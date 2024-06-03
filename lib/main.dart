@@ -23,7 +23,7 @@ void main() async {
   String savedIp = await localSettings.getSavedIp();
   String savedPort = await localSettings.getSavedPort();
   bool isMuted = await localSettings.getMutedSetting();
-  FeedbackType haptic = await localSettings.getHapticSetting();
+  FeedbackType? haptic = await localSettings.getHapticSetting();
   bool manageActivity = await localSettings.getActivitySetting();
 
   F16KeysModel f16Keys = F16KeysModel(COM1: Keyboard.D0);
@@ -49,7 +49,7 @@ class App extends StatelessWidget {
   final F16KeysModel f16keys;
   final bool isMuted;
   final int innactivityTime;
-  final FeedbackType haptic;
+  final FeedbackType? haptic;
   final bool manageActivity;
 
   const App({

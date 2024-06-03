@@ -6,28 +6,30 @@ class LocalSettings {
 
   LocalSettings(this.prefs);
 
-  getSavedIp() async {
+  Future<String> getSavedIp() async {
     return prefs.getString('ip') ?? "";
   }
 
-  getSavedPort() async {
+  Future<String> getSavedPort() async {
     return prefs.getString('port') ?? "5551";
   }
 
-  getMutedSetting() async {
+  Future<bool> getMutedSetting() async {
     return prefs.getBool('muted') ?? false;
   }
 
-  getActivitySetting() async {
+  Future<bool> getActivitySetting() async {
     return prefs.getBool('manage-activity') ?? false;
   }
 
-  getHapticSetting() async {
+  Future<FeedbackType?> getHapticSetting() async {
     var value = prefs.getString("haptic");
-    if (value != null) {
-      return FeedbackType.values.byName(value);
-    } else {
+    if (value == null) {
       return FeedbackType.medium;
+    } else if (value == "off") {
+      return null;
+    } else {
+      return FeedbackType.values.byName(value);
     }
   }
 }

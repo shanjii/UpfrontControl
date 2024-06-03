@@ -25,8 +25,12 @@ class Feedbacks {
   setHaptic(FeedbackType? type) async {
     final prefs = await SharedPreferences.getInstance();
     haptic = type;
-
-    await prefs.setString('haptic', type?.name.toString() ?? "null");
+    
+    if (type == null) {
+      await prefs.setString('haptic', "off");
+    } else {
+      await prefs.setString('haptic', type.name.toString());
+    }
   }
 
   cacheSound() async {
