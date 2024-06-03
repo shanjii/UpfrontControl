@@ -41,6 +41,7 @@ dependencies:
   shared_preferences: ^2.2.2
   audioplayers: ^5.2.1
   async: ^2.11.0
+  flutter_displaymode: ^0.6.0
 
 dev_dependencies:
   flutter_test:

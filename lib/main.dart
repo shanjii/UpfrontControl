@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:flutter_displaymode/flutter_displaymode.dart';
 import 'package:icp_app/data/models/f16_keys_model.dart';
 import 'package:icp_app/data/models/ip_model.dart';
 import 'package:icp_app/local.dart';
@@ -116,4 +119,7 @@ _setDisplaySettings() async {
     DeviceOrientation.landscapeLeft,
     DeviceOrientation.landscapeRight,
   ]);
+  if (Platform.isAndroid) {
+    await FlutterDisplayMode.setHighRefreshRate();
+  }
 }
