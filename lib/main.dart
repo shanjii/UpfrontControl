@@ -1,3 +1,4 @@
+import 'package:icp_app/datasource/models/ip_model.dart';
 import 'package:icp_app/pages/home/home.dart';
 import 'package:icp_app/providers/activity.dart';
 import 'package:icp_app/providers/network.dart';
@@ -16,6 +17,7 @@ void main() async {
   final prefs = await SharedPreferences.getInstance();
 
   String savedIp = await _getSavedIp(prefs);
+  String savedPort = await _getSavedPort(prefs);
   bool isMuted = await _getMutedSetting(prefs);
   FeedbackType haptic = await _getHapticSetting(prefs);
   bool manageActivity = await _getActivitySetting(prefs);
@@ -24,6 +26,7 @@ void main() async {
   runApp(
     App(
       savedIp: savedIp,
+      savedPort: savedPort,
       isMuted: isMuted,
       haptic: haptic,
       innactivityTime: innactivityTime,
@@ -34,6 +37,7 @@ void main() async {
 
 class App extends StatelessWidget {
   final String savedIp;
+  final String savedPort;
   final bool isMuted;
   final int innactivityTime;
   final FeedbackType haptic;
@@ -42,6 +46,7 @@ class App extends StatelessWidget {
   const App({
     super.key,
     required this.savedIp,
+    required this.savedPort,
     required this.isMuted,
     required this.haptic,
     required this.innactivityTime,
@@ -62,7 +67,9 @@ class App extends StatelessWidget {
           create: (context) => Tools(devMode: false),
         ),
         Provider(
-          create: (context) => Network(localIp: savedIp),
+          create: (context) => Network(
+            connection: ConnectionModel(ip: savedIp, port: savedPort),
+          ),
         ),
         ChangeNotifierProvider(
           create: (context) => Activity(
@@ -92,6 +99,10 @@ class App extends StatelessWidget {
 
 _getSavedIp(SharedPreferences prefs) async {
   return prefs.getString('ip') ?? "";
+}
+
+_getSavedPort(SharedPreferences prefs) async {
+  return prefs.getString('port') ?? "5551";
 }
 
 _getMutedSetting(SharedPreferences prefs) async {

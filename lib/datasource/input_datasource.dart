@@ -1,14 +1,15 @@
 import 'package:icp_app/datasource/endpoints.dart';
+import 'package:icp_app/datasource/models/ip_model.dart';
 import 'package:icp_app/values/buttons.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class InputDatasource {
-  pressKey(Keyboard key, String localIp) async {
+  pressKey(Keyboard key, ConnectionModel connection) async {
     try {
       var result = await http
           .post(
-            pressKeyUrl(localIp),
+            pressKeyUrl(connection),
             headers: {'Content-Type': 'application/json'},
             body: json.encode(
               {"key": key.value},
@@ -24,11 +25,11 @@ class InputDatasource {
     }
   }
 
-  releaseKey(Keyboard key, String localIp) async {
+  releaseKey(Keyboard key, ConnectionModel connection) async {
     try {
       var result = await http
           .post(
-            releaseKeyUrl(localIp),
+            releaseKeyUrl(connection),
             headers: {'Content-Type': 'application/json'},
             body: json.encode(
               {"key": key.value},

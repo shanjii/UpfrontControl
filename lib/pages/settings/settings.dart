@@ -25,7 +25,11 @@ class _SettingsState extends State<Settings> {
     activity = context.read<Activity>();
 
     TextEditingController ipController = TextEditingController(
-      text: network.localIp,
+      text: network.connection.ip,
+    );
+
+    TextEditingController portController = TextEditingController(
+      text: network.connection.port,
     );
 
     return Scaffold(
@@ -42,7 +46,7 @@ class _SettingsState extends State<Settings> {
       body: ListView(
         children: [
           _title("Server address"),
-          _ipInput(ipController),
+          _ipInput(ipController, portController),
           _title("Button sounds"),
           Container(
             margin: const EdgeInsets.symmetric(vertical: 10),
@@ -50,14 +54,14 @@ class _SettingsState extends State<Settings> {
             child: Row(
               children: [
                 _button(
-                  title: "Unmuted",
-                  onTap: () => feedbacks.unmute(),
-                  condition: !feedbacks.muted,
-                ),
-                _button(
-                  title: "Muted",
+                  title: "OFF",
                   onTap: () => feedbacks.mute(),
                   condition: feedbacks.muted,
+                ),
+                _button(
+                  title: "ON",
+                  onTap: () => feedbacks.unmute(),
+                  condition: !feedbacks.muted,
                 ),
               ],
             ),
@@ -69,22 +73,22 @@ class _SettingsState extends State<Settings> {
             child: Row(
               children: [
                 _button(
-                  title: "No vibration",
+                  title: "OFF",
                   onTap: () => feedbacks.setHaptic(null),
                   condition: feedbacks.haptic == null,
                 ),
                 _button(
-                  title: "Light vibration",
+                  title: "Light",
                   onTap: () => feedbacks.setHaptic(FeedbackType.light),
                   condition: feedbacks.haptic == FeedbackType.light,
                 ),
                 _button(
-                  title: "Medium vibration",
+                  title: "Medium",
                   onTap: () => feedbacks.setHaptic(FeedbackType.medium),
                   condition: feedbacks.haptic == FeedbackType.medium,
                 ),
                 _button(
-                  title: "Heavy vibration",
+                  title: "Heavy",
                   onTap: () => feedbacks.setHaptic(FeedbackType.heavy),
                   condition: feedbacks.haptic == FeedbackType.heavy,
                 ),
@@ -174,28 +178,60 @@ class _SettingsState extends State<Settings> {
     );
   }
 
-  _ipInput(TextEditingController ipController) {
+  _ipInput(
+    TextEditingController ipController,
+    TextEditingController portController,
+  ) {
     return Container(
       margin: const EdgeInsets.only(top: 10),
-      child: TextField(
-        style: const TextStyle(
-          color: Colors.white,
-          fontSize: 25,
-        ),
-        keyboardType: TextInputType.number,
-        onChanged: (value) => context.read<Network>().setLocalIp(value),
-        decoration: InputDecoration(
-          filled: true,
-          suffix: const Text(":3000"),
-          fillColor: DefaultColors.backgroundLight,
-          border: InputBorder.none,
-          hintText: "Your server IP address",
-          hintStyle: const TextStyle(
-            color: Colors.white,
-            fontSize: 25,
+      child: Row(
+        children: [
+          Expanded(
+            child: TextField(
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 25,
+              ),
+              keyboardType: TextInputType.number,
+              onChanged: (value) => context.read<Network>().setLocalIp(value),
+              decoration: InputDecoration(
+                filled: true,
+                prefix: const Text("IP: "),
+                fillColor: DefaultColors.backgroundLight,
+                border: InputBorder.none,
+                hintText: "Your server IP address",
+                hintStyle: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 25,
+                ),
+              ),
+              controller: ipController,
+            ),
           ),
-        ),
-        controller: ipController,
+          SizedBox(
+            width: 200,
+            child: TextField(
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 25,
+              ),
+              keyboardType: TextInputType.number,
+              onChanged: (value) => context.read<Network>().setPort(value),
+              decoration: InputDecoration(
+                filled: true,
+                prefix: const Text("Port: "),
+                fillColor: DefaultColors.backgroundLight2,
+                border: InputBorder.none,
+                hintText: "Your server IP address",
+                hintStyle: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 25,
+                ),
+              ),
+              controller: portController,
+            ),
+          ),
+        ],
       ),
     );
   }

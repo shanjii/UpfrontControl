@@ -8,15 +8,15 @@ class F16Actions {
 
   F16Actions({required this.feedbacks, required this.network});
 
-  onPress(Keyboard value) {
+  onPress(Keyboard? value) {
     feedbacks.tapVibration();
     feedbacks.tapSound();
-    network.pressKey(value);
+    if (value != null) network.pressKey(value);
   }
 
-  onRelease(Keyboard value) {
+  onRelease(Keyboard? value) {
     feedbacks.tapVibration();
     feedbacks.tapSound();
-    network.releaseKey(value);
+    if (value != null) network.releaseKey(value);
   }
 }

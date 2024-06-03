@@ -1,7 +1,9 @@
-releaseKeyUrl(String localIp) {
-  return Uri.parse('http://$localIp:3000/release');
+import 'package:icp_app/datasource/models/ip_model.dart';
+
+releaseKeyUrl(ConnectionModel connection) {
+  return Uri.parse('http://${connection.ip}:${connection.port}/release');
 }
 
-pressKeyUrl(String localIp) {
-  return Uri.parse('http://$localIp:3000/press');
+pressKeyUrl(ConnectionModel connection) {
+  return Uri.parse('http://${connection.ip}:${connection.port}/press');
 }
