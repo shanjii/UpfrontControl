@@ -1,3 +1,4 @@
+import 'package:icp_app/ui/common/display.dart';
 import 'package:icp_app/ui/pages/f16/f16_page.dart';
 import 'package:icp_app/ui/pages/f18/f18.dart';
 import 'package:icp_app/providers/activity.dart';
@@ -26,15 +27,20 @@ goToF16(BuildContext context) {
 }
 
 goToSettings(BuildContext context) {
+  setPortrait();
+
   Navigator.push(
     context,
     MaterialPageRoute(builder: (context) => const Settings()),
-  );
+  ).then((x) => setLandscape());
 }
 
 goToF16Settings(BuildContext context) {
+  setPortrait();
+
   Navigator.push(
     context,
     MaterialPageRoute(builder: (context) => const F16KeybindsPage()),
-  );
+  ).then((x) => setLandscape());
+  ;
 }
