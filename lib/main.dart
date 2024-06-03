@@ -1,12 +1,15 @@
-import 'package:icp_app/datasource/models/ip_model.dart';
-import 'package:icp_app/pages/home/home.dart';
+import 'package:icp_app/data/models/f16_keys_model.dart';
+import 'package:icp_app/data/models/ip_model.dart';
+import 'package:icp_app/local.dart';
+import 'package:icp_app/ui/pages/home/home.dart';
 import 'package:icp_app/providers/activity.dart';
-import 'package:icp_app/providers/network.dart';
+import 'package:icp_app/providers/communication.dart';
 import 'package:icp_app/providers/feedbacks.dart';
 import 'package:icp_app/providers/tools.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_vibrate/flutter_vibrate.dart';
+import 'package:icp_app/values/buttons.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -15,12 +18,16 @@ void main() async {
 
   await _setDisplaySettings();
   final prefs = await SharedPreferences.getInstance();
+  var localSettings = LocalSettings(prefs);
 
-  String savedIp = await _getSavedIp(prefs);
-  String savedPort = await _getSavedPort(prefs);
-  bool isMuted = await _getMutedSetting(prefs);
-  FeedbackType haptic = await _getHapticSetting(prefs);
-  bool manageActivity = await _getActivitySetting(prefs);
+  String savedIp = await localSettings.getSavedIp();
+  String savedPort = await localSettings.getSavedPort();
+  bool isMuted = await localSettings.getMutedSetting();
+  FeedbackType haptic = await localSettings.getHapticSetting();
+  bool manageActivity = await localSettings.getActivitySetting();
+
+  F16KeysModel f16Keys = F16KeysModel(COM1: Keyboard.D0);
+
   int innactivityTime = 15;
 
   runApp(
@@ -28,6 +35,7 @@ void main() async {
       savedIp: savedIp,
       savedPort: savedPort,
       isMuted: isMuted,
+      f16keys: f16Keys,
       haptic: haptic,
       innactivityTime: innactivityTime,
       manageActivity: manageActivity,
@@ -38,6 +46,7 @@ void main() async {
 class App extends StatelessWidget {
   final String savedIp;
   final String savedPort;
+  final F16KeysModel f16keys;
   final bool isMuted;
   final int innactivityTime;
   final FeedbackType haptic;
@@ -49,6 +58,7 @@ class App extends StatelessWidget {
     required this.savedPort,
     required this.isMuted,
     required this.haptic,
+    required this.f16keys,
     required this.innactivityTime,
     required this.manageActivity,
   });
@@ -64,11 +74,17 @@ class App extends StatelessWidget {
           ),
         ),
         Provider(
-          create: (context) => Tools(devMode: false),
+          create: (context) => Tools(
+            devMode: false,
+          ),
         ),
         Provider(
-          create: (context) => Network(
-            connection: ConnectionModel(ip: savedIp, port: savedPort),
+          create: (context) => Communication(
+            connection: ConnectionModel(
+              ip: savedIp,
+              port: savedPort,
+            ),
+            f16keysModel: f16keys,
           ),
         ),
         ChangeNotifierProvider(
@@ -91,34 +107,9 @@ class App extends StatelessWidget {
             },
           ),
         ),
-        home: const Home(),
+        home: const HomePage(),
       ),
     );
-  }
-}
-
-_getSavedIp(SharedPreferences prefs) async {
-  return prefs.getString('ip') ?? "";
-}
-
-_getSavedPort(SharedPreferences prefs) async {
-  return prefs.getString('port') ?? "5551";
-}
-
-_getMutedSetting(SharedPreferences prefs) async {
-  return prefs.getBool('muted') ?? false;
-}
-
-_getActivitySetting(SharedPreferences prefs) async {
-  return prefs.getBool('manage-activity') ?? false;
-}
-
-_getHapticSetting(SharedPreferences prefs) async {
-  var value = prefs.getString("haptic");
-  if (value != null) {
-    return FeedbackType.values.byName(value);
-  } else {
-    return FeedbackType.medium;
   }
 }
 

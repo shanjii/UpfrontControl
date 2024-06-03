@@ -1,0 +1,40 @@
+import 'package:icp_app/ui/pages/f16/f16_page.dart';
+import 'package:icp_app/ui/pages/f18/f18.dart';
+import 'package:icp_app/providers/activity.dart';
+import 'package:icp_app/providers/feedbacks.dart';
+import 'package:flutter/material.dart';
+import 'package:icp_app/ui/pages/home/subpages/f16_keybinds.dart';
+import 'package:icp_app/ui/pages/settings/settings.dart';
+import 'package:provider/provider.dart';
+
+goToF18(BuildContext context) {
+  context.read<Activity>().start();
+  context.read<Feedbacks>().cacheSound();
+  Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) => const F18()),
+  );
+}
+
+goToF16(BuildContext context) {
+  context.read<Activity>().start();
+  context.read<Feedbacks>().cacheSound();
+  Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) => const F16Page()),
+  );
+}
+
+goToSettings(BuildContext context) {
+  Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) => const Settings()),
+  );
+}
+
+goToF16Settings(BuildContext context) {
+  Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) => const F16KeybindsPage()),
+  );
+}
