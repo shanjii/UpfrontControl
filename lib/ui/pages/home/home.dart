@@ -36,7 +36,7 @@ class HomePage extends StatelessWidget {
                   context,
                   title: "F18",
                   onPress: () => goToF18(context),
-                  settings: () => goToF16Settings(context),
+                  settings: () => goToF18Settings(context),
                 ),
               ],
             ),

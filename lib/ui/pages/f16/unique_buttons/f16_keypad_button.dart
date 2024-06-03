@@ -1,15 +1,12 @@
-import 'package:icp_app/providers/communication.dart';
-import 'package:icp_app/providers/feedbacks.dart';
 import 'package:icp_app/ui/common/key_actions.dart';
 import 'package:icp_app/values/buttons.dart';
 import 'package:icp_app/values/colors.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class F16KeypadButton extends StatefulWidget {
   const F16KeypadButton({
     super.key,
-    required this.sentValue,
+    this.sentValue,
     this.topLabel,
     required this.label,
     this.cornerLabel,
@@ -38,31 +35,19 @@ class _F16KeypadState extends State<F16KeypadButton> {
           setState(() {
             isPressed = true;
           });
-          onPress(
-            widget.sentValue,
-            context.read<Feedbacks>(),
-            context.read<Communication>(),
-          );
+          onPress(context, key: widget.sentValue);
         },
         onTapUp: (details) {
           setState(() {
             isPressed = false;
           });
-          onRelease(
-            widget.sentValue,
-            context.read<Feedbacks>(),
-            context.read<Communication>(),
-          );
+          onRelease(context, key: widget.sentValue);
         },
         onTapCancel: () {
           setState(() {
             isPressed = false;
           });
-          onRelease(
-            widget.sentValue,
-            context.read<Feedbacks>(),
-            context.read<Communication>(),
-          );
+          onRelease(context, key: widget.sentValue);
         },
         child: Container(
           margin: const EdgeInsets.all(5),

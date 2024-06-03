@@ -9,7 +9,6 @@ import 'package:icp_app/providers/tools.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_vibrate/flutter_vibrate.dart';
-import 'package:icp_app/values/buttons.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -25,8 +24,7 @@ void main() async {
   bool isMuted = await localSettings.getMutedSetting();
   FeedbackType? haptic = await localSettings.getHapticSetting();
   bool manageActivity = await localSettings.getActivitySetting();
-
-  F16KeysModel f16Keys = F16KeysModel(COM1: Keyboard.D0);
+  F16KeysModel f16Keys = await localSettings.getF16Keybinds();
 
   int innactivityTime = 15;
 
@@ -118,5 +116,4 @@ _setDisplaySettings() async {
     DeviceOrientation.landscapeLeft,
     DeviceOrientation.landscapeRight,
   ]);
-  await SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
 }

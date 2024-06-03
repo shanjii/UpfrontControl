@@ -1,15 +1,17 @@
+import 'package:flutter/material.dart';
 import 'package:icp_app/providers/communication.dart';
 import 'package:icp_app/providers/feedbacks.dart';
 import 'package:icp_app/values/buttons.dart';
+import 'package:provider/provider.dart';
 
-onPress(Keyboard? value, Feedbacks feedbacks, Communication communication) {
-  feedbacks.tapVibration();
-  feedbacks.tapSound();
-  communication.pressKey(value);
+onPress(BuildContext context, {required Keyboard? key}) {
+  context.read<Feedbacks>().tapVibration();
+  context.read<Feedbacks>().tapSound();
+  context.read<Communication>().pressKey(key);
 }
 
-onRelease(Keyboard? value, Feedbacks feedbacks, Communication communication) {
-  feedbacks.tapVibration();
-  feedbacks.tapSound();
-  communication.releaseKey(value);
+onRelease(BuildContext context, {required Keyboard? key}) {
+  context.read<Feedbacks>().tapVibration();
+  context.read<Feedbacks>().tapSound();
+  context.read<Communication>().releaseKey(key);
 }

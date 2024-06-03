@@ -5,7 +5,6 @@ import 'package:icp_app/ui/pages/f16/button_groups/f16_left.dart';
 import 'package:icp_app/ui/pages/f16/button_groups/f16_right.dart';
 import 'package:icp_app/ui/pages/f16/button_groups/f16_top.dart';
 import 'package:icp_app/providers/activity.dart';
-import 'package:icp_app/values/buttons.dart';
 import 'package:icp_app/values/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -67,13 +66,13 @@ class _F16State extends State<F16Page> {
   }
 
   _leftGroup() {
-    return const F16Left(
-      dobberUp: Keyboard.Up,
-      dobberLeft: Keyboard.Left,
-      dobberDown: Keyboard.Down,
-      dobberRight: Keyboard.Right,
-      switchUp: Keyboard.PageUp,
-      switchDown: Keyboard.PageDown,
+    return F16Left(
+      dobberUp: f16Keys.dobberUp,
+      dobberLeft: f16Keys.dobberLeft,
+      dobberDown: f16Keys.dobberDown,
+      dobberRight: f16Keys.dobberRight,
+      switchUp: f16Keys.stepUp,
+      switchDown: f16Keys.stepDown,
     );
   }
 
@@ -82,39 +81,39 @@ class _F16State extends State<F16Page> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         F16Top(
-          com1: f16Keys.COM1,
-          com2: Keyboard.D2,
-          iff: Keyboard.D3,
-          list: Keyboard.D4,
-          aa: Keyboard.D5,
-          ag: Keyboard.D6,
+          com1: f16Keys.com1,
+          com2: f16Keys.com2,
+          iff: f16Keys.iff,
+          list: f16Keys.list,
+          aa: f16Keys.aa,
+          ag: f16Keys.ag,
         ),
-        const F16Keypad(
-          num0: Keyboard.NumPad0,
-          num1: Keyboard.NumPad1,
-          num2: Keyboard.NumPad2,
-          num3: Keyboard.NumPad3,
-          num4: Keyboard.NumPad4,
-          num5: Keyboard.NumPad5,
-          num6: Keyboard.NumPad6,
-          num7: Keyboard.NumPad7,
-          num8: Keyboard.NumPad8,
-          num9: Keyboard.NumPad9,
-          entr: Keyboard.Enter,
-          rcl: Keyboard.Backspace,
+        F16Keypad(
+          num0: f16Keys.num0,
+          num1: f16Keys.num1,
+          num2: f16Keys.num2,
+          num3: f16Keys.num3,
+          num4: f16Keys.num4,
+          num5: f16Keys.num5,
+          num6: f16Keys.num6,
+          num7: f16Keys.num7,
+          num8: f16Keys.num8,
+          num9: f16Keys.num9,
+          entr: f16Keys.entr,
+          rcl: f16Keys.rcl,
         ),
       ],
     );
   }
 
   _rightGroup() {
-    return const F16Right(
-      switchUp: Keyboard.Add,
-      switchDown: Keyboard.Subtract,
-      drift: Keyboard.J,
-      norm: Keyboard.K,
-      warnReset: Keyboard.L,
-      wx: Keyboard.Multiply,
+    return F16Right(
+      switchUp: f16Keys.flirUp,
+      switchDown: f16Keys.flirDown,
+      drift: f16Keys.drift,
+      norm: f16Keys.norm,
+      warnReset: f16Keys.warnReset,
+      wx: f16Keys.wx,
     );
   }
 }

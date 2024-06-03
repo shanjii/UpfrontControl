@@ -1,10 +1,7 @@
 import 'package:icp_app/ui/common/key_actions.dart';
-import 'package:icp_app/providers/feedbacks.dart';
-import 'package:icp_app/providers/communication.dart';
 import 'package:icp_app/values/buttons.dart';
 import 'package:icp_app/values/colors.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class F16Switch extends StatefulWidget {
   final Keyboard? sentValueDrift;
@@ -13,9 +10,9 @@ class F16Switch extends StatefulWidget {
 
   const F16Switch({
     super.key,
-    required this.sentValueDrift,
-    required this.sentValueNorm,
-    required this.sentValueWrnRst,
+    this.sentValueDrift,
+    this.sentValueNorm,
+    this.sentValueWrnRst,
   });
 
   @override
@@ -32,44 +29,20 @@ class _F16SwitchState extends State<F16Switch> {
           _Button(
             title: "DRIFT C/O",
             color: DefaultColors.f16ButtonInner,
-            onPress: () => onPress(
-              widget.sentValueDrift,
-              context.read<Feedbacks>(),
-              context.read<Communication>(),
-            ),
-            onRelease: () => onRelease(
-              widget.sentValueDrift,
-              context.read<Feedbacks>(),
-              context.read<Communication>(),
-            ),
+            onPress: () => onPress(context, key: widget.sentValueDrift),
+            onRelease: () => onRelease(context, key: widget.sentValueDrift),
           ),
           _Button(
             title: "NORM",
             color: DefaultColors.f16ButtonInner,
-            onPress: () => onPress(
-              widget.sentValueNorm,
-              context.read<Feedbacks>(),
-              context.read<Communication>(),
-            ),
-            onRelease: () => onRelease(
-              widget.sentValueNorm,
-              context.read<Feedbacks>(),
-              context.read<Communication>(),
-            ),
+            onPress: () => onPress(context, key: widget.sentValueNorm),
+            onRelease: () => onRelease(context, key: widget.sentValueNorm),
           ),
           _Button(
             title: "WRN RST",
             color: DefaultColors.f16RoundButton,
-            onPress: () => onPress(
-              widget.sentValueWrnRst,
-              context.read<Feedbacks>(),
-              context.read<Communication>(),
-            ),
-            onRelease: () => onRelease(
-              widget.sentValueWrnRst,
-              context.read<Feedbacks>(),
-              context.read<Communication>(),
-            ),
+            onPress: () => onPress(context, key: widget.sentValueWrnRst),
+            onRelease: () => onRelease(context, key: widget.sentValueWrnRst),
           ),
         ],
       ),

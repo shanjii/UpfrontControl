@@ -1,10 +1,7 @@
 import 'package:icp_app/ui/common/key_actions.dart';
 import 'package:icp_app/values/buttons.dart';
-import 'package:icp_app/providers/communication.dart';
-import 'package:icp_app/providers/feedbacks.dart';
 import 'package:icp_app/values/colors.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class F16DobberButton extends StatefulWidget {
   final Keyboard? sentValueUp;
@@ -14,10 +11,10 @@ class F16DobberButton extends StatefulWidget {
 
   const F16DobberButton({
     super.key,
-    required this.sentValueUp,
-    required this.sentValueLeft,
-    required this.sentValueDown,
-    required this.sentValueRight,
+    this.sentValueUp,
+    this.sentValueLeft,
+    this.sentValueDown,
+    this.sentValueRight,
   });
 
   @override
@@ -43,26 +40,10 @@ class _F16DobberButtonState extends State<F16DobberButton> {
           onTapDown: (details) => _getTapLocation(
             constraints: constraints,
             details: details,
-            topPress: () => onPress(
-              widget.sentValueUp,
-              context.read<Feedbacks>(),
-              context.read<Communication>(),
-            ),
-            rightPress: () => onPress(
-              widget.sentValueRight,
-              context.read<Feedbacks>(),
-              context.read<Communication>(),
-            ),
-            leftPress: () => onPress(
-              widget.sentValueLeft,
-              context.read<Feedbacks>(),
-              context.read<Communication>(),
-            ),
-            bottomPress: () => onPress(
-              widget.sentValueDown,
-              context.read<Feedbacks>(),
-              context.read<Communication>(),
-            ),
+            topPress: () => onPress(context, key: widget.sentValueUp),
+            rightPress: () => onPress(context, key: widget.sentValueRight),
+            leftPress: () => onPress(context, key: widget.sentValueLeft),
+            bottomPress: () => onPress(context, key: widget.sentValueDown),
           ),
           onTapUp: (details) => _releaseButton(),
           onTapCancel: () => _releaseButton(),
@@ -270,32 +251,19 @@ class _F16DobberButtonState extends State<F16DobberButton> {
   _releaseButton() {
     switch (pressedButton) {
       case _PressedButton.top:
-        onRelease(
-          widget.sentValueUp,
-          context.read<Feedbacks>(),
-          context.read<Communication>(),
-        );
+        onRelease(context, key: widget.sentValueUp);
         break;
       case _PressedButton.left:
-        onRelease(
-          widget.sentValueLeft,
-          context.read<Feedbacks>(),
-          context.read<Communication>(),
-        );
+        onRelease(context, key: widget.sentValueLeft);
+
         break;
       case _PressedButton.right:
-        onRelease(
-          widget.sentValueRight,
-          context.read<Feedbacks>(),
-          context.read<Communication>(),
-        );
+        onRelease(context, key: widget.sentValueRight);
+
         break;
       case _PressedButton.bottom:
-        onRelease(
-          widget.sentValueDown,
-          context.read<Feedbacks>(),
-          context.read<Communication>(),
-        );
+        onRelease(context, key: widget.sentValueDown);
+
         break;
       default:
     }

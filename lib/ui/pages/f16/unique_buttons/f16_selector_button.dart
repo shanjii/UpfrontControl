@@ -1,16 +1,13 @@
 import 'package:icp_app/ui/common/key_actions.dart';
-import 'package:icp_app/providers/feedbacks.dart';
-import 'package:icp_app/providers/communication.dart';
 import 'package:icp_app/values/buttons.dart';
 import 'package:icp_app/values/colors.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class F16SelectorButton extends StatefulWidget {
   const F16SelectorButton({
     super.key,
-    required this.sentValueUp,
-    required this.sentValueDown,
+    this.sentValueUp,
+    this.sentValueDown,
     required this.labelUp,
     required this.labelDown,
   });
@@ -43,31 +40,19 @@ class _F16SelectorButtonState extends State<F16SelectorButton> {
                   setState(() {
                     pressedUp = true;
                   });
-                  onPress(
-                    widget.sentValueUp,
-                    context.read<Feedbacks>(),
-                    context.read<Communication>(),
-                  );
+                  onPress(context, key: widget.sentValueUp);
                 },
                 onTapUp: (details) {
                   setState(() {
                     pressedUp = false;
                   });
-                  onRelease(
-                    widget.sentValueUp,
-                    context.read<Feedbacks>(),
-                    context.read<Communication>(),
-                  );
+                  onRelease(context, key: widget.sentValueUp);
                 },
                 onTapCancel: () {
                   setState(() {
                     pressedUp = false;
                   });
-                  onRelease(
-                    widget.sentValueUp,
-                    context.read<Feedbacks>(),
-                    context.read<Communication>(),
-                  );
+                  onRelease(context, key: widget.sentValueUp);
                 },
                 child: _button(widget.labelUp, widget.sentValueUp),
               ),
@@ -79,31 +64,19 @@ class _F16SelectorButtonState extends State<F16SelectorButton> {
                   setState(() {
                     pressedDown = true;
                   });
-                  onPress(
-                    widget.sentValueDown,
-                    context.read<Feedbacks>(),
-                    context.read<Communication>(),
-                  );
+                  onPress(context, key: widget.sentValueDown);
                 },
                 onTapUp: (details) {
                   setState(() {
                     pressedDown = false;
                   });
-                  onRelease(
-                    widget.sentValueDown,
-                    context.read<Feedbacks>(),
-                    context.read<Communication>(),
-                  );
+                  onRelease(context, key: widget.sentValueDown);
                 },
                 onTapCancel: () {
                   setState(() {
                     pressedDown = false;
                   });
-                  onRelease(
-                    widget.sentValueDown,
-                    context.read<Feedbacks>(),
-                    context.read<Communication>(),
-                  );
+                  onRelease(context, key: widget.sentValueDown);
                 },
                 child: _button(widget.labelDown, widget.sentValueDown),
               ),

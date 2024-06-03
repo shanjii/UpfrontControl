@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-defaultText(String text, {double? size}) {
+Widget defaultText(String text, {double? size}) {
   return Text(
     text,
     style: TextStyle(

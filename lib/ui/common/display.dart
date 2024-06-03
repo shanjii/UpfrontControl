@@ -12,3 +12,14 @@ setLandscape() {
     DeviceOrientation.landscapeRight,
   ]);
 }
+
+setDisplayFullscreen() {
+  SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
+}
+
+setDisplayDefault() {
+  SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: [
+    SystemUiOverlay.top,
+    SystemUiOverlay.bottom,
+  ]);
+}
