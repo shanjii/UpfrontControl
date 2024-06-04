@@ -1,32 +1,19 @@
-import 'package:icp_app/ui/pages/f16/unique_buttons/f16_dobber_button.dart';
-import 'package:icp_app/ui/pages/f16/unique_buttons/f16_selector_button.dart';
+import 'package:icp_app/providers/communication.dart';
+import 'package:icp_app/ui/pages/f16/layouts/buttons/f16_rounded_solid_button.dart';
+import 'package:icp_app/ui/pages/f16/layouts/buttons/f16_selector_button.dart';
+import 'package:icp_app/ui/pages/f16/layouts/buttons/f16_switch.dart';
 import 'package:icp_app/providers/tools.dart';
-import 'package:icp_app/values/buttons.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class F16Left extends StatelessWidget {
-  final Keyboard? switchUp;
-  final Keyboard? switchDown;
-  final Keyboard? dobberUp;
-  final Keyboard? dobberLeft;
-  final Keyboard? dobberDown;
-  final Keyboard? dobberRight;
-
-  const F16Left({
-    super.key,
-    required this.switchUp,
-    required this.switchDown,
-    required this.dobberUp,
-    required this.dobberLeft,
-    required this.dobberDown,
-    required this.dobberRight,
-  });
+class F16Right extends StatelessWidget {
+  const F16Right({super.key});
 
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     var devMode = context.read<Tools>().devMode;
+    var f16Keys = context.read<Communication>().f16keysModel;
 
     return Placeholder(
       color: devMode ? Colors.grey : Colors.transparent,
@@ -42,26 +29,35 @@ class F16Left extends StatelessWidget {
                 children: [
                   ConstrainedBox(
                     constraints: BoxConstraints(
+                      maxWidth: constraints.maxWidth * 0.4,
+                      maxHeight: height * 0.33,
+                    ),
+                    child: F16RoundedSolidButton(
+                      sentValue: f16Keys.wx,
+                      label: "WX",
+                    ),
+                  ),
+                  ConstrainedBox(
+                    constraints: BoxConstraints(
                       maxWidth: constraints.maxWidth * 0.45,
                       maxHeight: height * 0.33,
                     ),
                     child: F16SelectorButton(
                       labelUp: "▲",
                       labelDown: "▼",
-                      sentValueUp: switchUp,
-                      sentValueDown: switchDown,
+                      sentValueUp: f16Keys.flirUp,
+                      sentValueDown: f16Keys.flirDown,
                     ),
                   ),
                   ConstrainedBox(
                     constraints: BoxConstraints(
-                      maxHeight: height * 0.40,
-                      maxWidth: constraints.maxWidth,
+                      maxHeight: height * 0.33,
+                      maxWidth: constraints.maxWidth * 0.8,
                     ),
-                    child: F16DobberButton(
-                      sentValueUp: dobberUp,
-                      sentValueDown: dobberDown,
-                      sentValueLeft: dobberLeft,
-                      sentValueRight: dobberRight,
+                    child: F16Switch(
+                      sentValueDrift: f16Keys.drift,
+                      sentValueNorm: f16Keys.norm,
+                      sentValueWrnRst: f16Keys.warnReset,
                     ),
                   )
                 ],

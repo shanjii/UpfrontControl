@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:icp_app/data/models/f16_keys_model.dart';
 import 'package:icp_app/providers/communication.dart';
-import 'package:icp_app/ui/pages/f16/unique_buttons/f16_dobber_button.dart';
-import 'package:icp_app/ui/pages/f16/unique_buttons/f16_keypad_button.dart';
-import 'package:icp_app/ui/pages/f16/unique_buttons/f16_switch.dart';
 import 'package:icp_app/ui/pages/home/widgets/keybinder.dart';
 import 'package:icp_app/ui/pages/home/widgets/multi_keybinder.dart';
+import 'package:icp_app/ui/pages/f16/layouts/buttons/f16_dobber_button.dart';
+import 'package:icp_app/ui/pages/f16/layouts/buttons/f16_keypad_button.dart';
+import 'package:icp_app/ui/pages/f16/layouts/buttons/f16_switch.dart';
 import 'package:icp_app/values/buttons.dart';
 import 'package:icp_app/values/colors.dart';
 import 'package:provider/provider.dart';
