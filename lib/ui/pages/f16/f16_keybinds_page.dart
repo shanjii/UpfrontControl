@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:icp_app/data/models/f16_keys_model.dart';
 import 'package:icp_app/providers/communication.dart';
 import 'package:icp_app/ui/components/text.dart';
-import 'package:icp_app/ui/pages/f16/layouts/buttons/f16_rounded_button.dart';
-import 'package:icp_app/ui/pages/f16/layouts/buttons/f16_rounded_solid_button.dart';
-import 'package:icp_app/ui/pages/f16/layouts/buttons/f16_selector_button.dart';
-import 'package:icp_app/ui/pages/home/widgets/keybinder.dart';
-import 'package:icp_app/ui/pages/home/widgets/multi_keybinder.dart';
-import 'package:icp_app/ui/pages/f16/layouts/buttons/f16_dobber_button.dart';
-import 'package:icp_app/ui/pages/f16/layouts/buttons/f16_keypad_button.dart';
-import 'package:icp_app/ui/pages/f16/layouts/buttons/f16_switch.dart';
+import 'package:icp_app/ui/pages/f16/buttons/f16_rounded_button.dart';
+import 'package:icp_app/ui/pages/f16/buttons/f16_rounded_solid_button.dart';
+import 'package:icp_app/ui/pages/f16/buttons/f16_selector_button.dart';
+import 'package:icp_app/ui/components/keybinder.dart';
+import 'package:icp_app/ui/components/multi_keybinder.dart';
+import 'package:icp_app/ui/pages/f16/buttons/f16_dobber_button.dart';
+import 'package:icp_app/ui/pages/f16/buttons/f16_keypad_button.dart';
+import 'package:icp_app/ui/pages/f16/buttons/f16_switch.dart';
 import 'package:icp_app/values/buttons.dart';
 import 'package:icp_app/values/colors.dart';
 import 'package:provider/provider.dart';
@@ -295,6 +295,7 @@ class _F16KeybindsState extends State<F16KeybindsPage> {
               });
             },
           ),
+          const SizedBox(height: 20),
           _title(
             title: "Step switch",
             subtitle: "UP - DOWN",
@@ -361,8 +362,11 @@ class _F16KeybindsState extends State<F16KeybindsPage> {
 
   _title({required String title, String? subtitle}) {
     return Container(
-      padding: const EdgeInsets.all(18),
-      color: DefaultColors.backgroundLight,
+      padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 10),
+      decoration: BoxDecoration(
+        color: DefaultColors.backgroundLight,
+        border: Border.all(color: DefaultColors.backgroundLight, width: 0),
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

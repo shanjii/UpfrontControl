@@ -3,14 +3,14 @@ import 'package:icp_app/values/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class F18 extends StatefulWidget {
-  const F18({super.key});
+class F18Page extends StatefulWidget {
+  const F18Page({super.key});
 
   @override
-  State<F18> createState() => _F18State();
+  State<F18Page> createState() => _F18State();
 }
 
-class _F18State extends State<F18> {
+class _F18State extends State<F18Page> {
   late Activity activity;
 
   @override

@@ -1,6 +1,6 @@
 import 'package:icp_app/providers/communication.dart';
-import 'package:icp_app/ui/pages/f16/layouts/buttons/f16_dobber_button.dart';
-import 'package:icp_app/ui/pages/f16/layouts/buttons/f16_selector_button.dart';
+import 'package:icp_app/ui/pages/f16/buttons/f16_dobber_button.dart';
+import 'package:icp_app/ui/pages/f16/buttons/f16_selector_button.dart';
 import 'package:icp_app/providers/tools.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

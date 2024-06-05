@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:icp_app/ui/components/text.dart';
-import 'package:icp_app/ui/pages/home/widgets/keybind_selector.dart';
+import 'package:icp_app/ui/components/keybind_selector.dart';
 import 'package:icp_app/values/buttons.dart';
 import 'package:icp_app/values/colors.dart';
 

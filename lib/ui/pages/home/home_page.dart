@@ -1,5 +1,5 @@
+import 'package:icp_app/common/home_navigation.dart';
 import 'package:icp_app/ui/components/text.dart';
-import 'package:icp_app/ui/pages/home/home_navigation.dart';
 import 'package:icp_app/values/colors.dart';
 import 'package:flutter/material.dart';
 

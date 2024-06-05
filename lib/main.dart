@@ -4,7 +4,7 @@ import 'package:flutter_displaymode/flutter_displaymode.dart';
 import 'package:icp_app/data/models/f16_keys_model.dart';
 import 'package:icp_app/data/models/ip_model.dart';
 import 'package:icp_app/local.dart';
-import 'package:icp_app/ui/pages/home/home.dart';
+import 'package:icp_app/ui/pages/home/home_page.dart';
 import 'package:icp_app/providers/activity.dart';
 import 'package:icp_app/providers/communication.dart';
 import 'package:icp_app/providers/feedbacks.dart';

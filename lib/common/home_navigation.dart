@@ -1,11 +1,11 @@
 import 'package:icp_app/common/display.dart';
 import 'package:icp_app/ui/pages/f16/f16_page.dart';
-import 'package:icp_app/ui/pages/f18/f18.dart';
+import 'package:icp_app/ui/pages/f18/f18_page.dart';
 import 'package:icp_app/providers/activity.dart';
 import 'package:icp_app/providers/feedbacks.dart';
 import 'package:flutter/material.dart';
-import 'package:icp_app/ui/pages/home/subpages/f16_keybinds.dart';
-import 'package:icp_app/ui/pages/home/subpages/f18_keybinds.dart';
+import 'package:icp_app/ui/pages/f16/f16_keybinds_page.dart';
+import 'package:icp_app/ui/pages/f18/f18_keybinds.dart';
 import 'package:icp_app/ui/pages/settings/settings.dart';
 import 'package:provider/provider.dart';
 
@@ -17,7 +17,7 @@ goToF18(BuildContext context) {
 
   Navigator.push(
     context,
-    MaterialPageRoute(builder: (context) => const F18()),
+    MaterialPageRoute(builder: (context) => const F18Page()),
   ).then((x) => setDisplayDefault());
 }
 
