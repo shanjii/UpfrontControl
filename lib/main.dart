@@ -1,15 +1,14 @@
 import 'dart:io';
-
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter_displaymode/flutter_displaymode.dart';
-import 'package:icp_app/data/models/f16_keys_model.dart';
-import 'package:icp_app/data/models/ip_model.dart';
-import 'package:icp_app/local.dart';
-import 'package:icp_app/ui/pages/home/home_page.dart';
-import 'package:icp_app/providers/activity.dart';
-import 'package:icp_app/providers/communication.dart';
-import 'package:icp_app/providers/feedbacks.dart';
-import 'package:icp_app/providers/tools.dart';
+import 'package:icp_app/app/data/models/f16_keys_model.dart';
+import 'package:icp_app/app/data/models/ip_model.dart';
+import 'package:icp_app/app/presenters/activity_presenter.dart';
+import 'package:icp_app/app/presenters/communication_presenter.dart';
+import 'package:icp_app/app/presenters/feedback_presenter.dart';
+import 'package:icp_app/app/presenters/tool_presenter.dart';
+import 'package:icp_app/app/ui/pages/home/home_page.dart';
+import 'package:icp_app/core/storage/local_settings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_vibrate/flutter_vibrate.dart';
@@ -73,18 +72,18 @@ class App extends StatelessWidget {
     return MultiProvider(
       providers: [
         Provider(
-          create: (context) => Feedbacks(
+          create: (context) => FeedbackPresenter(
             muted: isMuted,
             haptic: haptic,
           ),
         ),
         Provider(
-          create: (context) => Tools(
+          create: (context) => ToolPresenter(
             devMode: false,
           ),
         ),
         Provider(
-          create: (context) => Communication(
+          create: (context) => CommunicationPresenter(
             connection: ConnectionModel(
               ip: savedIp,
               port: savedPort,
@@ -93,7 +92,7 @@ class App extends StatelessWidget {
           ),
         ),
         ChangeNotifierProvider(
-          create: (context) => Activity(
+          create: (context) => ActivityPresenter(
             innactivityTime: innactivityTime,
             manageActivity: manageActivity,
           ),
