@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter_displaymode/flutter_displaymode.dart';
 import 'package:icp_app/data/models/f16_keys_model.dart';
 import 'package:icp_app/data/models/ip_model.dart';
@@ -19,6 +20,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await _setDisplaySettings();
+
   final prefs = await SharedPreferences.getInstance();
   var localSettings = LocalSettings(prefs);
 
@@ -30,6 +32,8 @@ void main() async {
   F16KeysModel f16Keys = await localSettings.getF16Keybinds();
 
   int innactivityTime = 15;
+
+  await _cacheSounds();
 
   runApp(
     App(
@@ -122,4 +126,12 @@ _setDisplaySettings() async {
   if (Platform.isAndroid) {
     await FlutterDisplayMode.setHighRefreshRate();
   }
+}
+
+_cacheSounds() async {
+  await AudioPlayer().play(
+    AssetSource('click1.ogg'),
+    volume: 0,
+    mode: PlayerMode.lowLatency,
+  );
 }

@@ -2,7 +2,6 @@ import 'package:icp_app/common/display.dart';
 import 'package:icp_app/ui/pages/f16/f16_page.dart';
 import 'package:icp_app/ui/pages/f18/f18_page.dart';
 import 'package:icp_app/providers/activity.dart';
-import 'package:icp_app/providers/feedbacks.dart';
 import 'package:flutter/material.dart';
 import 'package:icp_app/ui/pages/f16/f16_keybinds_page.dart';
 import 'package:icp_app/ui/pages/f18/f18_keybinds.dart';
@@ -11,7 +10,6 @@ import 'package:provider/provider.dart';
 
 goToF18(BuildContext context) {
   context.read<Activity>().start();
-  context.read<Feedbacks>().cacheSound();
 
   setDisplayFullscreen();
 
@@ -23,7 +21,6 @@ goToF18(BuildContext context) {
 
 goToF16(BuildContext context) {
   context.read<Activity>().start();
-  context.read<Feedbacks>().cacheSound();
 
   setDisplayFullscreen();
 

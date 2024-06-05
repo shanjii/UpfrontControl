@@ -33,14 +33,6 @@ class Feedbacks {
     }
   }
 
-  cacheSound() async {
-    await AudioPlayer().play(
-      AssetSource('click1.ogg'),
-      volume: 0,
-      mode: PlayerMode.lowLatency,
-    );
-  }
-
   tapVibration() {
     if (haptic == null) return;
     Vibrate.feedback(haptic!);
