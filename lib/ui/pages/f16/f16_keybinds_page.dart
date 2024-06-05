@@ -295,78 +295,93 @@ class _F16KeybindsState extends State<F16KeybindsPage> {
               });
             },
           ),
-          const SizedBox(height: 20),
-          _title(
-            title: "Step switch",
-            subtitle: "UP - DOWN",
-          ),
-          MultiKeybinder(
-            button: const F16SelectorButton(
-              labelUp: "▲",
-              labelDown: "▼",
-            ),
-            square: false,
-            keybinds: [
-              keys.dobberUp,
-              keys.dobberLeft,
+          _multiKeybindRegion(
+            children: [
+              _title(
+                title: "Step switch",
+                subtitle: "UP - DOWN",
+              ),
+              MultiKeybinder(
+                button: const F16SelectorButton(
+                  labelUp: "▲",
+                  labelDown: "▼",
+                ),
+                square: false,
+                keybinds: [
+                  keys.dobberUp,
+                  keys.dobberLeft,
+                ],
+                onAdd: _setStepperKeybinds,
+              ),
+              _title(
+                title: "Flir switch",
+                subtitle: "UP - DOWN",
+              ),
+              MultiKeybinder(
+                button: const F16SelectorButton(
+                  labelUp: "+",
+                  labelDown: "-",
+                ),
+                square: false,
+                keybinds: [
+                  keys.flirUp,
+                  keys.flirDown,
+                ],
+                onAdd: _setFlirKeybinds,
+              ),
+              _title(
+                title: "Dobber switch ",
+                subtitle: "UP - LEFT - RIGHT - DOWN",
+              ),
+              MultiKeybinder(
+                button: const F16DobberButton(),
+                keybinds: [
+                  keys.dobberUp,
+                  keys.dobberLeft,
+                  keys.dobberRight,
+                  keys.dobberDown,
+                ],
+                onAdd: _setDobberKeybinds,
+              ),
+              _title(
+                title: "Drift switch ",
+                subtitle: "UP - CENTER - DOWN",
+              ),
+              MultiKeybinder(
+                button: const F16Switch(),
+                keybinds: [
+                  keys.drift,
+                  keys.norm,
+                  keys.warnReset,
+                ],
+                onAdd: _setSwitchKeybinds,
+              ),
             ],
-            onAdd: _setStepperKeybinds,
-          ),
-          _title(
-            title: "Flir switch",
-            subtitle: "UP - DOWN",
-          ),
-          MultiKeybinder(
-            button: const F16SelectorButton(
-              labelUp: "+",
-              labelDown: "-",
-            ),
-            square: false,
-            keybinds: [
-              keys.flirUp,
-              keys.flirDown,
-            ],
-            onAdd: _setFlirKeybinds,
-          ),
-          _title(
-            title: "Dobber switch ",
-            subtitle: "UP - LEFT - RIGHT - DOWN",
-          ),
-          MultiKeybinder(
-            button: const F16DobberButton(),
-            keybinds: [
-              keys.dobberUp,
-              keys.dobberLeft,
-              keys.dobberRight,
-              keys.dobberDown,
-            ],
-            onAdd: _setDobberKeybinds,
-          ),
-          _title(
-            title: "Drift switch ",
-            subtitle: "UP - CENTER - DOWN",
-          ),
-          MultiKeybinder(
-            button: const F16Switch(),
-            keybinds: [
-              keys.drift,
-              keys.norm,
-              keys.warnReset,
-            ],
-            onAdd: _setSwitchKeybinds,
-          ),
+          )
         ],
       ),
     );
   }
 
-  _title({required String title, String? subtitle}) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 10),
-      decoration: BoxDecoration(
-        color: DefaultColors.backgroundLight,
-        border: Border.all(color: DefaultColors.backgroundLight, width: 0),
+  _multiKeybindRegion({required List<Widget> children}) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 20),
+      child: Container(
+        decoration: BoxDecoration(
+          color: DefaultColors.backgroundLight,
+          border: Border.all(color: DefaultColors.backgroundLight, width: 0),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: children,
+        ),
       ),
+    );
+  }
+
+  _title({required String title, String? subtitle}) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 10),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

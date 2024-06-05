@@ -28,8 +28,8 @@ class _F16DobberButtonState extends State<F16DobberButton> {
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context, constraints) {
-        return GestureDetector(
-          onTapDown: (details) => _getTapLocation(
+        return Listener(
+          onPointerDown: (details) => _getTapLocation(
             constraints: constraints,
             details: details,
             topPress: () => onPress(context, key: widget.sentValueUp),
@@ -37,8 +37,8 @@ class _F16DobberButtonState extends State<F16DobberButton> {
             leftPress: () => onPress(context, key: widget.sentValueLeft),
             bottomPress: () => onPress(context, key: widget.sentValueDown),
           ),
-          onTapUp: (details) => _releaseButton(),
-          onTapCancel: () => _releaseButton(),
+          onPointerUp: (details) => _releaseButton(),
+          onPointerCancel: (details) => _releaseButton(),
           child: AspectRatio(
             aspectRatio: 1,
             child: Container(
@@ -161,7 +161,7 @@ class _F16DobberButtonState extends State<F16DobberButton> {
 
   _getTapLocation({
     required BoxConstraints constraints,
-    required TapDownDetails details,
+    required PointerDownEvent details,
     required Function() topPress,
     required Function() bottomPress,
     required Function() rightPress,

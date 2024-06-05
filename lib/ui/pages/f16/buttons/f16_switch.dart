@@ -73,20 +73,20 @@ class _ButtonState extends State<_Button> {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: GestureDetector(
-        onTapDown: (details) {
+      child: Listener(
+        onPointerDown: (details) {
           setState(() {
             pressed = true;
           });
           widget.onPress();
         },
-        onTapUp: (details) {
+        onPointerUp: (details) {
           setState(() {
             pressed = false;
           });
           widget.onRelease();
         },
-        onTapCancel: () {
+        onPointerCancel: (details) {
           setState(() {
             pressed = false;
           });

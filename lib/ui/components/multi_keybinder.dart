@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:icp_app/ui/components/add_keybind.dart';
 import 'package:icp_app/values/buttons.dart';
-import 'package:icp_app/values/colors.dart';
 
 class MultiKeybinder extends StatelessWidget {
   final Widget button;
@@ -19,12 +18,8 @@ class MultiKeybinder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 5),
-      decoration: BoxDecoration(
-        color: DefaultColors.backgroundLight,
-        border: Border.all(color: DefaultColors.backgroundLight, width: 0),
-      ),
       child: Row(
         children: [
           SizedBox(

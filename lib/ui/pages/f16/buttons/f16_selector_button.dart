@@ -35,20 +35,20 @@ class _F16SelectorButtonState extends State<F16SelectorButton> {
           children: [
             AspectRatio(
               aspectRatio: 1,
-              child: GestureDetector(
-                onTapDown: (details) {
+              child: Listener(
+                onPointerDown: (details) {
                   setState(() {
                     pressedUp = true;
                   });
                   onPress(context, key: widget.sentValueUp);
                 },
-                onTapUp: (details) {
+                onPointerUp: (details) {
                   setState(() {
                     pressedUp = false;
                   });
                   onRelease(context, key: widget.sentValueUp);
                 },
-                onTapCancel: () {
+                onPointerCancel: (details) {
                   setState(() {
                     pressedUp = false;
                   });

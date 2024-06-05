@@ -30,20 +30,20 @@ class _F16KeypadState extends State<F16KeypadButton> {
   Widget build(BuildContext context) {
     return AspectRatio(
       aspectRatio: 1,
-      child: GestureDetector(
-        onTapDown: (details) {
+      child: Listener(
+        onPointerDown: (details) {
           setState(() {
             isPressed = true;
           });
           onPress(context, key: widget.sentValue);
         },
-        onTapUp: (details) {
+        onPointerUp: (details) {
           setState(() {
             isPressed = false;
           });
           onRelease(context, key: widget.sentValue);
         },
-        onTapCancel: () {
+        onPointerCancel: (details) {
           setState(() {
             isPressed = false;
           });
