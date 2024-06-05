@@ -18,9 +18,9 @@ keybindSelector(
       return GridView.count(
         primary: false,
         padding: const EdgeInsets.all(10),
-        crossAxisSpacing: 10,
-        mainAxisSpacing: 10,
-        crossAxisCount: 2,
+        crossAxisSpacing: 0,
+        mainAxisSpacing: 0,
+        crossAxisCount: 4,
         children: [
           for (var key in Keyboard.values)
             _button(
@@ -47,7 +47,7 @@ _button(
       Navigator.pop(context);
     },
     child: Center(
-      child: defaultText(key.name),
+      child: defaultText(key.name, size: 16, centered: true),
     ),
   );
 }

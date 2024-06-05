@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:icp_app/data/models/f16_keys_model.dart';
 import 'package:icp_app/providers/communication.dart';
+import 'package:icp_app/ui/components/text.dart';
+import 'package:icp_app/ui/pages/f16/layouts/buttons/f16_rounded_button.dart';
+import 'package:icp_app/ui/pages/f16/layouts/buttons/f16_rounded_solid_button.dart';
+import 'package:icp_app/ui/pages/f16/layouts/buttons/f16_selector_button.dart';
 import 'package:icp_app/ui/pages/home/widgets/keybinder.dart';
 import 'package:icp_app/ui/pages/home/widgets/multi_keybinder.dart';
 import 'package:icp_app/ui/pages/f16/layouts/buttons/f16_dobber_button.dart';
@@ -39,24 +43,79 @@ class _F16KeybindsState extends State<F16KeybindsPage> {
       ),
       body: ListView(
         children: [
-          MultiKeybinder(
-            button: const F16DobberButton(),
-            keybinds: [
-              keys.dobberUp,
-              keys.dobberLeft,
-              keys.dobberRight,
-              keys.dobberDown,
-            ],
-            onAdd: setDobberKeybinds,
+          Keybinder(
+            button: const F16RoundedButton(
+              label: "COM",
+              secondLabel: "1",
+            ),
+            keybind: keys.com1,
+            onAdd: (newKeybind, index) {
+              setState(() {
+                keys.com1 = newKeybind;
+                communication.setF16Keys();
+              });
+            },
           ),
-          MultiKeybinder(
-            button: const F16Switch(),
-            keybinds: [
-              keys.drift,
-              keys.norm,
-              keys.warnReset,
-            ],
-            onAdd: setSwitchKeybinds,
+          Keybinder(
+            button: const F16RoundedButton(
+              label: "COM",
+              secondLabel: "2",
+            ),
+            keybind: keys.com2,
+            onAdd: (newKeybind, index) {
+              setState(() {
+                keys.com2 = newKeybind;
+                communication.setF16Keys();
+              });
+            },
+          ),
+          Keybinder(
+            button: const F16RoundedButton(
+              label: "IFF",
+            ),
+            keybind: keys.iff,
+            onAdd: (newKeybind, index) {
+              setState(() {
+                keys.iff = newKeybind;
+                communication.setF16Keys();
+              });
+            },
+          ),
+          Keybinder(
+            button: const F16RoundedButton(
+              label: "LIST",
+            ),
+            keybind: keys.list,
+            onAdd: (newKeybind, index) {
+              setState(() {
+                keys.list = newKeybind;
+                communication.setF16Keys();
+              });
+            },
+          ),
+          Keybinder(
+            button: const F16RoundedButton(
+              label: "A-A",
+            ),
+            keybind: keys.aa,
+            onAdd: (newKeybind, index) {
+              setState(() {
+                keys.aa = newKeybind;
+                communication.setF16Keys();
+              });
+            },
+          ),
+          Keybinder(
+            button: const F16RoundedButton(
+              label: "A-G",
+            ),
+            keybind: keys.ag,
+            onAdd: (newKeybind, index) {
+              setState(() {
+                keys.ag = newKeybind;
+                communication.setF16Keys();
+              });
+            },
           ),
           Keybinder(
             button: const F16KeypadButton(
@@ -224,12 +283,98 @@ class _F16KeybindsState extends State<F16KeybindsPage> {
               });
             },
           ),
+          Keybinder(
+            button: const F16RoundedSolidButton(
+              label: "WX",
+            ),
+            keybind: keys.wx,
+            onAdd: (newKeybind, index) {
+              setState(() {
+                keys.wx = newKeybind;
+                communication.setF16Keys();
+              });
+            },
+          ),
+          _title(
+            title: "Step switch",
+            subtitle: "UP - DOWN",
+          ),
+          MultiKeybinder(
+            button: const F16SelectorButton(
+              labelUp: "▲",
+              labelDown: "▼",
+            ),
+            square: false,
+            keybinds: [
+              keys.dobberUp,
+              keys.dobberLeft,
+            ],
+            onAdd: _setStepperKeybinds,
+          ),
+          _title(
+            title: "Flir switch",
+            subtitle: "UP - DOWN",
+          ),
+          MultiKeybinder(
+            button: const F16SelectorButton(
+              labelUp: "+",
+              labelDown: "-",
+            ),
+            square: false,
+            keybinds: [
+              keys.flirUp,
+              keys.flirDown,
+            ],
+            onAdd: _setFlirKeybinds,
+          ),
+          _title(
+            title: "Dobber switch ",
+            subtitle: "UP - LEFT - RIGHT - DOWN",
+          ),
+          MultiKeybinder(
+            button: const F16DobberButton(),
+            keybinds: [
+              keys.dobberUp,
+              keys.dobberLeft,
+              keys.dobberRight,
+              keys.dobberDown,
+            ],
+            onAdd: _setDobberKeybinds,
+          ),
+          _title(
+            title: "Drift switch ",
+            subtitle: "UP - CENTER - DOWN",
+          ),
+          MultiKeybinder(
+            button: const F16Switch(),
+            keybinds: [
+              keys.drift,
+              keys.norm,
+              keys.warnReset,
+            ],
+            onAdd: _setSwitchKeybinds,
+          ),
         ],
       ),
     );
   }
 
-  setDobberKeybinds(Keyboard? newKeybind, int index) {
+  _title({required String title, String? subtitle}) {
+    return Container(
+      padding: const EdgeInsets.all(18),
+      color: DefaultColors.backgroundLight,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          defaultText(title, size: 25),
+          const SizedBox(height: 5),
+          if (subtitle != null) defaultText(subtitle, size: 15),
+        ],
+      ),
+    );
+  }
+
+  _setDobberKeybinds(Keyboard? newKeybind, int index) {
     setState(() {
       switch (index) {
         case 0:
@@ -245,7 +390,31 @@ class _F16KeybindsState extends State<F16KeybindsPage> {
     communication.setF16Keys();
   }
 
-  setSwitchKeybinds(Keyboard? newKeybind, int index) {
+  _setStepperKeybinds(Keyboard? newKeybind, int index) {
+    setState(() {
+      switch (index) {
+        case 0:
+          keys.stepUp = newKeybind;
+        case 1:
+          keys.stepDown = newKeybind;
+      }
+    });
+    communication.setF16Keys();
+  }
+
+  _setFlirKeybinds(Keyboard? newKeybind, int index) {
+    setState(() {
+      switch (index) {
+        case 0:
+          keys.flirUp = newKeybind;
+        case 1:
+          keys.flirDown = newKeybind;
+      }
+    });
+    communication.setF16Keys();
+  }
+
+  _setSwitchKeybinds(Keyboard? newKeybind, int index) {
     setState(() {
       switch (index) {
         case 0:
