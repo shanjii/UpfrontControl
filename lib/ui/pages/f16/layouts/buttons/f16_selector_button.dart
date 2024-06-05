@@ -1,4 +1,4 @@
-import 'package:icp_app/ui/common/key_actions.dart';
+import 'package:icp_app/common/key_actions.dart';
 import 'package:icp_app/values/buttons.dart';
 import 'package:icp_app/values/colors.dart';
 import 'package:flutter/material.dart';

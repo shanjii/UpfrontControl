@@ -15,3 +15,13 @@ onRelease(BuildContext context, {required Keyboard? key}) {
   context.read<Feedbacks>().tapSound();
   context.read<Communication>().releaseKey(key);
 }
+
+Keyboard? stringToKeyboard(String? string) {
+  if (string == "" || string == null) return null;
+  for (var key in Keyboard.values) {
+    if (key.value == string) {
+      return key;
+    }
+  }
+  return null;
+}

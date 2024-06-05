@@ -1,4 +1,4 @@
-import 'package:icp_app/ui/common/display.dart';
+import 'package:icp_app/common/display.dart';
 import 'package:icp_app/ui/pages/f16/f16_page.dart';
 import 'package:icp_app/ui/pages/f18/f18.dart';
 import 'package:icp_app/providers/activity.dart';

@@ -18,11 +18,13 @@ class F16KeybindsPage extends StatefulWidget {
 }
 
 class _F16KeybindsState extends State<F16KeybindsPage> {
-  late F16KeysModel f16Keys;
+  late F16KeysModel keys;
+  late Communication communication;
 
   @override
   Widget build(BuildContext context) {
-    f16Keys = context.read<Communication>().f16keysModel;
+    communication = context.read<Communication>();
+    keys = communication.f16keysModel;
 
     return Scaffold(
       backgroundColor: DefaultColors.background,
@@ -40,19 +42,19 @@ class _F16KeybindsState extends State<F16KeybindsPage> {
           MultiKeybinder(
             button: const F16DobberButton(),
             keybinds: [
-              f16Keys.dobberUp,
-              f16Keys.dobberLeft,
-              f16Keys.dobberRight,
-              f16Keys.dobberDown,
+              keys.dobberUp,
+              keys.dobberLeft,
+              keys.dobberRight,
+              keys.dobberDown,
             ],
             onAdd: setDobberKeybinds,
           ),
           MultiKeybinder(
             button: const F16Switch(),
             keybinds: [
-              f16Keys.drift,
-              f16Keys.norm,
-              f16Keys.warnReset,
+              keys.drift,
+              keys.norm,
+              keys.warnReset,
             ],
             onAdd: setSwitchKeybinds,
           ),
@@ -62,10 +64,13 @@ class _F16KeybindsState extends State<F16KeybindsPage> {
               label: "1",
               cornerLabel: "",
             ),
-            keybind: f16Keys.num1,
-            onAdd: (newKeybind, index) => setState(() {
-              f16Keys.num1 = newKeybind;
-            }),
+            keybind: keys.num1,
+            onAdd: (newKeybind, index) {
+              setState(() {
+                keys.num1 = newKeybind;
+                communication.setF16Keys();
+              });
+            },
           ),
           Keybinder(
             button: const F16KeypadButton(
@@ -73,10 +78,13 @@ class _F16KeybindsState extends State<F16KeybindsPage> {
               label: "2",
               cornerLabel: "N",
             ),
-            keybind: f16Keys.num2,
-            onAdd: (newKeybind, index) => setState(() {
-              f16Keys.num2 = newKeybind;
-            }),
+            keybind: keys.num2,
+            onAdd: (newKeybind, index) {
+              setState(() {
+                keys.num2 = newKeybind;
+                communication.setF16Keys();
+              });
+            },
           ),
           Keybinder(
             button: const F16KeypadButton(
@@ -84,10 +92,13 @@ class _F16KeybindsState extends State<F16KeybindsPage> {
               label: "3",
               cornerLabel: "",
             ),
-            keybind: f16Keys.num3,
-            onAdd: (newKeybind, index) => setState(() {
-              f16Keys.num3 = newKeybind;
-            }),
+            keybind: keys.num3,
+            onAdd: (newKeybind, index) {
+              setState(() {
+                keys.num3 = newKeybind;
+                communication.setF16Keys();
+              });
+            },
           ),
           Keybinder(
             button: const F16KeypadButton(
@@ -95,10 +106,13 @@ class _F16KeybindsState extends State<F16KeybindsPage> {
               label: "4",
               cornerLabel: "W",
             ),
-            keybind: f16Keys.num4,
-            onAdd: (newKeybind, index) => setState(() {
-              f16Keys.num4 = newKeybind;
-            }),
+            keybind: keys.num4,
+            onAdd: (newKeybind, index) {
+              setState(() {
+                keys.num4 = newKeybind;
+                communication.setF16Keys();
+              });
+            },
           ),
           Keybinder(
             button: const F16KeypadButton(
@@ -106,10 +120,13 @@ class _F16KeybindsState extends State<F16KeybindsPage> {
               label: "5",
               cornerLabel: "",
             ),
-            keybind: f16Keys.num5,
-            onAdd: (newKeybind, index) => setState(() {
-              f16Keys.num5 = newKeybind;
-            }),
+            keybind: keys.num5,
+            onAdd: (newKeybind, index) {
+              setState(() {
+                keys.num5 = newKeybind;
+                communication.setF16Keys();
+              });
+            },
           ),
           Keybinder(
             button: const F16KeypadButton(
@@ -117,10 +134,13 @@ class _F16KeybindsState extends State<F16KeybindsPage> {
               label: "6",
               cornerLabel: "E",
             ),
-            keybind: f16Keys.num6,
-            onAdd: (newKeybind, index) => setState(() {
-              f16Keys.num6 = newKeybind;
-            }),
+            keybind: keys.num6,
+            onAdd: (newKeybind, index) {
+              setState(() {
+                keys.num6 = newKeybind;
+                communication.setF16Keys();
+              });
+            },
           ),
           Keybinder(
             button: const F16KeypadButton(
@@ -128,10 +148,13 @@ class _F16KeybindsState extends State<F16KeybindsPage> {
               label: "7",
               cornerLabel: "",
             ),
-            keybind: f16Keys.num7,
-            onAdd: (newKeybind, index) => setState(() {
-              f16Keys.num7 = newKeybind;
-            }),
+            keybind: keys.num7,
+            onAdd: (newKeybind, index) {
+              setState(() {
+                keys.num7 = newKeybind;
+                communication.setF16Keys();
+              });
+            },
           ),
           Keybinder(
             button: const F16KeypadButton(
@@ -139,10 +162,13 @@ class _F16KeybindsState extends State<F16KeybindsPage> {
               label: "8",
               cornerLabel: "S",
             ),
-            keybind: f16Keys.num8,
-            onAdd: (newKeybind, index) => setState(() {
-              f16Keys.num8 = newKeybind;
-            }),
+            keybind: keys.num8,
+            onAdd: (newKeybind, index) {
+              setState(() {
+                keys.num8 = newKeybind;
+                communication.setF16Keys();
+              });
+            },
           ),
           Keybinder(
             button: const F16KeypadButton(
@@ -150,10 +176,13 @@ class _F16KeybindsState extends State<F16KeybindsPage> {
               label: "9",
               cornerLabel: "",
             ),
-            keybind: f16Keys.num9,
-            onAdd: (newKeybind, index) => setState(() {
-              f16Keys.num9 = newKeybind;
-            }),
+            keybind: keys.num9,
+            onAdd: (newKeybind, index) {
+              setState(() {
+                keys.num9 = newKeybind;
+                communication.setF16Keys();
+              });
+            },
           ),
           Keybinder(
             button: const F16KeypadButton(
@@ -161,30 +190,39 @@ class _F16KeybindsState extends State<F16KeybindsPage> {
               label: "0",
               cornerLabel: "━",
             ),
-            keybind: f16Keys.num0,
-            onAdd: (newKeybind, index) => setState(() {
-              f16Keys.num0 = newKeybind;
-            }),
+            keybind: keys.num0,
+            onAdd: (newKeybind, index) {
+              setState(() {
+                keys.num0 = newKeybind;
+                communication.setF16Keys();
+              });
+            },
           ),
           Keybinder(
             button: const F16KeypadButton(
               label: "ENTR",
               functionButton: true,
             ),
-            keybind: f16Keys.entr,
-            onAdd: (newKeybind, index) => setState(() {
-              f16Keys.entr = newKeybind;
-            }),
+            keybind: keys.entr,
+            onAdd: (newKeybind, index) {
+              setState(() {
+                keys.entr = newKeybind;
+                communication.setF16Keys();
+              });
+            },
           ),
           Keybinder(
             button: const F16KeypadButton(
               label: "RCL",
               functionButton: true,
             ),
-            keybind: f16Keys.rcl,
-            onAdd: (newKeybind, index) => setState(() {
-              f16Keys.rcl = newKeybind;
-            }),
+            keybind: keys.rcl,
+            onAdd: (newKeybind, index) {
+              setState(() {
+                keys.rcl = newKeybind;
+                communication.setF16Keys();
+              });
+            },
           ),
         ],
       ),
@@ -195,27 +233,29 @@ class _F16KeybindsState extends State<F16KeybindsPage> {
     setState(() {
       switch (index) {
         case 0:
-          f16Keys.dobberUp = newKeybind;
+          keys.dobberUp = newKeybind;
         case 1:
-          f16Keys.dobberLeft = newKeybind;
+          keys.dobberLeft = newKeybind;
         case 2:
-          f16Keys.dobberRight = newKeybind;
+          keys.dobberRight = newKeybind;
         case 3:
-          f16Keys.dobberDown = newKeybind;
+          keys.dobberDown = newKeybind;
       }
     });
+    communication.setF16Keys();
   }
 
   setSwitchKeybinds(Keyboard? newKeybind, int index) {
     setState(() {
       switch (index) {
         case 0:
-          f16Keys.drift = newKeybind;
+          keys.drift = newKeybind;
         case 1:
-          f16Keys.norm = newKeybind;
+          keys.norm = newKeybind;
         case 2:
-          f16Keys.warnReset = newKeybind;
+          keys.warnReset = newKeybind;
       }
     });
+    communication.setF16Keys();
   }
 }

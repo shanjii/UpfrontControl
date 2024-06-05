@@ -1,4 +1,4 @@
-import 'package:icp_app/ui/common/key_actions.dart';
+import 'package:icp_app/common/key_actions.dart';
 import 'package:icp_app/values/buttons.dart';
 import 'package:icp_app/values/colors.dart';
 import 'package:flutter/material.dart';
@@ -19,14 +19,6 @@ class F16DobberButton extends StatefulWidget {
 
   @override
   State<F16DobberButton> createState() => _F16DobberButtonState();
-}
-
-enum _PressedButton {
-  top,
-  left,
-  right,
-  bottom,
-  none,
 }
 
 class _F16DobberButtonState extends State<F16DobberButton> {
@@ -271,4 +263,12 @@ class _F16DobberButtonState extends State<F16DobberButton> {
       pressedButton = _PressedButton.none;
     });
   }
+}
+
+enum _PressedButton {
+  top,
+  left,
+  right,
+  bottom,
+  none,
 }

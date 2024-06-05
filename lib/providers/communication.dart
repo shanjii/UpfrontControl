@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:icp_app/data/datasources/input_datasource.dart';
 import 'package:icp_app/data/models/f16_keys_model.dart';
 import 'package:icp_app/data/models/ip_model.dart';
@@ -43,10 +45,8 @@ class Communication {
     inputDatasource.releaseKey(key, connection);
   }
 
-  setF16Keys(F16KeysModel keys) async {
-    f16keysModel = keys;
-
+  setF16Keys() async {
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setString('f16Keys', keys.toString());
+    await prefs.setString('f16Keys', jsonEncode(f16keysModel.toJson()));
   }
 }
