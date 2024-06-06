@@ -1,20 +1,17 @@
 import 'dart:convert';
 
-import 'package:icp_app/app/data/datasources/input_datasource.dart';
 import 'package:icp_app/app/data/models/f16_keys_model.dart';
 import 'package:icp_app/app/data/models/ip_model.dart';
-import 'package:icp_app/core/values/buttons.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class CommunicationPresenter {
-  CommunicationPresenter({
+class ConfigurationPresenter {
+  ConfigurationPresenter({
     required this.connection,
-    required this.f16keysModel,
+    required this.f16KeysValues,
   });
 
   ConnectionModel connection;
-  F16KeysModel f16keysModel;
-  InputDatasource inputDatasource = InputDatasource();
+  F16KeysModel f16KeysValues;
 
   setLocalIp(String newIp) async {
     connection = ConnectionModel(
@@ -38,18 +35,8 @@ class CommunicationPresenter {
     await prefs.setString('port', newPort);
   }
 
-  pressKey(Keyboard? key) async {
-    if (key == null) return;
-    inputDatasource.pressKey(key, connection);
-  }
-
-  releaseKey(Keyboard? key) async {
-    if (key == null) return;
-    inputDatasource.releaseKey(key, connection);
-  }
-
   setF16Keys() async {
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setString('f16Keys', jsonEncode(f16keysModel.toJson()));
+    await prefs.setString('f16Keys', jsonEncode(f16KeysValues.toJson()));
   }
 }

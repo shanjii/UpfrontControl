@@ -1,7 +1,8 @@
-import 'package:icp_app/app/common/key_actions.dart';
+import 'package:icp_app/app/presenters/f16_presenter.dart';
 import 'package:icp_app/core/values/buttons.dart';
 import 'package:icp_app/core/values/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class F16Switch extends StatefulWidget {
   final Keyboard? sentValueDrift;
@@ -22,31 +23,33 @@ class F16Switch extends StatefulWidget {
 class _F16SwitchState extends State<F16Switch> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: DefaultColors.f16ButtonInner,
-      child: Column(
-        children: [
-          _Button(
-            title: "DRIFT C/O",
-            color: DefaultColors.f16ButtonInner,
-            onPress: () => onPress(context, key: widget.sentValueDrift),
-            onRelease: () => onRelease(context, key: widget.sentValueDrift),
-          ),
-          _Button(
-            title: "NORM",
-            color: DefaultColors.f16ButtonInner,
-            onPress: () => onPress(context, key: widget.sentValueNorm),
-            onRelease: () => onRelease(context, key: widget.sentValueNorm),
-          ),
-          _Button(
-            title: "WRN RST",
-            color: DefaultColors.f16RoundButton,
-            onPress: () => onPress(context, key: widget.sentValueWrnRst),
-            onRelease: () => onRelease(context, key: widget.sentValueWrnRst),
-          ),
-        ],
-      ),
-    );
+    return Consumer(builder: (context, F16Presenter controller, _) {
+      return Container(
+        color: DefaultColors.f16ButtonInner,
+        child: Column(
+          children: [
+            _Button(
+              title: "DRIFT C/O",
+              color: DefaultColors.f16ButtonInner,
+              onPress: () => controller.onPress(widget.sentValueDrift),
+              onRelease: () => controller.onRelease(widget.sentValueDrift),
+            ),
+            _Button(
+              title: "NORM",
+              color: DefaultColors.f16ButtonInner,
+              onPress: () => controller.onPress(widget.sentValueNorm),
+              onRelease: () => controller.onRelease(widget.sentValueNorm),
+            ),
+            _Button(
+              title: "WRN RST",
+              color: DefaultColors.f16RoundButton,
+              onPress: () => controller.onPress(widget.sentValueWrnRst),
+              onRelease: () => controller.onRelease(widget.sentValueWrnRst),
+            ),
+          ],
+        ),
+      );
+    });
   }
 }
 
@@ -75,21 +78,15 @@ class _ButtonState extends State<_Button> {
     return Expanded(
       child: Listener(
         onPointerDown: (details) {
-          setState(() {
-            pressed = true;
-          });
+          setState(() => pressed = true);
           widget.onPress();
         },
         onPointerUp: (details) {
-          setState(() {
-            pressed = false;
-          });
+          setState(() => pressed = false);
           widget.onRelease();
         },
         onPointerCancel: (details) {
-          setState(() {
-            pressed = false;
-          });
+          setState(() => pressed = false);
           widget.onRelease();
         },
         child: Container(

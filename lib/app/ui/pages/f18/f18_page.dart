@@ -1,4 +1,4 @@
-import 'package:icp_app/app/presenters/activity_presenter.dart';
+import 'package:icp_app/app/presenters/global_presenters/activity_presenter.dart';
 import 'package:icp_app/core/values/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

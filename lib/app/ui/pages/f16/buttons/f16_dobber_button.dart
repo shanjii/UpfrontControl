@@ -1,7 +1,8 @@
-import 'package:icp_app/app/common/key_actions.dart';
+import 'package:icp_app/app/presenters/f16_presenter.dart';
 import 'package:icp_app/core/values/buttons.dart';
 import 'package:icp_app/core/values/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class F16DobberButton extends StatefulWidget {
   final Keyboard? sentValueUp;
@@ -26,42 +27,56 @@ class _F16DobberButtonState extends State<F16DobberButton> {
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        return Listener(
-          onPointerDown: (details) => _getTapLocation(
-            constraints: constraints,
-            details: details,
-            topPress: () => onPress(context, key: widget.sentValueUp),
-            rightPress: () => onPress(context, key: widget.sentValueRight),
-            leftPress: () => onPress(context, key: widget.sentValueLeft),
-            bottomPress: () => onPress(context, key: widget.sentValueDown),
-          ),
-          onPointerUp: (details) => _releaseButton(),
-          onPointerCancel: (details) => _releaseButton(),
-          child: AspectRatio(
-            aspectRatio: 1,
-            child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: DefaultColors.f16ButtonInner,
-                gradient: _gradient(),
+    return Consumer(
+      builder: (context, F16Presenter controller, _) {
+        return LayoutBuilder(
+          builder: (context, constraints) {
+            return Listener(
+              onPointerDown: (details) => _getTapLocation(
+                constraints: constraints,
+                details: details,
+                topPress: () => controller.onPress(widget.sentValueUp),
+                rightPress: () => controller.onPress(widget.sentValueRight),
+                leftPress: () => controller.onPress(widget.sentValueLeft),
+                bottomPress: () => controller.onPress(widget.sentValueDown),
               ),
-              child: Stack(
-                children: [
-                  Align(
-                    alignment: Alignment.center,
-                    child: _verticalAxis(),
+              onPointerUp: (details) => _releaseButton(
+                topPress: () {},
+                bottomPress: () {},
+                rightPress: () {},
+                leftPress: () {},
+              ),
+              onPointerCancel: (details) => _releaseButton(
+                topPress: () => controller.onRelease(widget.sentValueUp),
+                rightPress: () => controller.onRelease(widget.sentValueRight),
+                leftPress: () => controller.onRelease(widget.sentValueLeft),
+                bottomPress: () => controller.onRelease(widget.sentValueDown),
+              ),
+              child: AspectRatio(
+                aspectRatio: 1,
+                child: Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: DefaultColors.f16ButtonInner,
+                    gradient: _gradient(),
                   ),
-                  Align(
-                    alignment: Alignment.center,
-                    child: _horizontalAxis(),
-                  )
-                ],
+                  child: Stack(
+                    children: [
+                      Align(
+                        alignment: Alignment.center,
+                        child: _verticalAxis(),
+                      ),
+                      Align(
+                        alignment: Alignment.center,
+                        child: _horizontalAxis(),
+                      )
+                    ],
+                  ),
+                ),
               ),
-            ),
-          ),
+            );
+          },
         );
       },
     );
@@ -180,14 +195,10 @@ class _F16DobberButtonState extends State<F16DobberButton> {
       var remainingToCenterX = positionX - centerPositionX;
       if (remainingToCenterX > remainingToCenterY) {
         rightPress();
-        setState(() {
-          pressedButton = _PressedButton.right;
-        });
+        setState(() => pressedButton = _PressedButton.right);
       } else {
         topPress();
-        setState(() {
-          pressedButton = _PressedButton.top;
-        });
+        setState(() => pressedButton = _PressedButton.top);
       }
     }
     if (positionY.compareTo(centerPositionY) == 1 &&
@@ -196,14 +207,10 @@ class _F16DobberButtonState extends State<F16DobberButton> {
       var remainingToCenterX = centerPositionX - positionX;
       if (remainingToCenterX > remainingToCenterY) {
         leftPress();
-        setState(() {
-          pressedButton = _PressedButton.left;
-        });
+        setState(() => pressedButton = _PressedButton.left);
       } else {
         bottomPress();
-        setState(() {
-          pressedButton = _PressedButton.bottom;
-        });
+        setState(() => pressedButton = _PressedButton.bottom);
       }
     }
     if (positionY.compareTo(centerPositionY) == -1 &&
@@ -212,14 +219,10 @@ class _F16DobberButtonState extends State<F16DobberButton> {
       var remainingToCenterX = centerPositionX - positionX;
       if (remainingToCenterX > remainingToCenterY) {
         leftPress();
-        setState(() {
-          pressedButton = _PressedButton.left;
-        });
+        setState(() => pressedButton = _PressedButton.left);
       } else {
         topPress();
-        setState(() {
-          pressedButton = _PressedButton.top;
-        });
+        setState(() => pressedButton = _PressedButton.top);
       }
     }
     if (positionY.compareTo(centerPositionY) == 1 &&
@@ -228,40 +231,32 @@ class _F16DobberButtonState extends State<F16DobberButton> {
       var remainingToCenterX = positionX - centerPositionX;
       if (remainingToCenterX > remainingToCenterY) {
         rightPress();
-        setState(() {
-          pressedButton = _PressedButton.right;
-        });
+        setState(() => pressedButton = _PressedButton.right);
       } else {
         bottomPress();
-        setState(() {
-          pressedButton = _PressedButton.bottom;
-        });
+        setState(() => pressedButton = _PressedButton.bottom);
       }
     }
   }
 
-  _releaseButton() {
+  _releaseButton({
+    required Function() topPress,
+    required Function() bottomPress,
+    required Function() rightPress,
+    required Function() leftPress,
+  }) {
     switch (pressedButton) {
       case _PressedButton.top:
-        onRelease(context, key: widget.sentValueUp);
-        break;
+        topPress();
       case _PressedButton.left:
-        onRelease(context, key: widget.sentValueLeft);
-
-        break;
+        leftPress();
       case _PressedButton.right:
-        onRelease(context, key: widget.sentValueRight);
-
-        break;
+        rightPress();
       case _PressedButton.bottom:
-        onRelease(context, key: widget.sentValueDown);
-
-        break;
+        bottomPress();
       default:
     }
-    setState(() {
-      pressedButton = _PressedButton.none;
-    });
+    setState(() => pressedButton = _PressedButton.none);
   }
 }
 

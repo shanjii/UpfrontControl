@@ -38,13 +38,13 @@ class ActivityPresenter extends ChangeNotifier {
     notifyListeners();
   }
 
-  enable() async {
+  Future enable() async {
     manageActivity = true;
     final prefs = await SharedPreferences.getInstance();
     await prefs.setBool('manage-activity', true);
   }
 
-  disable() async {
+  Future disable() async {
     manageActivity = false;
     final prefs = await SharedPreferences.getInstance();
     await prefs.setBool('manage-activity', false);

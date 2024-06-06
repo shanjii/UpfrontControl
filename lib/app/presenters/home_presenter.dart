@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:icp_app/app/common/display.dart';
-import 'package:icp_app/app/presenters/activity_presenter.dart';
+import 'package:icp_app/app/presenters/global_presenters/activity_presenter.dart';
 import 'package:icp_app/app/ui/pages/f16/f16_keybinds_page.dart';
 import 'package:icp_app/app/ui/pages/f16/f16_page.dart';
 import 'package:icp_app/app/ui/pages/f18/f18_keybinds.dart';
@@ -9,12 +9,14 @@ import 'package:icp_app/app/ui/pages/settings/settings.dart';
 import 'package:provider/provider.dart';
 
 class HomePresenter {
-  BuildContext context;
+  late ActivityPresenter activity;
 
-  HomePresenter(this.context);
+  HomePresenter(BuildContext context) {
+    activity = context.read<ActivityPresenter>();
+  }
 
   goToF18(BuildContext context) {
-    context.read<ActivityPresenter>().start();
+    activity.start();
 
     setDisplayFullscreen();
 
@@ -25,7 +27,7 @@ class HomePresenter {
   }
 
   goToF16(BuildContext context) {
-    context.read<ActivityPresenter>().start();
+    activity.start();
 
     setDisplayFullscreen();
 

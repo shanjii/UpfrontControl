@@ -1,7 +1,8 @@
-import 'package:icp_app/app/common/key_actions.dart';
+import 'package:icp_app/app/presenters/f16_presenter.dart';
 import 'package:icp_app/core/values/buttons.dart';
 import 'package:icp_app/core/values/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class F16KeypadButton extends StatefulWidget {
   const F16KeypadButton({
@@ -28,38 +29,36 @@ class _F16KeypadState extends State<F16KeypadButton> {
 
   @override
   Widget build(BuildContext context) {
-    return AspectRatio(
-      aspectRatio: 1,
-      child: Listener(
-        onPointerDown: (details) {
-          setState(() {
-            isPressed = true;
-          });
-          onPress(context, key: widget.sentValue);
-        },
-        onPointerUp: (details) {
-          setState(() {
-            isPressed = false;
-          });
-          onRelease(context, key: widget.sentValue);
-        },
-        onPointerCancel: (details) {
-          setState(() {
-            isPressed = false;
-          });
-          onRelease(context, key: widget.sentValue);
-        },
-        child: Container(
-          margin: const EdgeInsets.all(5),
-          padding: const EdgeInsets.all(2),
-          decoration: BoxDecoration(
-            color: _buttonInnerColor(),
-            border: _buttonBorder(),
-            borderRadius: BorderRadius.circular(5),
+    return Consumer(
+      builder: (context, F16Presenter controller, _) {
+        return AspectRatio(
+          aspectRatio: 1,
+          child: Listener(
+            onPointerDown: (details) {
+              setState(() => isPressed = true);
+              controller.onPress(widget.sentValue);
+            },
+            onPointerUp: (details) {
+              setState(() => isPressed = false);
+              controller.onRelease(widget.sentValue);
+            },
+            onPointerCancel: (details) {
+              setState(() => isPressed = false);
+              controller.onRelease(widget.sentValue);
+            },
+            child: Container(
+              margin: const EdgeInsets.all(5),
+              padding: const EdgeInsets.all(2),
+              decoration: BoxDecoration(
+                color: _buttonInnerColor(),
+                border: _buttonBorder(),
+                borderRadius: BorderRadius.circular(5),
+              ),
+              child: _labels(widget.topLabel, widget.label, widget.cornerLabel),
+            ),
           ),
-          child: _labels(widget.topLabel, widget.label, widget.cornerLabel),
-        ),
-      ),
+        );
+      },
     );
   }
 

@@ -1,7 +1,8 @@
-import 'package:icp_app/app/common/key_actions.dart';
+import 'package:icp_app/app/presenters/f16_presenter.dart';
 import 'package:icp_app/core/values/buttons.dart';
 import 'package:icp_app/core/values/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class F16SelectorButton extends StatefulWidget {
   const F16SelectorButton({
@@ -27,63 +28,55 @@ class _F16SelectorButtonState extends State<F16SelectorButton> {
 
   @override
   Widget build(BuildContext context) {
-    return AspectRatio(
-      aspectRatio: 1 / 2,
-      child: Container(
-        decoration: _buttonDecoration(),
-        child: Column(
-          children: [
-            AspectRatio(
-              aspectRatio: 1,
-              child: Listener(
-                onPointerDown: (details) {
-                  setState(() {
-                    pressedUp = true;
-                  });
-                  onPress(context, key: widget.sentValueUp);
-                },
-                onPointerUp: (details) {
-                  setState(() {
-                    pressedUp = false;
-                  });
-                  onRelease(context, key: widget.sentValueUp);
-                },
-                onPointerCancel: (details) {
-                  setState(() {
-                    pressedUp = false;
-                  });
-                  onRelease(context, key: widget.sentValueUp);
-                },
-                child: _button(widget.labelUp, widget.sentValueUp),
-              ),
+    return Consumer(
+      builder: (context, F16Presenter controller, _) {
+        return AspectRatio(
+          aspectRatio: 1 / 2,
+          child: Container(
+            decoration: _buttonDecoration(),
+            child: Column(
+              children: [
+                AspectRatio(
+                  aspectRatio: 1,
+                  child: Listener(
+                    onPointerDown: (details) {
+                      setState(() => pressedUp = true);
+                      controller.onPress(widget.sentValueUp);
+                    },
+                    onPointerUp: (details) {
+                      setState(() => pressedUp = false);
+                      controller.onRelease(widget.sentValueUp);
+                    },
+                    onPointerCancel: (details) {
+                      setState(() => pressedUp = false);
+                      controller.onRelease(widget.sentValueUp);
+                    },
+                    child: _button(widget.labelUp, widget.sentValueUp),
+                  ),
+                ),
+                AspectRatio(
+                  aspectRatio: 1,
+                  child: Listener(
+                    onPointerDown: (details) {
+                      setState(() => pressedDown = true);
+                      controller.onPress(widget.sentValueDown);
+                    },
+                    onPointerUp: (details) {
+                      setState(() => pressedDown = false);
+                      controller.onRelease(widget.sentValueDown);
+                    },
+                    onPointerCancel: (details) {
+                      setState(() => pressedDown = false);
+                      controller.onRelease(widget.sentValueDown);
+                    },
+                    child: _button(widget.labelDown, widget.sentValueDown),
+                  ),
+                ),
+              ],
             ),
-            AspectRatio(
-              aspectRatio: 1,
-              child: Listener(
-                onPointerDown: (details) {
-                  setState(() {
-                    pressedDown = true;
-                  });
-                  onPress(context, key: widget.sentValueDown);
-                },
-                onPointerUp: (details) {
-                  setState(() {
-                    pressedDown = false;
-                  });
-                  onRelease(context, key: widget.sentValueDown);
-                },
-                onPointerCancel: (details) {
-                  setState(() {
-                    pressedDown = false;
-                  });
-                  onRelease(context, key: widget.sentValueDown);
-                },
-                child: _button(widget.labelDown, widget.sentValueDown),
-              ),
-            ),
-          ],
-        ),
-      ),
+          ),
+        );
+      },
     );
   }
 

@@ -3,10 +3,10 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter_displaymode/flutter_displaymode.dart';
 import 'package:icp_app/app/data/models/f16_keys_model.dart';
 import 'package:icp_app/app/data/models/ip_model.dart';
-import 'package:icp_app/app/presenters/activity_presenter.dart';
-import 'package:icp_app/app/presenters/communication_presenter.dart';
-import 'package:icp_app/app/presenters/feedback_presenter.dart';
-import 'package:icp_app/app/presenters/tool_presenter.dart';
+import 'package:icp_app/app/presenters/global_presenters/activity_presenter.dart';
+import 'package:icp_app/app/presenters/global_presenters/configuration_presenter.dart';
+import 'package:icp_app/app/presenters/global_presenters/feedback_presenter.dart';
+import 'package:icp_app/app/presenters/global_presenters/tool_presenter.dart';
 import 'package:icp_app/app/ui/pages/home/home_page.dart';
 import 'package:icp_app/core/storage/local_settings.dart';
 import 'package:flutter/material.dart';
@@ -83,12 +83,12 @@ class App extends StatelessWidget {
           ),
         ),
         Provider(
-          create: (context) => CommunicationPresenter(
+          create: (context) => ConfigurationPresenter(
             connection: ConnectionModel(
               ip: savedIp,
               port: savedPort,
             ),
-            f16keysModel: f16keys,
+            f16KeysValues: f16keys,
           ),
         ),
         ChangeNotifierProvider(
