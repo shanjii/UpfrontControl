@@ -41,10 +41,10 @@ class _F16DobberButtonState extends State<F16DobberButton> {
                 bottomPress: () => controller.onPress(widget.sentValueDown),
               ),
               onPointerUp: (details) => _releaseButton(
-                topPress: () {},
-                bottomPress: () {},
-                rightPress: () {},
-                leftPress: () {},
+                topPress: () => controller.onRelease(widget.sentValueUp),
+                rightPress: () => controller.onRelease(widget.sentValueRight),
+                leftPress: () => controller.onRelease(widget.sentValueLeft),
+                bottomPress: () => controller.onRelease(widget.sentValueDown),
               ),
               onPointerCancel: (details) => _releaseButton(
                 topPress: () => controller.onRelease(widget.sentValueUp),
