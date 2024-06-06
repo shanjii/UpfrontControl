@@ -121,6 +121,8 @@ _setDisplaySettings() async {
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.landscapeLeft,
     DeviceOrientation.landscapeRight,
+    DeviceOrientation.portraitDown,
+    DeviceOrientation.portraitUp,
   ]);
   if (Platform.isAndroid) {
     await FlutterDisplayMode.setHighRefreshRate();

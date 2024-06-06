@@ -43,7 +43,7 @@ class HomePresenter {
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => const SettingsPage()),
-    ).then((x) => setLandscape());
+    ).then((x) => setDisplayDefault());
   }
 
   goToF16Settings(BuildContext context) {
@@ -52,7 +52,7 @@ class HomePresenter {
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => const F16KeybindsPage()),
-    ).then((x) => setLandscape());
+    ).then((x) => setDisplayDefault());
   }
 
   goToF18Settings(BuildContext context) {
@@ -61,6 +61,6 @@ class HomePresenter {
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => const F18KeybindsPage()),
-    ).then((x) => setLandscape());
+    ).then((x) => setDisplayDefault());
   }
 }

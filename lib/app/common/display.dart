@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 setPortrait() {
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
   ]);
 }
 
@@ -13,8 +14,18 @@ setLandscape() {
   ]);
 }
 
+setAllOrientations() async{
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.landscapeLeft,
+    DeviceOrientation.landscapeRight,
+    DeviceOrientation.portraitDown,
+    DeviceOrientation.portraitUp,
+  ]);
+}
+
 setDisplayFullscreen() {
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
+  setLandscape();
 }
 
 setDisplayDefault() {
@@ -22,4 +33,5 @@ setDisplayDefault() {
     SystemUiOverlay.top,
     SystemUiOverlay.bottom,
   ]);
+  setAllOrientations();
 }

@@ -23,34 +23,60 @@ class HomePage extends StatelessWidget {
                 _settingsButton(context, controller),
               ],
             ),
-            body: Stack(
-              children: [
-                Align(
-                  alignment: Alignment.center,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      _cardOption(
-                        context,
-                        title: "F16",
-                        onPress: () => controller.goToF16(context),
-                        settings: () => controller.goToF16Settings(context),
-                      ),
-                      _cardOption(
-                        context,
-                        title: "F18",
-                        onPress: () => controller.goToF18(context),
-                        settings: () => controller.goToF18Settings(context),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
+            body: OrientationBuilder(
+              builder: (context, orientation) {
+                if (orientation == Orientation.landscape) {
+                  return _landscapeMenu(context, controller);
+                } else {
+                  return _portraitMenu(context, controller);
+                }
+              },
             ),
           );
         },
       ),
+    );
+  }
+
+  _landscapeMenu(BuildContext context, HomePresenter controller) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        _cardOption(
+          context,
+          title: "F16",
+          onPress: () => controller.goToF16(context),
+          settings: () => controller.goToF16Settings(context),
+        ),
+        _cardOption(
+          context,
+          title: "F18",
+          onPress: () => controller.goToF18(context),
+          settings: () => controller.goToF18Settings(context),
+        ),
+      ],
+    );
+  }
+
+  _portraitMenu(BuildContext context, HomePresenter controller) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        _cardOption(
+          context,
+          title: "F16",
+          onPress: () => controller.goToF16(context),
+          settings: () => controller.goToF16Settings(context),
+        ),
+        _cardOption(
+          context,
+          title: "F18",
+          onPress: () => controller.goToF18(context),
+          settings: () => controller.goToF18Settings(context),
+        ),
+      ],
     );
   }
 
