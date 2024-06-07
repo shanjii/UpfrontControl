@@ -313,8 +313,8 @@ class _F16KeybindsState extends State<F16KeybindsPage> {
                       ),
                       square: false,
                       keybinds: [
-                        keys.dobberUp,
-                        keys.dobberLeft,
+                        keys.stepUp,
+                        keys.stepDown,
                       ],
                       onAdd: _setStepperKeybinds,
                     ),

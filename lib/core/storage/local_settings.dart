@@ -62,6 +62,8 @@ class LocalSettings {
       num9: Keyboard.NumPad9,
       entr: Keyboard.Enter,
       rcl: Keyboard.Backspace,
+      stepUp: Keyboard.Add,
+      stepDown: Keyboard.Subtract,
       flirUp: Keyboard.Add,
       flirDown: Keyboard.Subtract,
       drift: Keyboard.J,
