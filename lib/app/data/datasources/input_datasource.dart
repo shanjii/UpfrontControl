@@ -12,7 +12,8 @@ class InputDatasource {
             pressKeyUrl(connection),
             headers: {'Content-Type': 'application/json'},
             body: json.encode(
-              {"key": key.value},
+              //if key has extended value, adds a # to the string to flag it to the server
+              {"key": key.extended ? "${key.value}#" : key.value},
             ),
           )
           .timeout(const Duration(seconds: 2));
@@ -32,7 +33,8 @@ class InputDatasource {
             releaseKeyUrl(connection),
             headers: {'Content-Type': 'application/json'},
             body: json.encode(
-              {"key": key.value},
+              //if key has extended value, adds a # to the string to flag it to the server
+              {"key": key.extended ? "${key.value}#" : key.value},
             ),
           )
           .timeout(const Duration(seconds: 2));
