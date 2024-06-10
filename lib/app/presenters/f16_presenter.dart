@@ -32,7 +32,8 @@ class F16Presenter {
 
   onRelease(Keyboard? key) {
     feedback.tapVibration();
-    feedback.tapSound();
+    //Unsure about this one
+    // feedback.tapSound();
 
     if (key == null) return;
     inputDatasource.releaseKey(key, configuration.connection);
