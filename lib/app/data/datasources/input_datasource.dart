@@ -13,7 +13,7 @@ class InputDatasource {
             headers: {'Content-Type': 'application/json'},
             body: json.encode(
               //if key has extended value, adds a # to the string to flag it to the server
-              {"key": key.extended ? "${key.value}#" : key.value},
+              {"key": key.value},
             ),
           )
           .timeout(const Duration(seconds: 2));
@@ -34,7 +34,7 @@ class InputDatasource {
             headers: {'Content-Type': 'application/json'},
             body: json.encode(
               //if key has extended value, adds a # to the string to flag it to the server
-              {"key": key.extended ? "${key.value}#" : key.value},
+              {"key": key.value},
             ),
           )
           .timeout(const Duration(seconds: 2));
