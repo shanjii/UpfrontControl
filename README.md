@@ -1,16 +1,9 @@
-# app
+# ICPApp
 
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+A button box app for flight simulators created with responsiveness and ease of use in mind.
+The main goal of the app is to recreate a variety of preset UFC/ICP layouts for various aircraft in a way that feels satisfying and convenient for touch screen devices.
+The app contains easily customizable keybinds using highly responsive button layouts that can fit any type of device with the goal of maximizing screen real estate, as well as a variety of quality of life features that are useful for a mobile button box, including customizable haptics for button presses, audio clicks and auto screen fade to prevent burn-in on OLED screens.
+<br/>
+Requires a server client to be installed on the computer.
+<br/>
+**[Download the server client](https://github.com/shanjii/ICPServer/releases/tag/v1.0.0)**
