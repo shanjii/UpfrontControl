@@ -8,4 +8,4 @@ The main goal of the app is to recreate a variety of preset UFC/ICP layouts for 
 The app contains easily customizable keybinds using responsive button layouts that can fit any type of device with the goal of maximizing screen real estate, as well as a variety of quality of life features that are useful for a mobile button box, including customizable haptics for button presses, audio clicks and auto screen fade to prevent burn-in on OLED screens.
 <br/>
 <br/>
-Requires the **[ICPServer](https://github.com/shanjii/ICPServer)** to be installed, a server client that allows ICPApp to communicate with your computer.
+**Requires the [ICPServer](https://github.com/shanjii/ICPServer) to be installed**, a server client that allows ICPApp to communicate with your computer.
