@@ -6,7 +6,6 @@ The main goal of the app is to recreate a variety of preset UFC/ICP layouts for 
 ![Screenshot_1720019197](https://github.com/shanjii/ICPApp/assets/48361829/a1f5ce82-48e6-4978-a912-f7f31bd8716c)
 The app contains easily customizable keybinds using responsive button layouts that can fit any type of device with the goal of maximizing screen real estate, as well as a variety of quality of life features that are useful for a mobile button box, including customizable haptics for button presses, audio clicks and auto screen fade to prevent burn-in on OLED screens.
 <br/>
-![Screenshot_1720019325](https://github.com/shanjii/ICPApp/assets/48361829/79e2661c-2902-4142-8b18-4d4104db055c)
 <br/>
 Requires a server client to be installed on the computer.
 <br/>
