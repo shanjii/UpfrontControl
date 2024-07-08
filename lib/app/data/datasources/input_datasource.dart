@@ -1,20 +1,17 @@
 import 'package:icp_app/app/data/datasources/endpoints/endpoints.dart';
-import 'package:icp_app/app/data/models/ip_model.dart';
-import 'package:icp_app/core/values/buttons.dart';
+import 'package:icp_app/app/data/models/connection_model.dart';
+import 'package:icp_app/app/data/models/payloads/action_model.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class InputDatasource {
-  pressKey(Keyboard key, ConnectionModel connection) async {
+  pressKey(ActionModel action, ConnectionModel connection) async {
     try {
       var result = await http
           .post(
             pressKeyUrl(connection),
             headers: {'Content-Type': 'application/json'},
-            body: json.encode(
-              //if key has extended value, adds a # to the string to flag it to the server
-              {"key": key.extended ? "${key.value}#" : key.value},
-            ),
+            body: json.encode(action.toJson()),
           )
           .timeout(const Duration(seconds: 2));
 
@@ -26,15 +23,14 @@ class InputDatasource {
     }
   }
 
-  releaseKey(Keyboard key, ConnectionModel connection) async {
+  releaseKey(ActionModel action, ConnectionModel connection) async {
     try {
       var result = await http
           .post(
             releaseKeyUrl(connection),
             headers: {'Content-Type': 'application/json'},
             body: json.encode(
-              //if key has extended value, adds a # to the string to flag it to the server
-              {"key": key.extended ? "${key.value}#" : key.value},
+              action.toJson(),
             ),
           )
           .timeout(const Duration(seconds: 2));

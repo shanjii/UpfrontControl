@@ -1,5 +1,5 @@
+import 'package:icp_app/app/data/models/payloads/action_model.dart';
 import 'package:icp_app/app/presenters/f16_presenter.dart';
-import 'package:icp_app/core/values/buttons.dart';
 import 'package:icp_app/core/values/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -13,8 +13,8 @@ class F16SelectorButton extends StatefulWidget {
     required this.labelDown,
   });
 
-  final Keyboard? sentValueUp;
-  final Keyboard? sentValueDown;
+  final ActionModel? sentValueUp;
+  final ActionModel? sentValueDown;
   final String labelUp;
   final String labelDown;
 
@@ -41,17 +41,20 @@ class _F16SelectorButtonState extends State<F16SelectorButton> {
                   child: Listener(
                     onPointerDown: (details) {
                       setState(() => pressedUp = true);
-                      controller.onPress(widget.sentValueUp);
+                      if (widget.sentValueUp == null) return;
+                      controller.onPress(widget.sentValueUp!);
                     },
                     onPointerUp: (details) {
                       setState(() => pressedUp = false);
-                      controller.onRelease(widget.sentValueUp);
+                      if (widget.sentValueUp == null) return;
+                      controller.onRelease(widget.sentValueUp!);
                     },
                     onPointerCancel: (details) {
                       setState(() => pressedUp = false);
-                      controller.onRelease(widget.sentValueUp);
+                      if (widget.sentValueUp == null) return;
+                      controller.onRelease(widget.sentValueUp!);
                     },
-                    child: _button(widget.labelUp, widget.sentValueUp),
+                    child: _button(widget.labelUp),
                   ),
                 ),
                 AspectRatio(
@@ -59,17 +62,20 @@ class _F16SelectorButtonState extends State<F16SelectorButton> {
                   child: Listener(
                     onPointerDown: (details) {
                       setState(() => pressedDown = true);
-                      controller.onPress(widget.sentValueDown);
+                      if (widget.sentValueDown == null) return;
+                      controller.onPress(widget.sentValueDown!);
                     },
                     onPointerUp: (details) {
                       setState(() => pressedDown = false);
-                      controller.onRelease(widget.sentValueDown);
+                      if (widget.sentValueDown == null) return;
+                      controller.onRelease(widget.sentValueDown!);
                     },
                     onPointerCancel: (details) {
                       setState(() => pressedDown = false);
-                      controller.onRelease(widget.sentValueDown);
+                      if (widget.sentValueDown == null) return;
+                      controller.onRelease(widget.sentValueDown!);
                     },
-                    child: _button(widget.labelDown, widget.sentValueDown),
+                    child: _button(widget.labelDown),
                   ),
                 ),
               ],
@@ -80,7 +86,7 @@ class _F16SelectorButtonState extends State<F16SelectorButton> {
     );
   }
 
-  _button(String label, Keyboard? sentValue) {
+  _button(String label) {
     return LayoutBuilder(builder: (context, constraints) {
       return Container(
         padding: const EdgeInsets.all(5),

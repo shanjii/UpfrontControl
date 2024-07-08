@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:icp_app/app/data/models/payloads/action_model.dart';
 import 'package:icp_app/app/ui/components/add_keybind.dart';
-import 'package:icp_app/core/values/buttons.dart';
 
 class MultiKeybinder extends StatelessWidget {
   final Widget button;
-  final List<Keyboard?> keybinds;
-  final Function(Keyboard?, int) onAdd;
+  final List<ActionModel> keybinds;
+  final Function(String?, int) onAdd;
   final bool square;
 
   const MultiKeybinder({
@@ -39,7 +39,7 @@ class MultiKeybinder extends StatelessWidget {
                   SizedBox(
                     height: 80,
                     child: AddKeybind(
-                      keybind: keybinds[i],
+                      action: keybinds[i],
                       position: i,
                       onAdd: onAdd,
                     ),

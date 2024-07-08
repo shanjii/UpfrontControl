@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:icp_app/app/common/key_actions.dart';
 import 'package:icp_app/app/ui/components/text.dart';
 import 'package:icp_app/core/values/buttons.dart';
 import 'package:icp_app/core/values/colors.dart';
 
 keybindSelector(
   BuildContext context,
-  Function(Keyboard?, int) onAdd,
+  Function(String?, int) onAdd,
   int position,
 ) {
   showModalBottomSheet(
@@ -25,7 +26,7 @@ keybindSelector(
           for (var key in Keyboard.values)
             _button(
               context,
-              key: key,
+              key: key.value,
               onAdd: onAdd,
               position: position,
             ),
@@ -37,8 +38,8 @@ keybindSelector(
 
 _button(
   BuildContext context, {
-  required Keyboard key,
-  required Function(Keyboard?, int) onAdd,
+  required String key,
+  required Function(String?, int) onAdd,
   required int position,
 }) {
   return TextButton(
@@ -47,7 +48,7 @@ _button(
       Navigator.pop(context);
     },
     child: Center(
-      child: defaultText(key.name, size: 16, centered: true),
+      child: defaultText(stringToKeyname(key), size: 16, centered: true),
     ),
   );
 }

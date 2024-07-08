@@ -1,14 +1,14 @@
+import 'package:icp_app/app/data/models/payloads/action_model.dart';
 import 'package:icp_app/app/presenters/f16_presenter.dart';
-import 'package:icp_app/core/values/buttons.dart';
 import 'package:icp_app/core/values/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class F16DobberButton extends StatefulWidget {
-  final Keyboard? sentValueUp;
-  final Keyboard? sentValueLeft;
-  final Keyboard? sentValueDown;
-  final Keyboard? sentValueRight;
+  final ActionModel? sentValueUp;
+  final ActionModel? sentValueLeft;
+  final ActionModel? sentValueDown;
+  final ActionModel? sentValueRight;
 
   const F16DobberButton({
     super.key,
@@ -35,22 +35,58 @@ class _F16DobberButtonState extends State<F16DobberButton> {
               onPointerDown: (details) => _getTapLocation(
                 constraints: constraints,
                 details: details,
-                topPress: () => controller.onPress(widget.sentValueUp),
-                rightPress: () => controller.onPress(widget.sentValueRight),
-                leftPress: () => controller.onPress(widget.sentValueLeft),
-                bottomPress: () => controller.onPress(widget.sentValueDown),
+                topPress: () {
+                  if (widget.sentValueUp == null) return;
+                  controller.onPress(widget.sentValueUp!);
+                },
+                rightPress: () {
+                  if (widget.sentValueRight == null) return;
+                  controller.onPress(widget.sentValueRight!);
+                },
+                leftPress: () {
+                  if (widget.sentValueLeft == null) return;
+                  controller.onPress(widget.sentValueLeft!);
+                },
+                bottomPress: () {
+                  if (widget.sentValueDown == null) return;
+                  controller.onPress(widget.sentValueDown!);
+                },
               ),
               onPointerUp: (details) => _releaseButton(
-                topPress: () => controller.onRelease(widget.sentValueUp),
-                rightPress: () => controller.onRelease(widget.sentValueRight),
-                leftPress: () => controller.onRelease(widget.sentValueLeft),
-                bottomPress: () => controller.onRelease(widget.sentValueDown),
+                topPress: () {
+                  if (widget.sentValueUp == null) return;
+                  controller.onRelease(widget.sentValueUp!);
+                },
+                rightPress: () {
+                  if (widget.sentValueRight == null) return;
+                  controller.onRelease(widget.sentValueRight!);
+                },
+                leftPress: () {
+                  if (widget.sentValueLeft == null) return;
+                  controller.onRelease(widget.sentValueLeft!);
+                },
+                bottomPress: () {
+                  if (widget.sentValueDown == null) return;
+                  controller.onRelease(widget.sentValueDown!);
+                },
               ),
               onPointerCancel: (details) => _releaseButton(
-                topPress: () => controller.onRelease(widget.sentValueUp),
-                rightPress: () => controller.onRelease(widget.sentValueRight),
-                leftPress: () => controller.onRelease(widget.sentValueLeft),
-                bottomPress: () => controller.onRelease(widget.sentValueDown),
+                topPress: () {
+                  if (widget.sentValueUp == null) return;
+                  controller.onRelease(widget.sentValueUp!);
+                },
+                rightPress: () {
+                  if (widget.sentValueRight == null) return;
+                  controller.onRelease(widget.sentValueRight!);
+                },
+                leftPress: () {
+                  if (widget.sentValueLeft == null) return;
+                  controller.onRelease(widget.sentValueLeft!);
+                },
+                bottomPress: () {
+                  if (widget.sentValueDown == null) return;
+                  controller.onRelease(widget.sentValueDown!);
+                },
               ),
               child: AspectRatio(
                 aspectRatio: 1,

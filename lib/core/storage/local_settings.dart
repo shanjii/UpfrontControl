@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:flutter_vibrate/flutter_vibrate.dart';
-import 'package:icp_app/app/data/models/f16_keys_model.dart';
-import 'package:icp_app/core/values/buttons.dart';
+import 'package:icp_app/app/data/models/payloads/action_model.dart';
+import 'package:icp_app/app/data/models/payloads/f16_keys_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LocalSettings {
@@ -44,36 +44,36 @@ class LocalSettings {
     }
 
     return F16KeysModel(
-      com1: Keyboard.D0,
-      com2: Keyboard.D1,
-      iff: Keyboard.D3,
-      list: Keyboard.D4,
-      aa: Keyboard.D5,
-      ag: Keyboard.D6,
-      num0: Keyboard.NumPad0,
-      num1: Keyboard.NumPad1,
-      num2: Keyboard.NumPad2,
-      num3: Keyboard.NumPad3,
-      num4: Keyboard.NumPad4,
-      num5: Keyboard.NumPad5,
-      num6: Keyboard.NumPad6,
-      num7: Keyboard.NumPad7,
-      num8: Keyboard.NumPad8,
-      num9: Keyboard.NumPad9,
-      entr: Keyboard.Enter,
-      rcl: Keyboard.Backspace,
-      stepUp: Keyboard.Add,
-      stepDown: Keyboard.Subtract,
-      flirUp: Keyboard.Add,
-      flirDown: Keyboard.Subtract,
-      drift: Keyboard.J,
-      norm: Keyboard.K,
-      warnReset: Keyboard.L,
-      wx: Keyboard.Multiply,
-      dobberDown: Keyboard.Down,
-      dobberLeft: Keyboard.Left,
-      dobberRight: Keyboard.Right,
-      dobberUp: Keyboard.Up,
+      com1: ActionModel(key: null, modifier: null, joyKey: 1),
+      com2: ActionModel(key: null, modifier: null, joyKey: 2),
+      iff: ActionModel(key: null, modifier: null, joyKey: 3),
+      list: ActionModel(key: null, modifier: null, joyKey: 4),
+      aa: ActionModel(key: null, modifier: null, joyKey: 5),
+      ag: ActionModel(key: null, modifier: null, joyKey: 6),
+      num0: ActionModel(key: null, modifier: null, joyKey: 7),
+      num1: ActionModel(key: null, modifier: null, joyKey: 8),
+      num2: ActionModel(key: null, modifier: null, joyKey: 9),
+      num3: ActionModel(key: null, modifier: null, joyKey: 10),
+      num4: ActionModel(key: null, modifier: null, joyKey: 11),
+      num5: ActionModel(key: null, modifier: null, joyKey: 12),
+      num6: ActionModel(key: null, modifier: null, joyKey: 13),
+      num7: ActionModel(key: null, modifier: null, joyKey: 14),
+      num8: ActionModel(key: null, modifier: null, joyKey: 15),
+      num9: ActionModel(key: null, modifier: null, joyKey: 16),
+      entr: ActionModel(key: null, modifier: null, joyKey: 17),
+      rcl: ActionModel(key: null, modifier: null, joyKey: 18),
+      flirUp: ActionModel(key: null, modifier: null, joyKey: 19),
+      flirDown: ActionModel(key: null, modifier: null, joyKey: 20),
+      drift: ActionModel(key: null, modifier: null, joyKey: 21),
+      norm: ActionModel(key: null, modifier: null, joyKey: 22),
+      warnReset: ActionModel(key: null, modifier: null, joyKey: 23),
+      wx: ActionModel(key: null, modifier: null, joyKey: 24),
+      dobberLeft: ActionModel(key: null, modifier: null, joyKey: 25),
+      dobberUp: ActionModel(key: null, modifier: null, joyKey: 26),
+      dobberDown: ActionModel(key: null, modifier: null, joyKey: 27),
+      dobberRight: ActionModel(key: null, modifier: null, joyKey: 28),
+      stepUp: ActionModel(key: null, modifier: null, joyKey: 29),
+      stepDown: ActionModel(key: null, modifier: null, joyKey: 30),
     );
   }
 }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:icp_app/app/data/models/f16_keys_model.dart';
+import 'package:icp_app/app/data/models/payloads/f16_keys_model.dart';
 import 'package:icp_app/app/presenters/f16_presenter.dart';
 import 'package:icp_app/app/presenters/global_presenters/configuration_presenter.dart';
 import 'package:icp_app/app/ui/components/keybinder.dart';
@@ -11,7 +11,6 @@ import 'package:icp_app/app/ui/pages/f16/buttons/f16_rounded_button.dart';
 import 'package:icp_app/app/ui/pages/f16/buttons/f16_rounded_solid_button.dart';
 import 'package:icp_app/app/ui/pages/f16/buttons/f16_selector_button.dart';
 import 'package:icp_app/app/ui/pages/f16/buttons/f16_switch.dart';
-import 'package:icp_app/core/values/buttons.dart';
 import 'package:icp_app/core/values/colors.dart';
 import 'package:provider/provider.dart';
 
@@ -56,7 +55,7 @@ class _F16KeybindsState extends State<F16KeybindsPage> {
                   keybind: keys.com1,
                   onAdd: (newKeybind, index) {
                     setState(() {
-                      keys.com1 = newKeybind;
+                      keys.com1.key = newKeybind;
                       configuration.setF16Keys();
                     });
                   },
@@ -69,7 +68,7 @@ class _F16KeybindsState extends State<F16KeybindsPage> {
                   keybind: keys.com2,
                   onAdd: (newKeybind, index) {
                     setState(() {
-                      keys.com2 = newKeybind;
+                      keys.com2.key = newKeybind;
                       configuration.setF16Keys();
                     });
                   },
@@ -81,7 +80,7 @@ class _F16KeybindsState extends State<F16KeybindsPage> {
                   keybind: keys.iff,
                   onAdd: (newKeybind, index) {
                     setState(() {
-                      keys.iff = newKeybind;
+                      keys.iff.key = newKeybind;
                       configuration.setF16Keys();
                     });
                   },
@@ -93,7 +92,7 @@ class _F16KeybindsState extends State<F16KeybindsPage> {
                   keybind: keys.list,
                   onAdd: (newKeybind, index) {
                     setState(() {
-                      keys.list = newKeybind;
+                      keys.list.key = newKeybind;
                       configuration.setF16Keys();
                     });
                   },
@@ -105,7 +104,7 @@ class _F16KeybindsState extends State<F16KeybindsPage> {
                   keybind: keys.aa,
                   onAdd: (newKeybind, index) {
                     setState(() {
-                      keys.aa = newKeybind;
+                      keys.aa.key = newKeybind;
                       configuration.setF16Keys();
                     });
                   },
@@ -117,7 +116,7 @@ class _F16KeybindsState extends State<F16KeybindsPage> {
                   keybind: keys.ag,
                   onAdd: (newKeybind, index) {
                     setState(() {
-                      keys.ag = newKeybind;
+                      keys.ag.key = newKeybind;
                       configuration.setF16Keys();
                     });
                   },
@@ -131,7 +130,7 @@ class _F16KeybindsState extends State<F16KeybindsPage> {
                   keybind: keys.num1,
                   onAdd: (newKeybind, index) {
                     setState(() {
-                      keys.num1 = newKeybind;
+                      keys.num1.key = newKeybind;
                       configuration.setF16Keys();
                     });
                   },
@@ -145,7 +144,7 @@ class _F16KeybindsState extends State<F16KeybindsPage> {
                   keybind: keys.num2,
                   onAdd: (newKeybind, index) {
                     setState(() {
-                      keys.num2 = newKeybind;
+                      keys.num2.key = newKeybind;
                       configuration.setF16Keys();
                     });
                   },
@@ -159,7 +158,7 @@ class _F16KeybindsState extends State<F16KeybindsPage> {
                   keybind: keys.num3,
                   onAdd: (newKeybind, index) {
                     setState(() {
-                      keys.num3 = newKeybind;
+                      keys.num3.key = newKeybind;
                       configuration.setF16Keys();
                     });
                   },
@@ -173,7 +172,7 @@ class _F16KeybindsState extends State<F16KeybindsPage> {
                   keybind: keys.num4,
                   onAdd: (newKeybind, index) {
                     setState(() {
-                      keys.num4 = newKeybind;
+                      keys.num4.key = newKeybind;
                       configuration.setF16Keys();
                     });
                   },
@@ -187,7 +186,7 @@ class _F16KeybindsState extends State<F16KeybindsPage> {
                   keybind: keys.num5,
                   onAdd: (newKeybind, index) {
                     setState(() {
-                      keys.num5 = newKeybind;
+                      keys.num5.key = newKeybind;
                       configuration.setF16Keys();
                     });
                   },
@@ -201,7 +200,7 @@ class _F16KeybindsState extends State<F16KeybindsPage> {
                   keybind: keys.num6,
                   onAdd: (newKeybind, index) {
                     setState(() {
-                      keys.num6 = newKeybind;
+                      keys.num6.key = newKeybind;
                       configuration.setF16Keys();
                     });
                   },
@@ -215,7 +214,7 @@ class _F16KeybindsState extends State<F16KeybindsPage> {
                   keybind: keys.num7,
                   onAdd: (newKeybind, index) {
                     setState(() {
-                      keys.num7 = newKeybind;
+                      keys.num7.key = newKeybind;
                       configuration.setF16Keys();
                     });
                   },
@@ -229,7 +228,7 @@ class _F16KeybindsState extends State<F16KeybindsPage> {
                   keybind: keys.num8,
                   onAdd: (newKeybind, index) {
                     setState(() {
-                      keys.num8 = newKeybind;
+                      keys.num8.key = newKeybind;
                       configuration.setF16Keys();
                     });
                   },
@@ -243,7 +242,7 @@ class _F16KeybindsState extends State<F16KeybindsPage> {
                   keybind: keys.num9,
                   onAdd: (newKeybind, index) {
                     setState(() {
-                      keys.num9 = newKeybind;
+                      keys.num9.key = newKeybind;
                       configuration.setF16Keys();
                     });
                   },
@@ -257,7 +256,7 @@ class _F16KeybindsState extends State<F16KeybindsPage> {
                   keybind: keys.num0,
                   onAdd: (newKeybind, index) {
                     setState(() {
-                      keys.num0 = newKeybind;
+                      keys.num0.key = newKeybind;
                       configuration.setF16Keys();
                     });
                   },
@@ -270,7 +269,7 @@ class _F16KeybindsState extends State<F16KeybindsPage> {
                   keybind: keys.entr,
                   onAdd: (newKeybind, index) {
                     setState(() {
-                      keys.entr = newKeybind;
+                      keys.entr.key = newKeybind;
                       configuration.setF16Keys();
                     });
                   },
@@ -283,7 +282,7 @@ class _F16KeybindsState extends State<F16KeybindsPage> {
                   keybind: keys.rcl,
                   onAdd: (newKeybind, index) {
                     setState(() {
-                      keys.rcl = newKeybind;
+                      keys.rcl.key = newKeybind;
                       configuration.setF16Keys();
                     });
                   },
@@ -295,7 +294,7 @@ class _F16KeybindsState extends State<F16KeybindsPage> {
                   keybind: keys.wx,
                   onAdd: (newKeybind, index) {
                     setState(() {
-                      keys.wx = newKeybind;
+                      keys.wx.key = newKeybind;
                       configuration.setF16Keys();
                     });
                   },
@@ -401,55 +400,55 @@ class _F16KeybindsState extends State<F16KeybindsPage> {
     );
   }
 
-  _setDobberKeybinds(Keyboard? newKeybind, int index) {
+  _setDobberKeybinds(String? newKeybind, int index) {
     setState(() {
       switch (index) {
         case 0:
-          keys.dobberUp = newKeybind;
+          keys.dobberUp.key = newKeybind;
         case 1:
-          keys.dobberLeft = newKeybind;
+          keys.dobberLeft.key = newKeybind;
         case 2:
-          keys.dobberRight = newKeybind;
+          keys.dobberRight.key = newKeybind;
         case 3:
-          keys.dobberDown = newKeybind;
+          keys.dobberDown.key = newKeybind;
       }
     });
     configuration.setF16Keys();
   }
 
-  _setStepperKeybinds(Keyboard? newKeybind, int index) {
+  _setStepperKeybinds(String? newKeybind, int index) {
     setState(() {
       switch (index) {
         case 0:
-          keys.stepUp = newKeybind;
+          keys.stepUp.key = newKeybind;
         case 1:
-          keys.stepDown = newKeybind;
+          keys.stepDown.key = newKeybind;
       }
     });
     configuration.setF16Keys();
   }
 
-  _setFlirKeybinds(Keyboard? newKeybind, int index) {
+  _setFlirKeybinds(String? newKeybind, int index) {
     setState(() {
       switch (index) {
         case 0:
-          keys.flirUp = newKeybind;
+          keys.flirUp.key = newKeybind;
         case 1:
-          keys.flirDown = newKeybind;
+          keys.flirDown.key = newKeybind;
       }
     });
     configuration.setF16Keys();
   }
 
-  _setSwitchKeybinds(Keyboard? newKeybind, int index) {
+  _setSwitchKeybinds(String? newKeybind, int index) {
     setState(() {
       switch (index) {
         case 0:
-          keys.drift = newKeybind;
+          keys.drift.key = newKeybind;
         case 1:
-          keys.norm = newKeybind;
+          keys.norm.key = newKeybind;
         case 2:
-          keys.warnReset = newKeybind;
+          keys.warnReset.key = newKeybind;
       }
     });
     configuration.setF16Keys();

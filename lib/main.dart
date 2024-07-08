@@ -1,8 +1,8 @@
 import 'dart:io';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter_displaymode/flutter_displaymode.dart';
-import 'package:icp_app/app/data/models/f16_keys_model.dart';
-import 'package:icp_app/app/data/models/ip_model.dart';
+import 'package:icp_app/app/data/models/payloads/f16_keys_model.dart';
+import 'package:icp_app/app/data/models/connection_model.dart';
 import 'package:icp_app/app/presenters/global_presenters/activity_presenter.dart';
 import 'package:icp_app/app/presenters/global_presenters/configuration_presenter.dart';
 import 'package:icp_app/app/presenters/global_presenters/feedback_presenter.dart';

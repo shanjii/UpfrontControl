@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import 'package:icp_app/app/data/models/f16_keys_model.dart';
-import 'package:icp_app/app/data/models/ip_model.dart';
+import 'package:icp_app/app/data/models/payloads/f16_keys_model.dart';
+import 'package:icp_app/app/data/models/connection_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ConfigurationPresenter {

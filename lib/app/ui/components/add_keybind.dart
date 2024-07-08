@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:icp_app/app/common/key_actions.dart';
+import 'package:icp_app/app/data/models/payloads/action_model.dart';
 import 'package:icp_app/app/ui/components/keybind_selector.dart';
 import 'package:icp_app/app/ui/components/text.dart';
-import 'package:icp_app/core/values/buttons.dart';
 import 'package:icp_app/core/values/colors.dart';
 
 class AddKeybind extends StatefulWidget {
-  final Keyboard? keybind;
-  final Function(Keyboard?, int) onAdd;
+  final ActionModel action;
+  final Function(String?, int) onAdd;
   final int position;
   const AddKeybind({
     super.key,
-    required this.keybind,
+    required this.action,
     required this.onAdd,
     this.position = 0,
   });
@@ -39,9 +40,12 @@ class _AddKeybindState extends State<AddKeybind> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  if (widget.keybind != null)
+                  if (widget.action.key != null)
                     Center(
-                      child: defaultText(widget.keybind!.name, size: 20),
+                      child: defaultText(
+                        stringToKeyname(widget.action.key!)!,
+                        size: 20,
+                      ),
                     )
                   else
                     Center(
