@@ -11,6 +11,9 @@ class ConfigurationPresenter {
   });
 
   ConnectionModel connection;
+
+  //Replace name with f16CurrentKeys, add a new class for F16 presets that has 5 f16KeysModel.
+  //Whichever preset is selected will be the new F16KeysModel being used here.
   F16KeysModel f16KeysValues;
 
   setLocalIp(String newIp) async {
