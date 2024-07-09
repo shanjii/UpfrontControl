@@ -26,7 +26,7 @@ class _F18State extends State<F18Page> {
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: DefaultColors.backgroundBlack,
+      backgroundColor: DefaultColors.black,
       body: const Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [],

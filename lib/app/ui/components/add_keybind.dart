@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:icp_app/app/common/key_actions.dart';
+import 'package:icp_app/app/common/modals.dart';
+import 'package:icp_app/app/data/models/payloads/action_model.dart';
 import 'package:icp_app/app/ui/components/keybind_selector.dart';
 import 'package:icp_app/app/ui/components/text.dart';
-import 'package:icp_app/core/values/buttons.dart';
+import 'package:icp_app/core/enums/key_type.dart';
 import 'package:icp_app/core/values/colors.dart';
 
 class AddKeybind extends StatefulWidget {
-  final Keyboard? keybind;
-  final Function(Keyboard?, int) onAdd;
+  final ActionModel action;
+  final Function(String? key, String? modifier, int) onAdd;
   final int position;
   const AddKeybind({
     super.key,
-    required this.keybind,
+    required this.action,
     required this.onAdd,
     this.position = 0,
   });
@@ -22,37 +25,90 @@ class AddKeybind extends StatefulWidget {
 class _AddKeybindState extends State<AddKeybind> {
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 80,
-      child: Card(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 5),
+      child: SizedBox(
+        height: 80,
+        child: Row(
+          children: [
+            _keybindCard(KeyType.key),
+            _keybindCard(KeyType.modifer),
+          ],
         ),
-        margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-        color: DefaultColors.backgroundLight2,
+      ),
+    );
+  }
+
+  _keybindCard(KeyType type) {
+    return Expanded(
+      child: Card(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        margin: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+        color: _activeColor(type, widget.action),
         child: InkWell(
           borderRadius: BorderRadius.circular(12),
-          onTap: () => keybindSelector(context, widget.onAdd, widget.position),
+          onTap: () => defaultBottomSheet(
+            context,
+            modalWidget: KeybindSelector(
+              onAdd: widget.onAdd,
+              position: widget.position,
+              currentKey: widget.action.key,
+              currentModifier: widget.action.modifier,
+              type: type,
+            ),
+          ),
           child: Center(
             child: Padding(
               padding: const EdgeInsets.all(12),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  if (widget.keybind != null)
-                    Center(
-                      child: defaultText(widget.keybind!.name, size: 20),
-                    )
-                  else
-                    Center(
-                      child: defaultText("Add", size: 20),
-                    )
-                ],
-              ),
+              child: _label(type),
             ),
           ),
         ),
       ),
     );
+  }
+
+  _activeColor(KeyType type, ActionModel action) {
+    if (type == KeyType.key) {
+      if (action.key != null) {
+        return DefaultColors.gray2;
+      } else {
+        return DefaultColors.gray3;
+      }
+    } else {
+      if (action.modifier != null) {
+        return DefaultColors.gray2;
+      } else {
+        return DefaultColors.gray3;
+      }
+    }
+  }
+
+  _label(KeyType type) {
+    if (type == KeyType.key) {
+      if (widget.action.key != null) {
+        return Center(
+          child: defaultText(
+            stringToKeyname(widget.action.key!)!,
+            size: 20,
+          ),
+        );
+      } else {
+        return Center(
+          child: defaultText("Key", size: 20),
+        );
+      }
+    } else {
+      if (widget.action.modifier != null) {
+        return Center(
+          child: defaultText(
+            stringToKeyname(widget.action.modifier!)!,
+            size: 20,
+          ),
+        );
+      } else {
+        return Center(child: defaultText("Modifier", size: 20));
+      }
+    }
   }
 }

@@ -1,13 +1,13 @@
-import 'package:icp_app/app/presenters/f16_presenter.dart';
-import 'package:icp_app/core/values/buttons.dart';
+import 'package:icp_app/app/data/models/payloads/action_model.dart';
+import 'package:icp_app/app/presenters/global_presenters/button_presenter.dart';
 import 'package:icp_app/core/values/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class F16Switch extends StatefulWidget {
-  final Keyboard? sentValueDrift;
-  final Keyboard? sentValueNorm;
-  final Keyboard? sentValueWrnRst;
+  final ActionModel? sentValueDrift;
+  final ActionModel? sentValueNorm;
+  final ActionModel? sentValueWrnRst;
 
   const F16Switch({
     super.key,
@@ -23,7 +23,7 @@ class F16Switch extends StatefulWidget {
 class _F16SwitchState extends State<F16Switch> {
   @override
   Widget build(BuildContext context) {
-    return Consumer(builder: (context, F16Presenter controller, _) {
+    return Consumer(builder: (context, ButtonPresenter controller, _) {
       return Container(
         color: DefaultColors.f16ButtonInner,
         child: Column(
@@ -31,20 +31,38 @@ class _F16SwitchState extends State<F16Switch> {
             _Button(
               title: "DRIFT C/O",
               color: DefaultColors.f16ButtonInner,
-              onPress: () => controller.onPress(widget.sentValueDrift),
-              onRelease: () => controller.onRelease(widget.sentValueDrift),
+              onPress: () {
+                if (widget.sentValueDrift == null) return;
+                controller.onPress(widget.sentValueDrift!);
+              },
+              onRelease: () {
+                if (widget.sentValueDrift == null) return;
+                controller.onRelease(widget.sentValueDrift!);
+              },
             ),
             _Button(
               title: "NORM",
               color: DefaultColors.f16ButtonInner,
-              onPress: () => controller.onPress(widget.sentValueNorm),
-              onRelease: () => controller.onRelease(widget.sentValueNorm),
+              onPress: () {
+                if (widget.sentValueNorm == null) return;
+                controller.onPress(widget.sentValueNorm!);
+              },
+              onRelease: () {
+                if (widget.sentValueNorm == null) return;
+                controller.onRelease(widget.sentValueNorm!);
+              },
             ),
             _Button(
               title: "WRN RST",
               color: DefaultColors.f16RoundButton,
-              onPress: () => controller.onPress(widget.sentValueWrnRst),
-              onRelease: () => controller.onRelease(widget.sentValueWrnRst),
+              onPress: () {
+                if (widget.sentValueWrnRst == null) return;
+                controller.onPress(widget.sentValueWrnRst!);
+              },
+              onRelease: () {
+                if (widget.sentValueWrnRst == null) return;
+                controller.onRelease(widget.sentValueWrnRst!);
+              },
             ),
           ],
         ),

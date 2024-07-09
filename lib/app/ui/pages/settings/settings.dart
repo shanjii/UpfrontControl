@@ -1,4 +1,3 @@
-import 'package:icp_app/app/presenters/global_presenters/configuration_presenter.dart';
 import 'package:icp_app/app/presenters/settings_presenter.dart';
 import 'package:icp_app/app/ui/components/inputs.dart';
 import 'package:icp_app/app/ui/components/text.dart';
@@ -21,13 +20,12 @@ class _SettingsState extends State<SettingsPage> {
       create: (context) => SettingsPresenter(context),
       child: Consumer(
         builder: (context, SettingsPresenter controller, _) {
-          var feedback = controller.feedback;
           var activity = controller.activity;
 
           return Scaffold(
-            backgroundColor: DefaultColors.background,
+            backgroundColor: DefaultColors.gray4,
             appBar: AppBar(
-              backgroundColor: DefaultColors.background,
+              backgroundColor: DefaultColors.gray4,
               scrolledUnderElevation: 0,
               iconTheme: const IconThemeData(color: Colors.white),
               title: defaultText("Settings", size: 23),
@@ -35,7 +33,29 @@ class _SettingsState extends State<SettingsPage> {
             body: ListView(
               children: [
                 _title("Server address"),
-                _ipInput(controller.ipController, controller.portController),
+                _ipInput(controller),
+                _title("vJoy mode"),
+                _subTitle(
+                  "Use vJoy buttons instead of keyboard bindings. While this is active, all your keybinds will be ignored.",
+                ),
+                Container(
+                  margin: const EdgeInsets.symmetric(vertical: 10),
+                  height: 60,
+                  child: Row(
+                    children: [
+                      _button(
+                        title: "OFF",
+                        onTap: () => controller.setVirtualJoystick(false),
+                        condition: !controller.data.connection.virtualJoystick,
+                      ),
+                      _button(
+                        title: "ON",
+                        onTap: () => controller.setVirtualJoystick(true),
+                        condition: controller.data.connection.virtualJoystick,
+                      ),
+                    ],
+                  ),
+                ),
                 _title("Button sounds"),
                 Container(
                   margin: const EdgeInsets.symmetric(vertical: 10),
@@ -44,13 +64,13 @@ class _SettingsState extends State<SettingsPage> {
                     children: [
                       _button(
                         title: "OFF",
-                        onTap: () => feedback.mute(),
-                        condition: feedback.muted,
+                        onTap: () => controller.setSound(false),
+                        condition: !controller.feedback.muted,
                       ),
                       _button(
                         title: "ON",
-                        onTap: () => feedback.unmute(),
-                        condition: !feedback.muted,
+                        onTap: () => controller.setSound(true),
+                        condition: controller.feedback.muted,
                       ),
                     ],
                   ),
@@ -63,30 +83,33 @@ class _SettingsState extends State<SettingsPage> {
                     children: [
                       _button(
                         title: "OFF",
-                        onTap: () => feedback.setHaptic(null),
-                        condition: feedback.haptic == null,
+                        onTap: () => controller.setHaptic(null),
+                        condition: controller.feedback.haptic == null,
                       ),
                       _button(
                         title: "Light",
-                        onTap: () => feedback.setHaptic(FeedbackType.light),
-                        condition: feedback.haptic == FeedbackType.light,
+                        onTap: () => controller.setHaptic(FeedbackType.light),
+                        condition:
+                            controller.feedback.haptic == FeedbackType.light,
                       ),
                       _button(
                         title: "Medium",
-                        onTap: () => feedback.setHaptic(FeedbackType.medium),
-                        condition: feedback.haptic == FeedbackType.medium,
+                        onTap: () => controller.setHaptic(FeedbackType.medium),
+                        condition:
+                            controller.feedback.haptic == FeedbackType.medium,
                       ),
                       _button(
                         title: "Heavy",
-                        onTap: () => feedback.setHaptic(FeedbackType.heavy),
-                        condition: feedback.haptic == FeedbackType.heavy,
+                        onTap: () => controller.setHaptic(FeedbackType.heavy),
+                        condition:
+                            controller.feedback.haptic == FeedbackType.heavy,
                       ),
                     ],
                   ),
                 ),
                 _title("Turn screen black on innactivity"),
                 _subTitle(
-                  "(Useful on OLED screens to prevent burn-in, touch screen to restore)",
+                  "Useful on OLED screens to prevent burn-in, touch screen to restore.",
                 ),
                 Container(
                   margin: const EdgeInsets.symmetric(vertical: 10),
@@ -95,12 +118,12 @@ class _SettingsState extends State<SettingsPage> {
                     children: [
                       _button(
                         title: "OFF",
-                        onTap: () => activity.disable(),
+                        onTap: () => controller.setOledMode(false),
                         condition: !activity.manageActivity,
                       ),
                       _button(
                         title: "ON",
-                        onTap: () => activity.enable(),
+                        onTap: () => controller.setOledMode(true),
                         condition: activity.manageActivity,
                       ),
                     ],
@@ -126,7 +149,7 @@ class _SettingsState extends State<SettingsPage> {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10),
       margin: const EdgeInsets.only(top: 5),
-      child: defaultText(title, size: 16),
+      child: defaultText(title, size: 14),
     );
   }
 
@@ -137,9 +160,7 @@ class _SettingsState extends State<SettingsPage> {
   }) {
     return Expanded(
       child: Material(
-        color: condition
-            ? DefaultColors.backgroundLight2
-            : DefaultColors.backgroundLight,
+        color: condition ? DefaultColors.gray2 : DefaultColors.gray1,
         child: InkWell(
           onTap: () async {
             await onTap();
@@ -153,30 +174,25 @@ class _SettingsState extends State<SettingsPage> {
     );
   }
 
-  _ipInput(
-    TextEditingController ipController,
-    TextEditingController portController,
-  ) {
-    ConfigurationPresenter configuration =
-        context.read<ConfigurationPresenter>();
+  _ipInput(SettingsPresenter controller) {
     return Container(
       margin: const EdgeInsets.only(top: 10),
       child: Row(
         children: [
           Expanded(
             child: inputField(
-              onChanged: (value) => configuration.setLocalIp(value),
-              fillColors: DefaultColors.backgroundLight,
-              controller: ipController,
+              onChanged: (value) => controller.setLocalIp(value),
+              fillColors: DefaultColors.gray1,
+              controller: controller.ipController,
               hint: "IP address",
             ),
           ),
           SizedBox(
             width: MediaQuery.of(context).size.width * 0.4,
             child: inputField(
-              onChanged: (value) => configuration.setPort(value),
-              fillColors: DefaultColors.backgroundLight2,
-              controller: portController,
+              onChanged: (value) => controller.setPort(value),
+              fillColors: DefaultColors.gray2,
+              controller: controller.portController,
               hint: "Port",
             ),
           ),

@@ -1,0 +1,4 @@
+enum KeyType {
+  key,
+  modifer;
+}

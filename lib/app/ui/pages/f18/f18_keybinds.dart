@@ -12,9 +12,9 @@ class _F16KeybindsState extends State<F18KeybindsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: DefaultColors.background,
+      backgroundColor: DefaultColors.gray4,
       appBar: AppBar(
-        backgroundColor: DefaultColors.background,
+        backgroundColor: DefaultColors.gray4,
         scrolledUnderElevation: 0,
         iconTheme: const IconThemeData(color: Colors.white),
         title: const Text(

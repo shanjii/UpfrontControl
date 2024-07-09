@@ -1,14 +1,13 @@
 import 'dart:io';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter_displaymode/flutter_displaymode.dart';
-import 'package:icp_app/app/data/models/f16_keys_model.dart';
-import 'package:icp_app/app/data/models/ip_model.dart';
+import 'package:icp_app/app/data/models/payloads/f16_keys_model.dart';
+import 'package:icp_app/app/data/models/connection_model.dart';
 import 'package:icp_app/app/presenters/global_presenters/activity_presenter.dart';
-import 'package:icp_app/app/presenters/global_presenters/configuration_presenter.dart';
+import 'package:icp_app/app/presenters/global_presenters/data_presenter.dart';
 import 'package:icp_app/app/presenters/global_presenters/feedback_presenter.dart';
-import 'package:icp_app/app/presenters/global_presenters/tool_presenter.dart';
 import 'package:icp_app/app/ui/pages/home/home_page.dart';
-import 'package:icp_app/core/storage/local_settings.dart';
+import 'package:icp_app/startup.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_vibrate/flutter_vibrate.dart';
@@ -20,15 +19,15 @@ void main() async {
 
   await _setDisplaySettings();
 
-  final prefs = await SharedPreferences.getInstance();
-  var localSettings = LocalSettings(prefs);
+  var startup = Startup(instance: await SharedPreferences.getInstance());
 
-  String savedIp = await localSettings.getSavedIp();
-  String savedPort = await localSettings.getSavedPort();
-  bool isMuted = await localSettings.getMutedSetting();
-  FeedbackType? haptic = await localSettings.getHapticSetting();
-  bool manageActivity = await localSettings.getActivitySetting();
-  F16KeysModel f16Keys = await localSettings.getF16Keybinds();
+  String savedIp = await startup.getSavedIp();
+  String savedPort = await startup.getSavedPort();
+  bool isMuted = await startup.getMutedSetting();
+  FeedbackType? haptic = await startup.getHapticSetting();
+  bool manageActivity = await startup.getActivitySetting();
+  F16KeysModel f16Keys = await startup.getF16Keybinds();
+  bool virtualJoystick = await startup.getVirtualjoystickSetting();
 
   int innactivityTime = 15;
 
@@ -43,6 +42,7 @@ void main() async {
       haptic: haptic,
       innactivityTime: innactivityTime,
       manageActivity: manageActivity,
+      virtualJoystick: virtualJoystick,
     ),
   );
 }
@@ -55,6 +55,7 @@ class App extends StatelessWidget {
   final int innactivityTime;
   final FeedbackType? haptic;
   final bool manageActivity;
+  final bool virtualJoystick;
 
   const App({
     super.key,
@@ -65,6 +66,7 @@ class App extends StatelessWidget {
     required this.f16keys,
     required this.innactivityTime,
     required this.manageActivity,
+    required this.virtualJoystick,
   });
 
   @override
@@ -78,17 +80,14 @@ class App extends StatelessWidget {
           ),
         ),
         Provider(
-          create: (context) => ToolPresenter(
-            devMode: false,
-          ),
-        ),
-        Provider(
-          create: (context) => ConfigurationPresenter(
+          create: (context) => DataPresenter(
             connection: ConnectionModel(
               ip: savedIp,
               port: savedPort,
+              virtualJoystick: virtualJoystick,
             ),
             f16KeysValues: f16keys,
+            devMode: false,
           ),
         ),
         ChangeNotifierProvider(

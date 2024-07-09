@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:icp_app/app/data/models/payloads/action_model.dart';
 import 'package:icp_app/app/ui/components/add_keybind.dart';
-import 'package:icp_app/core/values/buttons.dart';
 
 class Keybinder extends StatelessWidget {
   final Widget button;
-  final Keyboard? keybind;
-  final Function(Keyboard?, int) onAdd;
+  final ActionModel keybind;
+  final Function(String? key, String? modifier, int) onAdd;
 
   const Keybinder({
     super.key,
@@ -27,7 +27,7 @@ class Keybinder extends StatelessWidget {
           ),
           Expanded(
             child: AddKeybind(
-              keybind: keybind,
+              action: keybind,
               onAdd: onAdd,
             ),
           ),

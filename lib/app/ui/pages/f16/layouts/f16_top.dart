@@ -1,4 +1,4 @@
-import 'package:icp_app/app/presenters/f16_presenter.dart';
+import 'package:icp_app/app/presenters/global_presenters/button_presenter.dart';
 import 'package:icp_app/app/ui/pages/f16/buttons/f16_rounded_button.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -11,9 +11,9 @@ class F16Top extends StatelessWidget {
     double height = MediaQuery.of(context).size.height;
 
     return Consumer(
-      builder: (context, F16Presenter controller, _) {
-        var devMode = controller.tool.devMode;
-        var f16Keys = controller.configuration.f16KeysValues;
+      builder: (context, ButtonPresenter controller, _) {
+        var devMode = controller.data.devMode;
+        var f16Keys = controller.data.f16KeysValues;
 
         return Placeholder(
           color: devMode ? Colors.grey : Colors.transparent,

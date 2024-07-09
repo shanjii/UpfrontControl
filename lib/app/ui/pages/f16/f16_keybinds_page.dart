@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:icp_app/app/data/models/f16_keys_model.dart';
-import 'package:icp_app/app/presenters/f16_presenter.dart';
-import 'package:icp_app/app/presenters/global_presenters/configuration_presenter.dart';
+import 'package:icp_app/app/data/models/payloads/f16_keys_model.dart';
+import 'package:icp_app/app/presenters/global_presenters/button_presenter.dart';
 import 'package:icp_app/app/ui/components/keybinder.dart';
 import 'package:icp_app/app/ui/components/multi_keybinder.dart';
 import 'package:icp_app/app/ui/components/text.dart';
@@ -11,7 +10,6 @@ import 'package:icp_app/app/ui/pages/f16/buttons/f16_rounded_button.dart';
 import 'package:icp_app/app/ui/pages/f16/buttons/f16_rounded_solid_button.dart';
 import 'package:icp_app/app/ui/pages/f16/buttons/f16_selector_button.dart';
 import 'package:icp_app/app/ui/pages/f16/buttons/f16_switch.dart';
-import 'package:icp_app/core/values/buttons.dart';
 import 'package:icp_app/core/values/colors.dart';
 import 'package:provider/provider.dart';
 
@@ -23,22 +21,18 @@ class F16KeybindsPage extends StatefulWidget {
 }
 
 class _F16KeybindsState extends State<F16KeybindsPage> {
-  late F16KeysModel keys;
-  late ConfigurationPresenter configuration;
-
   @override
   Widget build(BuildContext context) {
     return Provider(
-      create: (context) => F16Presenter(context),
+      create: (context) => ButtonPresenter(context),
       child: Consumer(
-        builder: (context, F16Presenter controller, _) {
-          keys = controller.configuration.f16KeysValues;
-          configuration = controller.configuration;
+        builder: (context, ButtonPresenter controller, _) {
+          F16KeysModel keys = controller.data.f16KeysValues;
 
           return Scaffold(
-            backgroundColor: DefaultColors.background,
+            backgroundColor: DefaultColors.gray4,
             appBar: AppBar(
-              backgroundColor: DefaultColors.background,
+              backgroundColor: DefaultColors.gray4,
               scrolledUnderElevation: 0,
               iconTheme: const IconThemeData(color: Colors.white),
               title: const Text(
@@ -46,323 +40,368 @@ class _F16KeybindsState extends State<F16KeybindsPage> {
                 style: TextStyle(color: Colors.white),
               ),
             ),
-            body: ListView(
+            body: Column(
               children: [
-                Keybinder(
-                  button: const F16RoundedButton(
-                    label: "COM",
-                    secondLabel: "1",
-                  ),
-                  keybind: keys.com1,
-                  onAdd: (newKeybind, index) {
-                    setState(() {
-                      keys.com1 = newKeybind;
-                      configuration.setF16Keys();
-                    });
-                  },
-                ),
-                Keybinder(
-                  button: const F16RoundedButton(
-                    label: "COM",
-                    secondLabel: "2",
-                  ),
-                  keybind: keys.com2,
-                  onAdd: (newKeybind, index) {
-                    setState(() {
-                      keys.com2 = newKeybind;
-                      configuration.setF16Keys();
-                    });
-                  },
-                ),
-                Keybinder(
-                  button: const F16RoundedButton(
-                    label: "IFF",
-                  ),
-                  keybind: keys.iff,
-                  onAdd: (newKeybind, index) {
-                    setState(() {
-                      keys.iff = newKeybind;
-                      configuration.setF16Keys();
-                    });
-                  },
-                ),
-                Keybinder(
-                  button: const F16RoundedButton(
-                    label: "LIST",
-                  ),
-                  keybind: keys.list,
-                  onAdd: (newKeybind, index) {
-                    setState(() {
-                      keys.list = newKeybind;
-                      configuration.setF16Keys();
-                    });
-                  },
-                ),
-                Keybinder(
-                  button: const F16RoundedButton(
-                    label: "A-A",
-                  ),
-                  keybind: keys.aa,
-                  onAdd: (newKeybind, index) {
-                    setState(() {
-                      keys.aa = newKeybind;
-                      configuration.setF16Keys();
-                    });
-                  },
-                ),
-                Keybinder(
-                  button: const F16RoundedButton(
-                    label: "A-G",
-                  ),
-                  keybind: keys.ag,
-                  onAdd: (newKeybind, index) {
-                    setState(() {
-                      keys.ag = newKeybind;
-                      configuration.setF16Keys();
-                    });
-                  },
-                ),
-                Keybinder(
-                  button: const F16KeypadButton(
-                    topLabel: "T-ILS",
-                    label: "1",
-                    cornerLabel: "",
-                  ),
-                  keybind: keys.num1,
-                  onAdd: (newKeybind, index) {
-                    setState(() {
-                      keys.num1 = newKeybind;
-                      configuration.setF16Keys();
-                    });
-                  },
-                ),
-                Keybinder(
-                  button: const F16KeypadButton(
-                    topLabel: "ALOW",
-                    label: "2",
-                    cornerLabel: "N",
-                  ),
-                  keybind: keys.num2,
-                  onAdd: (newKeybind, index) {
-                    setState(() {
-                      keys.num2 = newKeybind;
-                      configuration.setF16Keys();
-                    });
-                  },
-                ),
-                Keybinder(
-                  button: const F16KeypadButton(
-                    topLabel: "",
-                    label: "3",
-                    cornerLabel: "",
-                  ),
-                  keybind: keys.num3,
-                  onAdd: (newKeybind, index) {
-                    setState(() {
-                      keys.num3 = newKeybind;
-                      configuration.setF16Keys();
-                    });
-                  },
-                ),
-                Keybinder(
-                  button: const F16KeypadButton(
-                    topLabel: "STPT",
-                    label: "4",
-                    cornerLabel: "W",
-                  ),
-                  keybind: keys.num4,
-                  onAdd: (newKeybind, index) {
-                    setState(() {
-                      keys.num4 = newKeybind;
-                      configuration.setF16Keys();
-                    });
-                  },
-                ),
-                Keybinder(
-                  button: const F16KeypadButton(
-                    topLabel: "CRUS",
-                    label: "5",
-                    cornerLabel: "",
-                  ),
-                  keybind: keys.num5,
-                  onAdd: (newKeybind, index) {
-                    setState(() {
-                      keys.num5 = newKeybind;
-                      configuration.setF16Keys();
-                    });
-                  },
-                ),
-                Keybinder(
-                  button: const F16KeypadButton(
-                    topLabel: "TIME",
-                    label: "6",
-                    cornerLabel: "E",
-                  ),
-                  keybind: keys.num6,
-                  onAdd: (newKeybind, index) {
-                    setState(() {
-                      keys.num6 = newKeybind;
-                      configuration.setF16Keys();
-                    });
-                  },
-                ),
-                Keybinder(
-                  button: const F16KeypadButton(
-                    topLabel: "MARK",
-                    label: "7",
-                    cornerLabel: "",
-                  ),
-                  keybind: keys.num7,
-                  onAdd: (newKeybind, index) {
-                    setState(() {
-                      keys.num7 = newKeybind;
-                      configuration.setF16Keys();
-                    });
-                  },
-                ),
-                Keybinder(
-                  button: const F16KeypadButton(
-                    topLabel: "FIX",
-                    label: "8",
-                    cornerLabel: "S",
-                  ),
-                  keybind: keys.num8,
-                  onAdd: (newKeybind, index) {
-                    setState(() {
-                      keys.num8 = newKeybind;
-                      configuration.setF16Keys();
-                    });
-                  },
-                ),
-                Keybinder(
-                  button: const F16KeypadButton(
-                    topLabel: "A-CAL",
-                    label: "9",
-                    cornerLabel: "",
-                  ),
-                  keybind: keys.num9,
-                  onAdd: (newKeybind, index) {
-                    setState(() {
-                      keys.num9 = newKeybind;
-                      configuration.setF16Keys();
-                    });
-                  },
-                ),
-                Keybinder(
-                  button: const F16KeypadButton(
-                    topLabel: "M-SEL",
-                    label: "0",
-                    cornerLabel: "━",
-                  ),
-                  keybind: keys.num0,
-                  onAdd: (newKeybind, index) {
-                    setState(() {
-                      keys.num0 = newKeybind;
-                      configuration.setF16Keys();
-                    });
-                  },
-                ),
-                Keybinder(
-                  button: const F16KeypadButton(
-                    label: "ENTR",
-                    functionButton: true,
-                  ),
-                  keybind: keys.entr,
-                  onAdd: (newKeybind, index) {
-                    setState(() {
-                      keys.entr = newKeybind;
-                      configuration.setF16Keys();
-                    });
-                  },
-                ),
-                Keybinder(
-                  button: const F16KeypadButton(
-                    label: "RCL",
-                    functionButton: true,
-                  ),
-                  keybind: keys.rcl,
-                  onAdd: (newKeybind, index) {
-                    setState(() {
-                      keys.rcl = newKeybind;
-                      configuration.setF16Keys();
-                    });
-                  },
-                ),
-                Keybinder(
-                  button: const F16RoundedSolidButton(
-                    label: "WX",
-                  ),
-                  keybind: keys.wx,
-                  onAdd: (newKeybind, index) {
-                    setState(() {
-                      keys.wx = newKeybind;
-                      configuration.setF16Keys();
-                    });
-                  },
-                ),
-                _multiKeybindRegion(
-                  children: [
-                    _title(
-                      title: "Step switch",
-                      subtitle: "UP - DOWN",
+                if (controller.data.connection.virtualJoystick)
+                  Container(
+                    height: 50,
+                    color: Colors.green,
+                    child: Center(
+                      child: defaultText("vJoy mode enabled", size: 20),
                     ),
-                    MultiKeybinder(
-                      button: const F16SelectorButton(
-                        labelUp: "▲",
-                        labelDown: "▼",
+                  ),
+                Expanded(
+                  child: ListView(
+                    children: [
+                      Keybinder(
+                        button: const F16RoundedButton(
+                          label: "COM",
+                          secondLabel: "1",
+                        ),
+                        keybind: keys.com1,
+                        onAdd: (key, modifier, index) {
+                          setState(() {
+                            keys.com1.key = key;
+                            keys.com1.modifier = modifier;
+                            controller.setF16Keys();
+                          });
+                        },
                       ),
-                      square: false,
-                      keybinds: [
-                        keys.stepUp,
-                        keys.stepDown,
-                      ],
-                      onAdd: _setStepperKeybinds,
-                    ),
-                    _title(
-                      title: "Flir switch",
-                      subtitle: "UP - DOWN",
-                    ),
-                    MultiKeybinder(
-                      button: const F16SelectorButton(
-                        labelUp: "+",
-                        labelDown: "-",
+                      Keybinder(
+                        button: const F16RoundedButton(
+                          label: "COM",
+                          secondLabel: "2",
+                        ),
+                        keybind: keys.com2,
+                        onAdd: (key, modifier, index) {
+                          setState(() {
+                            keys.com2.key = key;
+                            keys.com2.modifier = modifier;
+                            controller.setF16Keys();
+                          });
+                        },
                       ),
-                      square: false,
-                      keybinds: [
-                        keys.flirUp,
-                        keys.flirDown,
-                      ],
-                      onAdd: _setFlirKeybinds,
-                    ),
-                    _title(
-                      title: "Dobber switch ",
-                      subtitle: "UP - LEFT - RIGHT - DOWN",
-                    ),
-                    MultiKeybinder(
-                      button: const F16DobberButton(),
-                      keybinds: [
-                        keys.dobberUp,
-                        keys.dobberLeft,
-                        keys.dobberRight,
-                        keys.dobberDown,
-                      ],
-                      onAdd: _setDobberKeybinds,
-                    ),
-                    _title(
-                      title: "Drift switch ",
-                      subtitle: "UP - CENTER - DOWN",
-                    ),
-                    MultiKeybinder(
-                      button: const F16Switch(),
-                      keybinds: [
-                        keys.drift,
-                        keys.norm,
-                        keys.warnReset,
-                      ],
-                      onAdd: _setSwitchKeybinds,
-                    ),
-                  ],
-                )
+                      Keybinder(
+                        button: const F16RoundedButton(
+                          label: "IFF",
+                        ),
+                        keybind: keys.iff,
+                        onAdd: (key, modifier, index) {
+                          setState(() {
+                            keys.iff.key = key;
+                            keys.iff.modifier = modifier;
+                            controller.setF16Keys();
+                          });
+                        },
+                      ),
+                      Keybinder(
+                        button: const F16RoundedButton(
+                          label: "LIST",
+                        ),
+                        keybind: keys.list,
+                        onAdd: (key, modifier, index) {
+                          setState(() {
+                            keys.list.key = key;
+                            keys.list.modifier = modifier;
+                            controller.setF16Keys();
+                          });
+                        },
+                      ),
+                      Keybinder(
+                        button: const F16RoundedButton(
+                          label: "A-A",
+                        ),
+                        keybind: keys.aa,
+                        onAdd: (key, modifier, index) {
+                          setState(() {
+                            keys.aa.key = key;
+                            keys.aa.modifier = modifier;
+                            controller.setF16Keys();
+                          });
+                        },
+                      ),
+                      Keybinder(
+                        button: const F16RoundedButton(
+                          label: "A-G",
+                        ),
+                        keybind: keys.ag,
+                        onAdd: (key, modifier, index) {
+                          setState(() {
+                            keys.ag.key = key;
+                            keys.ag.modifier = modifier;
+                            controller.setF16Keys();
+                          });
+                        },
+                      ),
+                      Keybinder(
+                        button: const F16KeypadButton(
+                          topLabel: "T-ILS",
+                          label: "1",
+                          cornerLabel: "",
+                        ),
+                        keybind: keys.num1,
+                        onAdd: (key, modifier, index) {
+                          setState(() {
+                            keys.num1.key = key;
+                            keys.num1.modifier = modifier;
+                            controller.setF16Keys();
+                          });
+                        },
+                      ),
+                      Keybinder(
+                        button: const F16KeypadButton(
+                          topLabel: "ALOW",
+                          label: "2",
+                          cornerLabel: "N",
+                        ),
+                        keybind: keys.num2,
+                        onAdd: (key, modifier, index) {
+                          setState(() {
+                            keys.num2.key = key;
+                            keys.num2.modifier = modifier;
+                            controller.setF16Keys();
+                          });
+                        },
+                      ),
+                      Keybinder(
+                        button: const F16KeypadButton(
+                          topLabel: "",
+                          label: "3",
+                          cornerLabel: "",
+                        ),
+                        keybind: keys.num3,
+                        onAdd: (key, modifier, index) {
+                          setState(() {
+                            keys.num3.key = key;
+                            keys.num3.modifier = modifier;
+                            controller.setF16Keys();
+                          });
+                        },
+                      ),
+                      Keybinder(
+                        button: const F16KeypadButton(
+                          topLabel: "STPT",
+                          label: "4",
+                          cornerLabel: "W",
+                        ),
+                        keybind: keys.num4,
+                        onAdd: (key, modifier, index) {
+                          setState(() {
+                            keys.num4.key = key;
+                            keys.num4.modifier = modifier;
+                            controller.setF16Keys();
+                          });
+                        },
+                      ),
+                      Keybinder(
+                        button: const F16KeypadButton(
+                          topLabel: "CRUS",
+                          label: "5",
+                          cornerLabel: "",
+                        ),
+                        keybind: keys.num5,
+                        onAdd: (key, modifier, index) {
+                          setState(() {
+                            keys.num5.key = key;
+                            keys.num5.modifier = modifier;
+                            controller.setF16Keys();
+                          });
+                        },
+                      ),
+                      Keybinder(
+                        button: const F16KeypadButton(
+                          topLabel: "TIME",
+                          label: "6",
+                          cornerLabel: "E",
+                        ),
+                        keybind: keys.num6,
+                        onAdd: (key, modifier, index) {
+                          setState(() {
+                            keys.num6.key = key;
+                            keys.num6.modifier = modifier;
+                            controller.setF16Keys();
+                          });
+                        },
+                      ),
+                      Keybinder(
+                        button: const F16KeypadButton(
+                          topLabel: "MARK",
+                          label: "7",
+                          cornerLabel: "",
+                        ),
+                        keybind: keys.num7,
+                        onAdd: (key, modifier, index) {
+                          setState(() {
+                            keys.num7.key = key;
+                            keys.num7.modifier = modifier;
+                            controller.setF16Keys();
+                          });
+                        },
+                      ),
+                      Keybinder(
+                        button: const F16KeypadButton(
+                          topLabel: "FIX",
+                          label: "8",
+                          cornerLabel: "S",
+                        ),
+                        keybind: keys.num8,
+                        onAdd: (key, modifier, index) {
+                          setState(() {
+                            keys.num8.key = key;
+                            keys.num8.modifier = modifier;
+                            controller.setF16Keys();
+                          });
+                        },
+                      ),
+                      Keybinder(
+                        button: const F16KeypadButton(
+                          topLabel: "A-CAL",
+                          label: "9",
+                          cornerLabel: "",
+                        ),
+                        keybind: keys.num9,
+                        onAdd: (key, modifier, index) {
+                          setState(() {
+                            keys.num9.key = key;
+                            keys.num9.modifier = modifier;
+                            controller.setF16Keys();
+                          });
+                        },
+                      ),
+                      Keybinder(
+                        button: const F16KeypadButton(
+                          topLabel: "M-SEL",
+                          label: "0",
+                          cornerLabel: "━",
+                        ),
+                        keybind: keys.num0,
+                        onAdd: (key, modifier, index) {
+                          setState(() {
+                            keys.num0.key = key;
+                            keys.num0.modifier = modifier;
+                            controller.setF16Keys();
+                          });
+                        },
+                      ),
+                      Keybinder(
+                        button: const F16KeypadButton(
+                          label: "ENTR",
+                          functionButton: true,
+                        ),
+                        keybind: keys.entr,
+                        onAdd: (key, modifier, index) {
+                          setState(() {
+                            keys.entr.key = key;
+                            keys.entr.modifier = modifier;
+                            controller.setF16Keys();
+                          });
+                        },
+                      ),
+                      Keybinder(
+                        button: const F16KeypadButton(
+                          label: "RCL",
+                          functionButton: true,
+                        ),
+                        keybind: keys.rcl,
+                        onAdd: (key, modifier, index) {
+                          setState(() {
+                            keys.rcl.key = key;
+                            keys.rcl.modifier = modifier;
+                            controller.setF16Keys();
+                          });
+                        },
+                      ),
+                      Keybinder(
+                        button: const F16RoundedSolidButton(
+                          label: "WX",
+                        ),
+                        keybind: keys.wx,
+                        onAdd: (key, modifier, index) {
+                          setState(() {
+                            keys.wx.key = key;
+                            keys.wx.modifier = modifier;
+                            controller.setF16Keys();
+                          });
+                        },
+                      ),
+                      _multiKeybindRegion(
+                        children: [
+                          _title(
+                            title: "Step switch",
+                            subtitle: "UP - DOWN",
+                          ),
+                          MultiKeybinder(
+                            button: const F16SelectorButton(
+                              labelUp: "▲",
+                              labelDown: "▼",
+                            ),
+                            square: false,
+                            keybinds: [
+                              keys.stepUp,
+                              keys.stepDown,
+                            ],
+                            onAdd: (key, modifier, index) {
+                              _setStepperKeybinds(key, modifier, index, keys);
+                              controller.setF16Keys();
+                            },
+                          ),
+                          _title(
+                            title: "Flir switch",
+                            subtitle: "UP - DOWN",
+                          ),
+                          MultiKeybinder(
+                            button: const F16SelectorButton(
+                              labelUp: "+",
+                              labelDown: "-",
+                            ),
+                            square: false,
+                            keybinds: [
+                              keys.flirUp,
+                              keys.flirDown,
+                            ],
+                            onAdd: (key, modifier, index) {
+                              _setFlirKeybinds(key, modifier, index, keys);
+                              controller.setF16Keys();
+                            },
+                          ),
+                          _title(
+                            title: "Dobber switch ",
+                            subtitle: "UP - LEFT - RIGHT - DOWN",
+                          ),
+                          MultiKeybinder(
+                            button: const F16DobberButton(),
+                            keybinds: [
+                              keys.dobberUp,
+                              keys.dobberLeft,
+                              keys.dobberRight,
+                              keys.dobberDown,
+                            ],
+                            onAdd: (key, modifier, index) {
+                              _setDobberKeybinds(key, modifier, index, keys);
+                              controller.setF16Keys();
+                            },
+                          ),
+                          _title(
+                            title: "Drift switch ",
+                            subtitle: "UP - CENTER - DOWN",
+                          ),
+                          MultiKeybinder(
+                            button: const F16Switch(),
+                            keybinds: [
+                              keys.drift,
+                              keys.norm,
+                              keys.warnReset,
+                            ],
+                            onAdd: (key, modifier, index) {
+                              _setSwitchKeybinds(key, modifier, index, keys);
+                              controller.setF16Keys();
+                            },
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
+                ),
               ],
             ),
           );
@@ -373,16 +412,18 @@ class _F16KeybindsState extends State<F16KeybindsPage> {
 
   _multiKeybindRegion({required List<Widget> children}) {
     return Padding(
-      padding: const EdgeInsets.only(top: 20),
-      child: Container(
-        decoration: BoxDecoration(
-          color: DefaultColors.backgroundLight,
-          border: Border.all(color: DefaultColors.backgroundLight, width: 0),
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: children,
-        ),
+      padding: const EdgeInsets.only(top: 15),
+      child: Column(
+        children: [
+          Container(
+            height: 4,
+            color: DefaultColors.gray1,
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: children,
+          ),
+        ],
       ),
     );
   }
@@ -401,57 +442,64 @@ class _F16KeybindsState extends State<F16KeybindsPage> {
     );
   }
 
-  _setDobberKeybinds(Keyboard? newKeybind, int index) {
+  _setDobberKeybinds(
+      String? key, String? modifier, int index, F16KeysModel keys) {
     setState(() {
       switch (index) {
         case 0:
-          keys.dobberUp = newKeybind;
+          keys.dobberUp.key = key;
         case 1:
-          keys.dobberLeft = newKeybind;
+          keys.dobberLeft.key = key;
         case 2:
-          keys.dobberRight = newKeybind;
+          keys.dobberRight.key = key;
         case 3:
-          keys.dobberDown = newKeybind;
+          keys.dobberDown.key = key;
       }
     });
-    configuration.setF16Keys();
   }
 
-  _setStepperKeybinds(Keyboard? newKeybind, int index) {
+  _setStepperKeybinds(
+      String? key, String? modifier, int index, F16KeysModel keys) {
     setState(() {
       switch (index) {
         case 0:
-          keys.stepUp = newKeybind;
+          keys.stepUp.key = key;
+          keys.stepUp.modifier = modifier;
         case 1:
-          keys.stepDown = newKeybind;
+          keys.stepDown.key = key;
+          keys.stepDown.modifier = modifier;
       }
     });
-    configuration.setF16Keys();
   }
 
-  _setFlirKeybinds(Keyboard? newKeybind, int index) {
+  _setFlirKeybinds(
+      String? key, String? modifier, int index, F16KeysModel keys) {
     setState(() {
       switch (index) {
         case 0:
-          keys.flirUp = newKeybind;
+          keys.flirUp.key = key;
+          keys.flirUp.modifier = modifier;
         case 1:
-          keys.flirDown = newKeybind;
+          keys.flirDown.key = key;
+          keys.flirDown.modifier = modifier;
       }
     });
-    configuration.setF16Keys();
   }
 
-  _setSwitchKeybinds(Keyboard? newKeybind, int index) {
+  _setSwitchKeybinds(
+      String? key, String? modifier, int index, F16KeysModel keys) {
     setState(() {
       switch (index) {
         case 0:
-          keys.drift = newKeybind;
+          keys.drift.key = key;
+          keys.drift.modifier = modifier;
         case 1:
-          keys.norm = newKeybind;
+          keys.norm.key = key;
+          keys.norm.modifier = modifier;
         case 2:
-          keys.warnReset = newKeybind;
+          keys.warnReset.key = key;
+          keys.warnReset.modifier = modifier;
       }
     });
-    configuration.setF16Keys();
   }
 }

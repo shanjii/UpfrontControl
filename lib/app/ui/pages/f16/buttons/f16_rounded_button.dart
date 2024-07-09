@@ -1,5 +1,5 @@
-import 'package:icp_app/app/presenters/f16_presenter.dart';
-import 'package:icp_app/core/values/buttons.dart';
+import 'package:icp_app/app/data/models/payloads/action_model.dart';
+import 'package:icp_app/app/presenters/global_presenters/button_presenter.dart';
 import 'package:icp_app/core/values/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -12,7 +12,7 @@ class F16RoundedButton extends StatefulWidget {
     this.secondLabel,
   });
 
-  final Keyboard? sentValue;
+  final ActionModel? sentValue;
   final String label;
   final String? secondLabel;
 
@@ -26,21 +26,24 @@ class _F16RoundedButtonState extends State<F16RoundedButton> {
   @override
   Widget build(BuildContext context) {
     return Consumer(
-      builder: (context, F16Presenter controller, _) {
+      builder: (context, ButtonPresenter controller, _) {
         return AspectRatio(
           aspectRatio: 1,
           child: Listener(
             onPointerDown: (details) {
               setState(() => isPressed = true);
-              controller.onPress(widget.sentValue);
+              if (widget.sentValue == null) return;
+              controller.onPress(widget.sentValue!);
             },
             onPointerUp: (details) {
               setState(() => isPressed = false);
-              controller.onRelease(widget.sentValue);
+              if (widget.sentValue == null) return;
+              controller.onRelease(widget.sentValue!);
             },
             onPointerCancel: (details) {
               setState(() => isPressed = false);
-              controller.onRelease(widget.sentValue);
+              if (widget.sentValue == null) return;
+              controller.onRelease(widget.sentValue!);
             },
             child: Container(
               margin: const EdgeInsets.all(5),

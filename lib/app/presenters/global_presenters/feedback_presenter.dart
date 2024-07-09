@@ -1,37 +1,11 @@
-// ignore_for_file: file_names
-
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter_vibrate/flutter_vibrate.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class FeedbackPresenter {
   bool muted;
   FeedbackType? haptic;
 
   FeedbackPresenter({required this.muted, required this.haptic});
-
-  mute() async {
-    muted = true;
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setBool('muted', true);
-  }
-
-  unmute() async {
-    muted = false;
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setBool('muted', false);
-  }
-
-  setHaptic(FeedbackType? type) async {
-    final prefs = await SharedPreferences.getInstance();
-    haptic = type;
-
-    if (type == null) {
-      await prefs.setString('haptic', "off");
-    } else {
-      await prefs.setString('haptic', type.name.toString());
-    }
-  }
 
   tapVibration() {
     if (haptic == null) return;
