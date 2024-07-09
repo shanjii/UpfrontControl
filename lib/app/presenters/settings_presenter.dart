@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_vibrate/flutter_vibrate.dart';
-import 'package:icp_app/app/data/models/connection_model.dart';
-import 'package:icp_app/app/presenters/global_presenters/activity_presenter.dart';
-import 'package:icp_app/app/presenters/global_presenters/data_presenter.dart';
-import 'package:icp_app/app/presenters/global_presenters/feedback_presenter.dart';
+import 'package:ufc_app/app/data/models/connection_model.dart';
+import 'package:ufc_app/app/presenters/global_presenters/activity_presenter.dart';
+import 'package:ufc_app/app/presenters/global_presenters/data_presenter.dart';
+import 'package:ufc_app/app/presenters/global_presenters/feedback_presenter.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

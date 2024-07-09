@@ -1,4 +1,4 @@
-import 'package:icp_app/app/data/models/payloads/action_model.dart';
+import 'package:ufc_app/app/data/models/payloads/action_model.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'f16_keys_model.g.dart';

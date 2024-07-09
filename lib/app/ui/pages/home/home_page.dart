@@ -1,6 +1,6 @@
-import 'package:icp_app/app/presenters/home_presenter.dart';
-import 'package:icp_app/app/ui/components/text.dart';
-import 'package:icp_app/core/values/colors.dart';
+import 'package:ufc_app/app/presenters/home_presenter.dart';
+import 'package:ufc_app/app/ui/components/text.dart';
+import 'package:ufc_app/core/values/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

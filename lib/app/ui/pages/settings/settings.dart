@@ -1,7 +1,7 @@
-import 'package:icp_app/app/presenters/settings_presenter.dart';
-import 'package:icp_app/app/ui/components/inputs.dart';
-import 'package:icp_app/app/ui/components/text.dart';
-import 'package:icp_app/core/values/colors.dart';
+import 'package:ufc_app/app/presenters/settings_presenter.dart';
+import 'package:ufc_app/app/ui/components/inputs.dart';
+import 'package:ufc_app/app/ui/components/text.dart';
+import 'package:ufc_app/core/values/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_vibrate/flutter_vibrate.dart';
 import 'package:provider/provider.dart';

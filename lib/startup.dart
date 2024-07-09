@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter_vibrate/flutter_vibrate.dart';
-import 'package:icp_app/app/data/models/payloads/action_model.dart';
-import 'package:icp_app/app/data/models/payloads/f16_keys_model.dart';
+import 'package:ufc_app/app/data/models/payloads/action_model.dart';
+import 'package:ufc_app/app/data/models/payloads/f16_keys_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Startup {

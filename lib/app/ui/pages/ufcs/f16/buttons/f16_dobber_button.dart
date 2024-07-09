@@ -1,6 +1,6 @@
-import 'package:icp_app/app/data/models/payloads/action_model.dart';
-import 'package:icp_app/app/presenters/global_presenters/button_presenter.dart';
-import 'package:icp_app/core/values/colors.dart';
+import 'package:ufc_app/app/data/models/payloads/action_model.dart';
+import 'package:ufc_app/app/presenters/global_presenters/button_presenter.dart';
+import 'package:ufc_app/core/values/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -28,7 +28,7 @@ class _F16DobberButtonState extends State<F16DobberButton> {
   @override
   Widget build(BuildContext context) {
     return Consumer(
-      builder: (context, ButtonPresenter controller, _) {
+      builder: (context, UfcPresenter controller, _) {
         return LayoutBuilder(
           builder: (context, constraints) {
             return Listener(

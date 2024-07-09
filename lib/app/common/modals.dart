@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:icp_app/core/values/colors.dart';
+import 'package:ufc_app/core/values/colors.dart';
 
 defaultBottomSheet(BuildContext context, {required Widget modalWidget}) {
   showModalBottomSheet(

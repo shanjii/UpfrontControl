@@ -1,21 +1,21 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:icp_app/app/data/datasources/input_datasource.dart';
-import 'package:icp_app/app/data/models/payloads/action_model.dart';
-import 'package:icp_app/app/presenters/global_presenters/activity_presenter.dart';
-import 'package:icp_app/app/presenters/global_presenters/data_presenter.dart';
-import 'package:icp_app/app/presenters/global_presenters/feedback_presenter.dart';
+import 'package:ufc_app/app/data/datasources/input_datasource.dart';
+import 'package:ufc_app/app/data/models/payloads/action_model.dart';
+import 'package:ufc_app/app/presenters/global_presenters/activity_presenter.dart';
+import 'package:ufc_app/app/presenters/global_presenters/data_presenter.dart';
+import 'package:ufc_app/app/presenters/global_presenters/feedback_presenter.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class ButtonPresenter {
+class UfcPresenter {
   InputDatasource inputDatasource = InputDatasource();
 
   late ActivityPresenter activity;
   late FeedbackPresenter feedback;
   late DataPresenter data;
 
-  ButtonPresenter(BuildContext context) {
+  UfcPresenter(BuildContext context) {
     activity = context.read<ActivityPresenter>();
     data = context.read<DataPresenter>();
     feedback = context.read<FeedbackPresenter>();
@@ -42,5 +42,13 @@ class ButtonPresenter {
       'f16Keys',
       jsonEncode(data.f16KeysValues.toJson()),
     );
+  }
+
+  setExampleKeys() async {
+    // final prefs = await SharedPreferences.getInstance();
+    // await prefs.setString(
+    //   'example',
+    //   jsonEncode(data.example.toJson()),
+    // );
   }
 }

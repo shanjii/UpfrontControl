@@ -1,6 +1,6 @@
-import 'package:icp_app/app/data/datasources/endpoints/endpoints.dart';
-import 'package:icp_app/app/data/models/connection_model.dart';
-import 'package:icp_app/app/data/models/payloads/action_model.dart';
+import 'package:ufc_app/app/data/datasources/endpoints/endpoints.dart';
+import 'package:ufc_app/app/data/models/connection_model.dart';
+import 'package:ufc_app/app/data/models/payloads/action_model.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 

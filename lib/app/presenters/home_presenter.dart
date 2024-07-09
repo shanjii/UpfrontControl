@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:icp_app/app/common/display.dart';
-import 'package:icp_app/app/presenters/global_presenters/activity_presenter.dart';
-import 'package:icp_app/app/ui/pages/f16/f16_keybinds_page.dart';
-import 'package:icp_app/app/ui/pages/f16/f16_page.dart';
-import 'package:icp_app/app/ui/pages/f18/f18_keybinds.dart';
-import 'package:icp_app/app/ui/pages/f18/f18_page.dart';
-import 'package:icp_app/app/ui/pages/settings/settings.dart';
+import 'package:ufc_app/app/common/display.dart';
+import 'package:ufc_app/app/presenters/global_presenters/activity_presenter.dart';
+import 'package:ufc_app/app/ui/pages/ufcs/f16/f16_keybinds_page.dart';
+import 'package:ufc_app/app/ui/pages/ufcs/f16/f16_page.dart';
+import 'package:ufc_app/app/ui/pages/ufcs/f18/f18_keybinds.dart';
+import 'package:ufc_app/app/ui/pages/ufcs/f18/f18_page.dart';
+import 'package:ufc_app/app/ui/pages/settings/settings.dart';
 import 'package:provider/provider.dart';
 
 class HomePresenter {

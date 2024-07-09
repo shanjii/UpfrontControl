@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:icp_app/app/data/models/payloads/f16_keys_model.dart';
-import 'package:icp_app/app/presenters/global_presenters/button_presenter.dart';
-import 'package:icp_app/app/ui/components/keybinder.dart';
-import 'package:icp_app/app/ui/components/multi_keybinder.dart';
-import 'package:icp_app/app/ui/components/text.dart';
-import 'package:icp_app/app/ui/pages/f16/buttons/f16_dobber_button.dart';
-import 'package:icp_app/app/ui/pages/f16/buttons/f16_keypad_button.dart';
-import 'package:icp_app/app/ui/pages/f16/buttons/f16_rounded_button.dart';
-import 'package:icp_app/app/ui/pages/f16/buttons/f16_rounded_solid_button.dart';
-import 'package:icp_app/app/ui/pages/f16/buttons/f16_selector_button.dart';
-import 'package:icp_app/app/ui/pages/f16/buttons/f16_switch.dart';
-import 'package:icp_app/core/values/colors.dart';
+import 'package:ufc_app/app/data/models/payloads/f16_keys_model.dart';
+import 'package:ufc_app/app/presenters/global_presenters/button_presenter.dart';
+import 'package:ufc_app/app/ui/components/keybinder.dart';
+import 'package:ufc_app/app/ui/components/multi_keybinder.dart';
+import 'package:ufc_app/app/ui/components/text.dart';
+import 'package:ufc_app/app/ui/pages/ufcs/f16/buttons/f16_dobber_button.dart';
+import 'package:ufc_app/app/ui/pages/ufcs/f16/buttons/f16_keypad_button.dart';
+import 'package:ufc_app/app/ui/pages/ufcs/f16/buttons/f16_rounded_button.dart';
+import 'package:ufc_app/app/ui/pages/ufcs/f16/buttons/f16_rounded_solid_button.dart';
+import 'package:ufc_app/app/ui/pages/ufcs/f16/buttons/f16_selector_button.dart';
+import 'package:ufc_app/app/ui/pages/ufcs/f16/buttons/f16_switch.dart';
+import 'package:ufc_app/core/values/colors.dart';
 import 'package:provider/provider.dart';
 
 class F16KeybindsPage extends StatefulWidget {
@@ -24,9 +24,9 @@ class _F16KeybindsState extends State<F16KeybindsPage> {
   @override
   Widget build(BuildContext context) {
     return Provider(
-      create: (context) => ButtonPresenter(context),
+      create: (context) => UfcPresenter(context),
       child: Consumer(
-        builder: (context, ButtonPresenter controller, _) {
+        builder: (context, UfcPresenter controller, _) {
           F16KeysModel keys = controller.data.f16KeysValues;
 
           return Scaffold(

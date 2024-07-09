@@ -1,5 +1,5 @@
-import 'package:icp_app/app/data/models/payloads/f16_keys_model.dart';
-import 'package:icp_app/app/data/models/connection_model.dart';
+import 'package:ufc_app/app/data/models/payloads/f16_keys_model.dart';
+import 'package:ufc_app/app/data/models/connection_model.dart';
 
 class DataPresenter {
   DataPresenter({

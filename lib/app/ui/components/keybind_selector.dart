@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:icp_app/app/common/key_actions.dart';
-import 'package:icp_app/app/ui/components/text.dart';
-import 'package:icp_app/core/enums/key_type.dart';
-import 'package:icp_app/core/enums/keyboard.dart';
-import 'package:icp_app/core/values/colors.dart';
+import 'package:ufc_app/app/common/key_actions.dart';
+import 'package:ufc_app/app/ui/components/text.dart';
+import 'package:ufc_app/core/enums/key_type.dart';
+import 'package:ufc_app/core/enums/keyboard.dart';
+import 'package:ufc_app/core/values/colors.dart';
 
 class KeybindSelector extends StatelessWidget {
   final Function(String? key, String? modifier, int) onAdd;

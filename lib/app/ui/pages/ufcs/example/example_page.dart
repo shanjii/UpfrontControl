@@ -1,16 +1,16 @@
-import 'package:icp_app/app/presenters/global_presenters/activity_presenter.dart';
-import 'package:icp_app/core/values/colors.dart';
+import 'package:ufc_app/app/presenters/global_presenters/activity_presenter.dart';
+import 'package:ufc_app/core/values/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class F18Page extends StatefulWidget {
-  const F18Page({super.key});
+class ExamplePage extends StatefulWidget {
+  const ExamplePage({super.key});
 
   @override
-  State<F18Page> createState() => _F18State();
+  State<ExamplePage> createState() => _F18State();
 }
 
-class _F18State extends State<F18Page> {
+class _F18State extends State<ExamplePage> {
   late ActivityPresenter activity;
 
   @override

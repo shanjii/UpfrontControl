@@ -1,10 +1,10 @@
-import 'package:icp_app/app/presenters/global_presenters/activity_presenter.dart';
-import 'package:icp_app/app/presenters/global_presenters/button_presenter.dart';
-import 'package:icp_app/app/ui/pages/f16/layouts/f16_keypad.dart';
-import 'package:icp_app/app/ui/pages/f16/layouts/f16_left.dart';
-import 'package:icp_app/app/ui/pages/f16/layouts/f16_right.dart';
-import 'package:icp_app/app/ui/pages/f16/layouts/f16_top.dart';
-import 'package:icp_app/core/values/colors.dart';
+import 'package:ufc_app/app/presenters/global_presenters/activity_presenter.dart';
+import 'package:ufc_app/app/presenters/global_presenters/button_presenter.dart';
+import 'package:ufc_app/app/ui/pages/ufcs/f16/layouts/f16_keypad.dart';
+import 'package:ufc_app/app/ui/pages/ufcs/f16/layouts/f16_left.dart';
+import 'package:ufc_app/app/ui/pages/ufcs/f16/layouts/f16_right.dart';
+import 'package:ufc_app/app/ui/pages/ufcs/f16/layouts/f16_top.dart';
+import 'package:ufc_app/core/values/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -16,10 +16,10 @@ class F16Page extends StatelessWidget {
     double width = MediaQuery.of(context).size.width;
 
     return Provider(
-      create: (context) => ButtonPresenter(context),
+      create: (context) => UfcPresenter(context),
       dispose: (context, value) => value.activity.stop(),
       child: Consumer(
-        builder: (context, ButtonPresenter controller, _) {
+        builder: (context, UfcPresenter controller, _) {
           return Listener(
             onPointerDown: (event) => controller.activity.resetTimer(),
             child: Scaffold(

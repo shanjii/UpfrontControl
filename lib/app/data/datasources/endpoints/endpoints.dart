@@ -1,4 +1,4 @@
-import 'package:icp_app/app/data/models/connection_model.dart';
+import 'package:ufc_app/app/data/models/connection_model.dart';
 
 releaseKeyUrl(ConnectionModel connection) {
   return Uri.parse(

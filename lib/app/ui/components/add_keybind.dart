@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:icp_app/app/common/key_actions.dart';
-import 'package:icp_app/app/common/modals.dart';
-import 'package:icp_app/app/data/models/payloads/action_model.dart';
-import 'package:icp_app/app/ui/components/keybind_selector.dart';
-import 'package:icp_app/app/ui/components/text.dart';
-import 'package:icp_app/core/enums/key_type.dart';
-import 'package:icp_app/core/values/colors.dart';
+import 'package:ufc_app/app/common/key_actions.dart';
+import 'package:ufc_app/app/common/modals.dart';
+import 'package:ufc_app/app/data/models/payloads/action_model.dart';
+import 'package:ufc_app/app/ui/components/keybind_selector.dart';
+import 'package:ufc_app/app/ui/components/text.dart';
+import 'package:ufc_app/core/enums/key_type.dart';
+import 'package:ufc_app/core/values/colors.dart';
 
 class AddKeybind extends StatefulWidget {
   final ActionModel action;
