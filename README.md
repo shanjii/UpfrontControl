@@ -8,7 +8,7 @@ The app contains easily customizable keybinds and integration with [vJoy](https:
 
 ## Integrations with vJoy
 
-The app uses a vJoy wrapper (thanks to [bobhelander](https://github.com/bobhelander)'s [vJoy.Wrapper](https://github.com/bobhelander/vJoy.Wrapper)) this makes it possible to become it's own input device, independent from the keyboard bindings. This also turns it into a plug and play device without the need for additional keybinds, since each aircraft preset contains its own vJoy bindings preconfigured without the need of further bindings.
+The app can communicate with vJoy (thanks to [bobhelander](https://github.com/bobhelander)'s [vJoy.Wrapper](https://github.com/bobhelander/vJoy.Wrapper)), this makes it possible to become it's own input device independent from the keyboard bindings. This also turns it into a plug and play device without the need for additional keybinds, since each aircraft preset contains its own vJoy bindings preconfigured without the need of further bindings.
 Keyboard bindings can still be used and customized if preferred by disabling vJoy in the settings menu.
 
 **You must have vJoy installed in your machine and properly setup to make use of the vJoy integrations**
