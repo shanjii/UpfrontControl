@@ -1,32 +1,31 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:icp_app/app/data/datasources/input_datasource.dart';
 import 'package:icp_app/app/data/models/payloads/action_model.dart';
 import 'package:icp_app/app/presenters/global_presenters/activity_presenter.dart';
-import 'package:icp_app/app/presenters/global_presenters/configuration_presenter.dart';
+import 'package:icp_app/app/presenters/global_presenters/data_presenter.dart';
 import 'package:icp_app/app/presenters/global_presenters/feedback_presenter.dart';
-import 'package:icp_app/app/presenters/global_presenters/tool_presenter.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class F16Presenter {
+class ButtonPresenter {
   InputDatasource inputDatasource = InputDatasource();
 
   late ActivityPresenter activity;
   late FeedbackPresenter feedback;
-  late ConfigurationPresenter configuration;
-  late ToolPresenter tool;
+  late DataPresenter data;
 
-  F16Presenter(BuildContext context) {
+  ButtonPresenter(BuildContext context) {
     activity = context.read<ActivityPresenter>();
-    configuration = context.read<ConfigurationPresenter>();
+    data = context.read<DataPresenter>();
     feedback = context.read<FeedbackPresenter>();
-    tool = context.read<ToolPresenter>();
   }
 
   onPress(ActionModel action) {
     feedback.tapVibration();
     feedback.tapSound();
 
-    inputDatasource.pressKey(action, configuration.connection);
+    inputDatasource.pressKey(action, data.connection);
   }
 
   onRelease(ActionModel action) {
@@ -34,6 +33,14 @@ class F16Presenter {
     //Unsure about this one
     // feedback.tapSound();
 
-    inputDatasource.releaseKey(action, configuration.connection);
+    inputDatasource.releaseKey(action, data.connection);
+  }
+
+  setF16Keys() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString(
+      'f16Keys',
+      jsonEncode(data.f16KeysValues.toJson()),
+    );
   }
 }

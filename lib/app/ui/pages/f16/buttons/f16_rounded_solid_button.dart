@@ -1,5 +1,5 @@
 import 'package:icp_app/app/data/models/payloads/action_model.dart';
-import 'package:icp_app/app/presenters/f16_presenter.dart';
+import 'package:icp_app/app/presenters/global_presenters/button_presenter.dart';
 import 'package:icp_app/core/values/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -26,7 +26,7 @@ class _F16RoundedSolidButtonState extends State<F16RoundedSolidButton> {
   @override
   Widget build(BuildContext context) {
     return Consumer(
-      builder: (context, F16Presenter controller, _) {
+      builder: (context, ButtonPresenter controller, _) {
         return AspectRatio(
           aspectRatio: 1,
           child: Listener(

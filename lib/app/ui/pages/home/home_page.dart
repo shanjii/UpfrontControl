@@ -14,10 +14,10 @@ class HomePage extends StatelessWidget {
       child: Consumer(
         builder: (context, HomePresenter controller, _) {
           return Scaffold(
-            backgroundColor: DefaultColors.background,
+            backgroundColor: DefaultColors.gray4,
             resizeToAvoidBottomInset: false,
             appBar: AppBar(
-              backgroundColor: DefaultColors.background,
+              backgroundColor: DefaultColors.gray4,
               title: defaultText("Select your module", size: 23),
               actions: [
                 _settingsButton(context, controller),

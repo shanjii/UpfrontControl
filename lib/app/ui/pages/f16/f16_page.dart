@@ -1,5 +1,5 @@
 import 'package:icp_app/app/presenters/global_presenters/activity_presenter.dart';
-import 'package:icp_app/app/presenters/f16_presenter.dart';
+import 'package:icp_app/app/presenters/global_presenters/button_presenter.dart';
 import 'package:icp_app/app/ui/pages/f16/layouts/f16_keypad.dart';
 import 'package:icp_app/app/ui/pages/f16/layouts/f16_left.dart';
 import 'package:icp_app/app/ui/pages/f16/layouts/f16_right.dart';
@@ -16,15 +16,15 @@ class F16Page extends StatelessWidget {
     double width = MediaQuery.of(context).size.width;
 
     return Provider(
-      create: (context) => F16Presenter(context),
+      create: (context) => ButtonPresenter(context),
       dispose: (context, value) => value.activity.stop(),
       child: Consumer(
-        builder: (context, F16Presenter controller, _) {
+        builder: (context, ButtonPresenter controller, _) {
           return Listener(
             onPointerDown: (event) => controller.activity.resetTimer(),
             child: Scaffold(
               resizeToAvoidBottomInset: false,
-              backgroundColor: DefaultColors.backgroundBlack,
+              backgroundColor: DefaultColors.black,
               body: IgnorePointer(
                 ignoring: !controller.activity.isActive,
                 child: AnimatedOpacity(

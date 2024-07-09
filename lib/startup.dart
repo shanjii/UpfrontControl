@@ -4,29 +4,33 @@ import 'package:icp_app/app/data/models/payloads/action_model.dart';
 import 'package:icp_app/app/data/models/payloads/f16_keys_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class LocalSettings {
-  final SharedPreferences prefs;
+class Startup {
+  final SharedPreferences instance;
 
-  LocalSettings(this.prefs);
+  Startup({required this.instance});
 
   Future<String> getSavedIp() async {
-    return prefs.getString('ip') ?? "";
+    return instance.getString('ip') ?? "";
   }
 
   Future<String> getSavedPort() async {
-    return prefs.getString('port') ?? "5551";
+    return instance.getString('port') ?? "5551";
   }
 
   Future<bool> getMutedSetting() async {
-    return prefs.getBool('muted') ?? false;
+    return instance.getBool('muted') ?? false;
   }
 
   Future<bool> getActivitySetting() async {
-    return prefs.getBool('manage-activity') ?? false;
+    return instance.getBool('manage-activity') ?? false;
+  }
+
+  Future<bool> getVirtualjoystickSetting() async {
+    return instance.getBool('virtual-joystick') ?? false;
   }
 
   Future<FeedbackType?> getHapticSetting() async {
-    var value = prefs.getString("haptic");
+    var value = instance.getString("haptic");
     if (value == null) {
       return FeedbackType.medium;
     } else if (value == "off") {
@@ -37,7 +41,7 @@ class LocalSettings {
   }
 
   Future<F16KeysModel> getF16Keybinds() async {
-    var value = prefs.getString('f16Keys');
+    var value = instance.getString('f16Keys');
 
     if (value != null) {
       return F16KeysModel.fromJson(jsonDecode(value));

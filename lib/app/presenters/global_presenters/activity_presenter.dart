@@ -1,6 +1,5 @@
 import 'package:async/async.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wakelock/wakelock.dart';
 
 class ActivityPresenter extends ChangeNotifier {
@@ -9,8 +8,10 @@ class ActivityPresenter extends ChangeNotifier {
   bool manageActivity;
   late RestartableTimer timer;
 
-  ActivityPresenter(
-      {required this.innactivityTime, required this.manageActivity});
+  ActivityPresenter({
+    required this.innactivityTime,
+    required this.manageActivity,
+  });
 
   start() async {
     //Prevent device from sleeping
@@ -36,17 +37,5 @@ class ActivityPresenter extends ChangeNotifier {
     isActive = true;
     timer.reset();
     notifyListeners();
-  }
-
-  Future enable() async {
-    manageActivity = true;
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setBool('manage-activity', true);
-  }
-
-  Future disable() async {
-    manageActivity = false;
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setBool('manage-activity', false);
   }
 }

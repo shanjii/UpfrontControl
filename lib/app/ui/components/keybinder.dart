@@ -5,7 +5,7 @@ import 'package:icp_app/app/ui/components/add_keybind.dart';
 class Keybinder extends StatelessWidget {
   final Widget button;
   final ActionModel keybind;
-  final Function(String?, int) onAdd;
+  final Function(String? key, String? modifier, int) onAdd;
 
   const Keybinder({
     super.key,
