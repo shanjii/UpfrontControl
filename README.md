@@ -1,6 +1,6 @@
-# ICPApp
+# Upfront Control
 
-![Screenshot_1720019197](https://github.com/shanjii/ICPApp/assets/48361829/a1f5ce82-48e6-4978-a912-f7f31bd8716c)
+![Screenshot_1720019197](https://github.com/shanjii/UpfrontControl/assets/48361829/a1f5ce82-48e6-4978-a912-f7f31bd8716c)
 A button box app for flight simulators created with responsiveness and ease of use in mind.
 The main goal of the app is to recreate a variety of preset UFC/ICP layouts for various aircraft in a way that feels satisfying and convenient for touch screen devices.
 
@@ -17,7 +17,7 @@ Keyboard bindings can still be used and customized if preferred by disabling vJo
 
 Setup guide pending.
 
-**Requires the [ICPServer](https://github.com/shanjii/ICPServer) to be installed**, a server client that allows ICPApp to communicate with your computer.
+**Requires the [Upfront Control Server](https://github.com/shanjii/UpfrontControlServer) to be installed**, a server client that allows Upfront Control to communicate with your computer.
 
 
 
