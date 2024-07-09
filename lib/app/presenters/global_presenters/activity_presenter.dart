@@ -1,6 +1,6 @@
 import 'package:async/async.dart';
 import 'package:flutter/material.dart';
-import 'package:wakelock/wakelock.dart';
+import 'package:wakelock_plus/wakelock_plus.dart';
 
 class ActivityPresenter extends ChangeNotifier {
   bool isActive = true;
@@ -15,7 +15,7 @@ class ActivityPresenter extends ChangeNotifier {
 
   start() async {
     //Prevent device from sleeping
-    await Wakelock.enable();
+    await WakelockPlus.enable();
 
     isActive = true;
     timer = RestartableTimer(Duration(seconds: innactivityTime), () {
@@ -27,7 +27,7 @@ class ActivityPresenter extends ChangeNotifier {
   }
 
   stop() async {
-    await Wakelock.disable();
+    await WakelockPlus.disable();
     timer.cancel();
   }
 
