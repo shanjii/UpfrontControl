@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter_displaymode/flutter_displaymode.dart';
 import 'package:icp_app/app/data/models/payloads/f16_keys_model.dart';
 import 'package:icp_app/app/data/models/connection_model.dart';
@@ -11,16 +10,21 @@ import 'package:icp_app/startup.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_vibrate/flutter_vibrate.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+late PackageInfo packageInfo;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
+  packageInfo = await PackageInfo.fromPlatform();
+
   await _setDisplaySettings();
 
   var startup = Startup(instance: await SharedPreferences.getInstance());
-
+  await startup.manageVersion(packageInfo.version);
   String savedIp = await startup.getSavedIp();
   String savedPort = await startup.getSavedPort();
   bool isMuted = await startup.getMutedSetting();
@@ -28,10 +32,8 @@ void main() async {
   bool manageActivity = await startup.getActivitySetting();
   F16KeysModel f16Keys = await startup.getF16Keybinds();
   bool virtualJoystick = await startup.getVirtualjoystickSetting();
-
   int innactivityTime = 15;
-
-  await _cacheSounds();
+  await startup.cacheSounds();
 
   runApp(
     App(
@@ -126,12 +128,4 @@ _setDisplaySettings() async {
   if (Platform.isAndroid) {
     await FlutterDisplayMode.setHighRefreshRate();
   }
-}
-
-_cacheSounds() async {
-  await AudioPlayer().play(
-    AssetSource('click1.ogg'),
-    volume: 0,
-    mode: PlayerMode.lowLatency,
-  );
 }

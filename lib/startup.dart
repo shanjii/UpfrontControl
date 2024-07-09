@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter_vibrate/flutter_vibrate.dart';
 import 'package:icp_app/app/data/models/payloads/action_model.dart';
 import 'package:icp_app/app/data/models/payloads/f16_keys_model.dart';
@@ -8,6 +9,26 @@ class Startup {
   final SharedPreferences instance;
 
   Startup({required this.instance});
+
+  Future clearStorage() async {
+    await instance.clear();
+  }
+
+  Future cacheSounds() async {
+    await AudioPlayer().play(
+      AssetSource('click1.ogg'),
+      volume: 0,
+      mode: PlayerMode.lowLatency,
+    );
+  }
+
+  Future manageVersion(String version) async {
+    String? installedVersion = instance.getString("version");
+    if (version != installedVersion) {
+      await instance.clear();
+    }
+    await instance.setString("version", version);
+  }
 
   Future<String> getSavedIp() async {
     return instance.getString('ip') ?? "";
