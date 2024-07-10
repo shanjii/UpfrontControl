@@ -28,6 +28,7 @@ class SettingsPresenter {
     data.connection = ConnectionModel(
       ip: newIp,
       port: data.connection.port,
+      virtualJoystick: data.connection.virtualJoystick,
     );
 
     final prefs = await SharedPreferences.getInstance();
@@ -39,6 +40,7 @@ class SettingsPresenter {
     data.connection = ConnectionModel(
       ip: data.connection.ip,
       port: newPort,
+      virtualJoystick: data.connection.virtualJoystick,
     );
 
     final prefs = await SharedPreferences.getInstance();

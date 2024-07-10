@@ -3,5 +3,5 @@ class ConnectionModel {
   String port;
   bool virtualJoystick;
 
-  ConnectionModel({this.ip = "", this.port = "", this.virtualJoystick = true});
+  ConnectionModel({this.ip = "", this.port = "", this.virtualJoystick = false});
 }
