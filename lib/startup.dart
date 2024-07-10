@@ -1,9 +1,11 @@
 import 'dart:convert';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter_vibrate/flutter_vibrate.dart';
-import 'package:ufc_app/app/data/models/payloads/action_model.dart';
-import 'package:ufc_app/app/data/models/payloads/f16_keys_model.dart';
+import 'package:ufc_app/app/data/models/action_model.dart';
+import 'package:ufc_app/app/data/models/ufcs/f16_keys_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:ufc_app/app/data/models/ufcs/f18_keys_model.dart';
+import 'package:ufc_app/core/enums/ufcs.dart';
 
 class Startup {
   final SharedPreferences instance;
@@ -62,7 +64,7 @@ class Startup {
   }
 
   Future<F16KeysModel> getF16Keybinds() async {
-    var value = instance.getString('f16Keys');
+    var value = instance.getString(Ufcs.f16.value);
 
     if (value != null) {
       return F16KeysModel.fromJson(jsonDecode(value));
@@ -101,4 +103,37 @@ class Startup {
       stepDown: ActionModel(key: null, modifier: null, joyKey: 30),
     );
   }
+
+  Future<F18KeysModel> getF18Keybinds() async {
+    var value = instance.getString(Ufcs.f18.value);
+
+    if (value != null) {
+      return F18KeysModel.fromJson(jsonDecode(value));
+    }
+
+    return F18KeysModel(
+      num1: ActionModel(
+        key: null,
+        modifier: null,
+        joyKey: 1,
+      ),
+    );
+  }
+
+  // Future<ExampleModel> getExampleKeybinds() async {
+  //   var value = instance.getString('example');
+
+  //   if (value != null) {
+  //     return Example.fromJson(jsonDecode(value));
+  //   }
+
+  //   return ExampleModel(
+  //     com1: ActionModel(key: null, modifier: null, joyKey: 1),
+  //     com2: ActionModel(key: null, modifier: null, joyKey: 2),
+  //     iff: ActionModel(key: null, modifier: null, joyKey: 3),
+  //     list: ActionModel(key: null, modifier: null, joyKey: 4),
+  //     aa: ActionModel(key: null, modifier: null, joyKey: 5),
+  //     ag: ActionModel(key: null, modifier: null, joyKey: 6),
+  //   );
+  // }
 }

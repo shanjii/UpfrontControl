@@ -1,5 +1,5 @@
 import 'package:ufc_app/app/presenters/global_presenters/activity_presenter.dart';
-import 'package:ufc_app/app/presenters/global_presenters/button_presenter.dart';
+import 'package:ufc_app/app/presenters/ufc_presenter.dart';
 import 'package:ufc_app/app/ui/pages/ufcs/f16/layouts/f16_keypad.dart';
 import 'package:ufc_app/app/ui/pages/ufcs/f16/layouts/f16_left.dart';
 import 'package:ufc_app/app/ui/pages/ufcs/f16/layouts/f16_right.dart';
@@ -39,11 +39,13 @@ class F16Page extends StatelessWidget {
                       ),
                       SizedBox(
                         width: width * 0.60,
-                        child: const Column(
+                        child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            F16Top(),
-                            F16Keypad(),
+                            const F16Top(),
+                            F16Keypad(
+                              controller: controller,
+                            ),
                           ],
                         ),
                       ),

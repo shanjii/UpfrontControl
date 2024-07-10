@@ -1,10 +1,11 @@
-import 'package:ufc_app/app/data/models/payloads/action_model.dart';
+import 'package:ufc_app/app/data/models/action_model.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:ufc_app/app/data/models/interfaces/ufc_interface.dart';
 
 part 'f16_keys_model.g.dart';
 
 @JsonSerializable(explicitToJson: true)
-class F16KeysModel {
+class F16KeysModel implements Ufc {
   ActionModel com1;
   ActionModel com2;
   ActionModel iff;
@@ -72,6 +73,7 @@ class F16KeysModel {
     required this.stepDown,
   });
 
+  @override
   Map<String, dynamic> toJson() => _$F16KeysModelToJson(this);
 
   factory F16KeysModel.fromJson(Map<String, dynamic> map) =>

@@ -1,12 +1,14 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:ufc_app/app/data/datasources/input_datasource.dart';
-import 'package:ufc_app/app/data/models/payloads/action_model.dart';
+import 'package:ufc_app/app/data/models/action_model.dart';
+import 'package:ufc_app/app/data/models/interfaces/ufc_interface.dart';
 import 'package:ufc_app/app/presenters/global_presenters/activity_presenter.dart';
 import 'package:ufc_app/app/presenters/global_presenters/data_presenter.dart';
 import 'package:ufc_app/app/presenters/global_presenters/feedback_presenter.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:ufc_app/core/enums/ufcs.dart';
 
 class UfcPresenter {
   InputDatasource inputDatasource = InputDatasource();
@@ -36,19 +38,11 @@ class UfcPresenter {
     inputDatasource.releaseKey(action, data.connection);
   }
 
-  setF16Keys() async {
+  saveUfcKeys(Ufcs module, Ufc keyValues) async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString(
-      'f16Keys',
-      jsonEncode(data.f16KeysValues.toJson()),
+      module.value,
+      jsonEncode(keyValues.toJson()),
     );
-  }
-
-  setExampleKeys() async {
-    // final prefs = await SharedPreferences.getInstance();
-    // await prefs.setString(
-    //   'example',
-    //   jsonEncode(data.example.toJson()),
-    // );
   }
 }

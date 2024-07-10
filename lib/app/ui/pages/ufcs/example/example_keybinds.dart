@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:ufc_app/app/data/models/payloads/f16_keys_model.dart';
-import 'package:ufc_app/app/presenters/global_presenters/button_presenter.dart';
+import 'package:ufc_app/app/data/models/ufcs/f16_keys_model.dart';
+import 'package:ufc_app/app/presenters/ufc_presenter.dart';
 import 'package:ufc_app/app/ui/components/keybinder.dart';
 import 'package:ufc_app/app/ui/components/multi_keybinder.dart';
 import 'package:ufc_app/app/ui/components/text.dart';
 import 'package:ufc_app/app/ui/pages/ufcs/f16/buttons/f16_rounded_button.dart';
 import 'package:ufc_app/app/ui/pages/ufcs/f16/buttons/f16_selector_button.dart';
+import 'package:ufc_app/core/enums/ufcs.dart';
 import 'package:ufc_app/core/values/colors.dart';
 import 'package:provider/provider.dart';
 
@@ -86,7 +87,7 @@ class _ExampleKeybindsPage extends State<ExampleKeybindsPage> {
                                 index,
                                 keys,
                               );
-                              controller.setExampleKeys();
+                              controller.saveUfcKeys(Ufcs.f18, keys);
                             },
                           ),
                         ],

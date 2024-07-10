@@ -106,7 +106,7 @@ class HomePage extends StatelessWidget {
               alignment: Alignment.topRight,
               child: IconButton(
                 icon: const Icon(
-                  Icons.keyboard,
+                  Icons.edit_note_rounded,
                   size: 50,
                 ),
                 color: Colors.white,

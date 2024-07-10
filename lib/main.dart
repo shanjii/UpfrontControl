@@ -1,7 +1,8 @@
 import 'dart:io';
 import 'package:flutter_displaymode/flutter_displaymode.dart';
-import 'package:ufc_app/app/data/models/payloads/f16_keys_model.dart';
+import 'package:ufc_app/app/data/models/ufcs/f16_keys_model.dart';
 import 'package:ufc_app/app/data/models/connection_model.dart';
+import 'package:ufc_app/app/data/models/ufcs/f18_keys_model.dart';
 import 'package:ufc_app/app/presenters/global_presenters/activity_presenter.dart';
 import 'package:ufc_app/app/presenters/global_presenters/data_presenter.dart';
 import 'package:ufc_app/app/presenters/global_presenters/feedback_presenter.dart';
@@ -31,6 +32,9 @@ void main() async {
   FeedbackType? haptic = await startup.getHapticSetting();
   bool manageActivity = await startup.getActivitySetting();
   F16KeysModel f16Keys = await startup.getF16Keybinds();
+  F18KeysModel f18Keys = await startup.getF18Keybinds();
+
+  //more ufcs go here
   bool virtualJoystick = await startup.getVirtualjoystickSetting();
   int innactivityTime = 15;
   await startup.cacheSounds();
@@ -41,6 +45,7 @@ void main() async {
       savedPort: savedPort,
       isMuted: isMuted,
       f16keys: f16Keys,
+      f18keys: f18Keys,
       haptic: haptic,
       innactivityTime: innactivityTime,
       manageActivity: manageActivity,
@@ -53,6 +58,7 @@ class App extends StatelessWidget {
   final String savedIp;
   final String savedPort;
   final F16KeysModel f16keys;
+  final F18KeysModel f18keys;
   final bool isMuted;
   final int innactivityTime;
   final FeedbackType? haptic;
@@ -66,6 +72,7 @@ class App extends StatelessWidget {
     required this.isMuted,
     required this.haptic,
     required this.f16keys,
+    required this.f18keys,
     required this.innactivityTime,
     required this.manageActivity,
     required this.virtualJoystick,
@@ -89,6 +96,8 @@ class App extends StatelessWidget {
               virtualJoystick: virtualJoystick,
             ),
             f16KeysValues: f16keys,
+            f18KeysValues: f18keys,
+            //more ufcs go here
             devMode: false,
           ),
         ),

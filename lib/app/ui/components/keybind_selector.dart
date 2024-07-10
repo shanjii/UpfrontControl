@@ -86,7 +86,7 @@ class KeybindSelector extends StatelessWidget {
         },
         child: Center(
           child: defaultText(
-            stringToKeyname(value),
+            type == KeyType.key ? stringToKey(value) : stringToModifier(value),
             size: 16,
             centered: true,
           ),

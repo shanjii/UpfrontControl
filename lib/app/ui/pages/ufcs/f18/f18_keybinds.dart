@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:ufc_app/app/data/models/payloads/f16_keys_model.dart';
-import 'package:ufc_app/app/presenters/global_presenters/button_presenter.dart';
+import 'package:ufc_app/app/data/models/ufcs/f16_keys_model.dart';
+import 'package:ufc_app/app/data/models/ufcs/f18_keys_model.dart';
+import 'package:ufc_app/app/presenters/ufc_presenter.dart';
 import 'package:ufc_app/app/ui/components/keybinder.dart';
-import 'package:ufc_app/app/ui/components/multi_keybinder.dart';
 import 'package:ufc_app/app/ui/components/text.dart';
 import 'package:ufc_app/app/ui/pages/ufcs/f16/buttons/f16_rounded_button.dart';
-import 'package:ufc_app/app/ui/pages/ufcs/f16/buttons/f16_selector_button.dart';
+import 'package:ufc_app/core/enums/ufcs.dart';
 import 'package:ufc_app/core/values/colors.dart';
 import 'package:provider/provider.dart';
 
@@ -23,7 +23,7 @@ class _F18KeybindsPage extends State<F18KeybindsPage> {
       create: (context) => UfcPresenter(context),
       child: Consumer(
         builder: (context, UfcPresenter controller, _) {
-          F16KeysModel keys = controller.data.f16KeysValues;
+          F18KeysModel keys = controller.data.f18KeysValues;
 
           return Scaffold(
             backgroundColor: DefaultColors.gray4,
@@ -54,43 +54,43 @@ class _F18KeybindsPage extends State<F18KeybindsPage> {
                           label: "COM",
                           secondLabel: "1",
                         ),
-                        keybind: keys.com1,
+                        keybind: keys.num1,
                         onAdd: (key, modifier, index) {
                           setState(() {
-                            keys.com1.key = key;
-                            keys.com1.modifier = modifier;
-                            controller.setExampleKeys();
+                            keys.num1.key = key;
+                            keys.num1.modifier = modifier;
+                            controller.saveUfcKeys(Ufcs.f18, keys);
                           });
                         },
                       ),
-                      _multiKeybindRegion(
-                        children: [
-                          _title(
-                            title: "Step switch",
-                            subtitle: "UP - DOWN",
-                          ),
-                          MultiKeybinder(
-                            button: const F16SelectorButton(
-                              labelUp: "▲",
-                              labelDown: "▼",
-                            ),
-                            square: false,
-                            keybinds: [
-                              keys.stepUp,
-                              keys.stepDown,
-                            ],
-                            onAdd: (key, modifier, index) {
-                              _setMultiKeybindsExample(
-                                key,
-                                modifier,
-                                index,
-                                keys,
-                              );
-                              controller.setExampleKeys();
-                            },
-                          ),
-                        ],
-                      )
+                      // _multiKeybindRegion(
+                      //   children: [
+                      //     _title(
+                      //       title: "Step switch",
+                      //       subtitle: "UP - DOWN",
+                      //     ),
+                      //     MultiKeybinder(
+                      //       button: const F16SelectorButton(
+                      //         labelUp: "▲",
+                      //         labelDown: "▼",
+                      //       ),
+                      //       square: false,
+                      //       keybinds: [
+                      //         keys.stepUp,
+                      //         keys.stepDown,
+                      //       ],
+                      //       onAdd: (key, modifier, index) {
+                      //         _setMultiKeybindsExample(
+                      //           key,
+                      //           modifier,
+                      //           index,
+                      //           keys,
+                      //         );
+                      //         controller.saveUfcKeys(Ufcs.f18, keys);
+                      //       },
+                      //     ),
+                      //   ],
+                      // )
                     ],
                   ),
                 ),

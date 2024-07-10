@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:ufc_app/app/data/models/payloads/f16_keys_model.dart';
-import 'package:ufc_app/app/presenters/global_presenters/button_presenter.dart';
+import 'package:ufc_app/app/data/models/ufcs/f16_keys_model.dart';
+import 'package:ufc_app/app/presenters/ufc_presenter.dart';
 import 'package:ufc_app/app/ui/components/keybinder.dart';
 import 'package:ufc_app/app/ui/components/multi_keybinder.dart';
 import 'package:ufc_app/app/ui/components/text.dart';
@@ -10,6 +10,7 @@ import 'package:ufc_app/app/ui/pages/ufcs/f16/buttons/f16_rounded_button.dart';
 import 'package:ufc_app/app/ui/pages/ufcs/f16/buttons/f16_rounded_solid_button.dart';
 import 'package:ufc_app/app/ui/pages/ufcs/f16/buttons/f16_selector_button.dart';
 import 'package:ufc_app/app/ui/pages/ufcs/f16/buttons/f16_switch.dart';
+import 'package:ufc_app/core/enums/ufcs.dart';
 import 'package:ufc_app/core/values/colors.dart';
 import 'package:provider/provider.dart';
 
@@ -63,7 +64,7 @@ class _F16KeybindsState extends State<F16KeybindsPage> {
                           setState(() {
                             keys.com1.key = key;
                             keys.com1.modifier = modifier;
-                            controller.setF16Keys();
+                            controller.saveUfcKeys(Ufcs.f16, keys);
                           });
                         },
                       ),
@@ -77,7 +78,7 @@ class _F16KeybindsState extends State<F16KeybindsPage> {
                           setState(() {
                             keys.com2.key = key;
                             keys.com2.modifier = modifier;
-                            controller.setF16Keys();
+                            controller.saveUfcKeys(Ufcs.f16, keys);
                           });
                         },
                       ),
@@ -90,7 +91,7 @@ class _F16KeybindsState extends State<F16KeybindsPage> {
                           setState(() {
                             keys.iff.key = key;
                             keys.iff.modifier = modifier;
-                            controller.setF16Keys();
+                            controller.saveUfcKeys(Ufcs.f16, keys);
                           });
                         },
                       ),
@@ -103,7 +104,7 @@ class _F16KeybindsState extends State<F16KeybindsPage> {
                           setState(() {
                             keys.list.key = key;
                             keys.list.modifier = modifier;
-                            controller.setF16Keys();
+                            controller.saveUfcKeys(Ufcs.f16, keys);
                           });
                         },
                       ),
@@ -116,7 +117,7 @@ class _F16KeybindsState extends State<F16KeybindsPage> {
                           setState(() {
                             keys.aa.key = key;
                             keys.aa.modifier = modifier;
-                            controller.setF16Keys();
+                            controller.saveUfcKeys(Ufcs.f16, keys);
                           });
                         },
                       ),
@@ -129,7 +130,7 @@ class _F16KeybindsState extends State<F16KeybindsPage> {
                           setState(() {
                             keys.ag.key = key;
                             keys.ag.modifier = modifier;
-                            controller.setF16Keys();
+                            controller.saveUfcKeys(Ufcs.f16, keys);
                           });
                         },
                       ),
@@ -144,7 +145,7 @@ class _F16KeybindsState extends State<F16KeybindsPage> {
                           setState(() {
                             keys.num1.key = key;
                             keys.num1.modifier = modifier;
-                            controller.setF16Keys();
+                            controller.saveUfcKeys(Ufcs.f16, keys);
                           });
                         },
                       ),
@@ -159,7 +160,7 @@ class _F16KeybindsState extends State<F16KeybindsPage> {
                           setState(() {
                             keys.num2.key = key;
                             keys.num2.modifier = modifier;
-                            controller.setF16Keys();
+                            controller.saveUfcKeys(Ufcs.f16, keys);
                           });
                         },
                       ),
@@ -174,7 +175,7 @@ class _F16KeybindsState extends State<F16KeybindsPage> {
                           setState(() {
                             keys.num3.key = key;
                             keys.num3.modifier = modifier;
-                            controller.setF16Keys();
+                            controller.saveUfcKeys(Ufcs.f16, keys);
                           });
                         },
                       ),
@@ -189,7 +190,7 @@ class _F16KeybindsState extends State<F16KeybindsPage> {
                           setState(() {
                             keys.num4.key = key;
                             keys.num4.modifier = modifier;
-                            controller.setF16Keys();
+                            controller.saveUfcKeys(Ufcs.f16, keys);
                           });
                         },
                       ),
@@ -204,7 +205,7 @@ class _F16KeybindsState extends State<F16KeybindsPage> {
                           setState(() {
                             keys.num5.key = key;
                             keys.num5.modifier = modifier;
-                            controller.setF16Keys();
+                            controller.saveUfcKeys(Ufcs.f16, keys);
                           });
                         },
                       ),
@@ -219,7 +220,7 @@ class _F16KeybindsState extends State<F16KeybindsPage> {
                           setState(() {
                             keys.num6.key = key;
                             keys.num6.modifier = modifier;
-                            controller.setF16Keys();
+                            controller.saveUfcKeys(Ufcs.f16, keys);
                           });
                         },
                       ),
@@ -234,7 +235,7 @@ class _F16KeybindsState extends State<F16KeybindsPage> {
                           setState(() {
                             keys.num7.key = key;
                             keys.num7.modifier = modifier;
-                            controller.setF16Keys();
+                            controller.saveUfcKeys(Ufcs.f16, keys);
                           });
                         },
                       ),
@@ -249,7 +250,7 @@ class _F16KeybindsState extends State<F16KeybindsPage> {
                           setState(() {
                             keys.num8.key = key;
                             keys.num8.modifier = modifier;
-                            controller.setF16Keys();
+                            controller.saveUfcKeys(Ufcs.f16, keys);
                           });
                         },
                       ),
@@ -264,7 +265,7 @@ class _F16KeybindsState extends State<F16KeybindsPage> {
                           setState(() {
                             keys.num9.key = key;
                             keys.num9.modifier = modifier;
-                            controller.setF16Keys();
+                            controller.saveUfcKeys(Ufcs.f16, keys);
                           });
                         },
                       ),
@@ -279,7 +280,7 @@ class _F16KeybindsState extends State<F16KeybindsPage> {
                           setState(() {
                             keys.num0.key = key;
                             keys.num0.modifier = modifier;
-                            controller.setF16Keys();
+                            controller.saveUfcKeys(Ufcs.f16, keys);
                           });
                         },
                       ),
@@ -293,7 +294,7 @@ class _F16KeybindsState extends State<F16KeybindsPage> {
                           setState(() {
                             keys.entr.key = key;
                             keys.entr.modifier = modifier;
-                            controller.setF16Keys();
+                            controller.saveUfcKeys(Ufcs.f16, keys);
                           });
                         },
                       ),
@@ -307,7 +308,7 @@ class _F16KeybindsState extends State<F16KeybindsPage> {
                           setState(() {
                             keys.rcl.key = key;
                             keys.rcl.modifier = modifier;
-                            controller.setF16Keys();
+                            controller.saveUfcKeys(Ufcs.f16, keys);
                           });
                         },
                       ),
@@ -320,7 +321,7 @@ class _F16KeybindsState extends State<F16KeybindsPage> {
                           setState(() {
                             keys.wx.key = key;
                             keys.wx.modifier = modifier;
-                            controller.setF16Keys();
+                            controller.saveUfcKeys(Ufcs.f16, keys);
                           });
                         },
                       ),
@@ -342,7 +343,10 @@ class _F16KeybindsState extends State<F16KeybindsPage> {
                             ],
                             onAdd: (key, modifier, index) {
                               _setStepperKeybinds(key, modifier, index, keys);
-                              controller.setF16Keys();
+                              controller.saveUfcKeys(
+                                Ufcs.f16,
+                                keys,
+                              );
                             },
                           ),
                           _title(
@@ -361,7 +365,10 @@ class _F16KeybindsState extends State<F16KeybindsPage> {
                             ],
                             onAdd: (key, modifier, index) {
                               _setFlirKeybinds(key, modifier, index, keys);
-                              controller.setF16Keys();
+                              controller.saveUfcKeys(
+                                Ufcs.f16,
+                                keys,
+                              );
                             },
                           ),
                           _title(
@@ -378,7 +385,10 @@ class _F16KeybindsState extends State<F16KeybindsPage> {
                             ],
                             onAdd: (key, modifier, index) {
                               _setDobberKeybinds(key, modifier, index, keys);
-                              controller.setF16Keys();
+                              controller.saveUfcKeys(
+                                Ufcs.f16,
+                                keys,
+                              );
                             },
                           ),
                           _title(
@@ -394,7 +404,10 @@ class _F16KeybindsState extends State<F16KeybindsPage> {
                             ],
                             onAdd: (key, modifier, index) {
                               _setSwitchKeybinds(key, modifier, index, keys);
-                              controller.setF16Keys();
+                              controller.saveUfcKeys(
+                                Ufcs.f16,
+                                keys,
+                              );
                             },
                           ),
                         ],

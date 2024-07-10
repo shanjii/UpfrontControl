@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ufc_app/app/common/key_actions.dart';
 import 'package:ufc_app/app/common/modals.dart';
-import 'package:ufc_app/app/data/models/payloads/action_model.dart';
+import 'package:ufc_app/app/data/models/action_model.dart';
 import 'package:ufc_app/app/ui/components/keybind_selector.dart';
 import 'package:ufc_app/app/ui/components/text.dart';
 import 'package:ufc_app/core/enums/key_type.dart';
@@ -89,7 +89,7 @@ class _AddKeybindState extends State<AddKeybind> {
       if (widget.action.key != null) {
         return Center(
           child: defaultText(
-            stringToKeyname(widget.action.key!)!,
+            stringToKey(widget.action.key!)!,
             size: 20,
           ),
         );
@@ -102,7 +102,7 @@ class _AddKeybindState extends State<AddKeybind> {
       if (widget.action.modifier != null) {
         return Center(
           child: defaultText(
-            stringToKeyname(widget.action.modifier!)!,
+            stringToModifier(widget.action.modifier!)!,
             size: 20,
           ),
         );

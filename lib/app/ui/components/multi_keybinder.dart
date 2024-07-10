@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ufc_app/app/data/models/payloads/action_model.dart';
+import 'package:ufc_app/app/data/models/action_model.dart';
 import 'package:ufc_app/app/ui/components/add_keybind.dart';
 
 class MultiKeybinder extends StatelessWidget {
