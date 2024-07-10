@@ -1,11 +1,16 @@
-import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter_vibrate/flutter_vibrate.dart';
+import 'package:ufc_app/core/sounds/sounds.dart';
 
 class FeedbackPresenter {
+  FeedbackPresenter({
+    required this.muted,
+    required this.haptic,
+    required this.sounds,
+  });
+
   bool muted;
   FeedbackType? haptic;
-
-  FeedbackPresenter({required this.muted, required this.haptic});
+  Sounds sounds;
 
   tapVibration() {
     if (haptic == null) return;
@@ -13,10 +18,6 @@ class FeedbackPresenter {
   }
 
   tapSound() {
-    AudioPlayer().play(
-      AssetSource('click1.ogg'),
-      volume: muted ? 0 : 100,
-      mode: PlayerMode.lowLatency,
-    );
+    sounds.playClick();
   }
 }

@@ -1,11 +1,13 @@
 import 'dart:convert';
-import 'package:audioplayers/audioplayers.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_vibrate/flutter_vibrate.dart';
+import 'package:soundpool/soundpool.dart';
 import 'package:ufc_app/app/data/models/action_model.dart';
 import 'package:ufc_app/app/data/models/ufcs/f16_keys_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:ufc_app/app/data/models/ufcs/f18_keys_model.dart';
 import 'package:ufc_app/core/enums/ufcs.dart';
+import 'package:ufc_app/core/sounds/sounds.dart';
 
 class Startup {
   final SharedPreferences instance;
@@ -14,14 +16,6 @@ class Startup {
 
   Future clearStorage() async {
     await instance.clear();
-  }
-
-  Future cacheSounds() async {
-    await AudioPlayer().play(
-      AssetSource('click1.ogg'),
-      volume: 0,
-      mode: PlayerMode.lowLatency,
-    );
   }
 
   Future manageVersion(String version) async {
@@ -61,6 +55,19 @@ class Startup {
     } else {
       return FeedbackType.values.byName(value);
     }
+  }
+
+  Future<Sounds> loadSounds() async {
+    Soundpool pool = Soundpool.fromOptions(
+      options: const SoundpoolOptions(streamType: StreamType.notification),
+    );
+
+    int clickSound = await rootBundle.load("assets/click1.ogg").then(
+      (ByteData soundData) {
+        return pool.load(soundData);
+      },
+    );
+    return Sounds(pool: pool, clickSound: clickSound);
   }
 
   Future<F16KeysModel> getF16Keybinds() async {

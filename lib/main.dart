@@ -7,6 +7,7 @@ import 'package:ufc_app/app/presenters/global_presenters/activity_presenter.dart
 import 'package:ufc_app/app/presenters/global_presenters/data_presenter.dart';
 import 'package:ufc_app/app/presenters/global_presenters/feedback_presenter.dart';
 import 'package:ufc_app/app/ui/pages/home/home_page.dart';
+import 'package:ufc_app/core/sounds/sounds.dart';
 import 'package:ufc_app/startup.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -26,6 +27,7 @@ void main() async {
 
   var startup = Startup(instance: await SharedPreferences.getInstance());
   await startup.manageVersion(packageInfo.version);
+  Sounds sounds = await startup.loadSounds();
   String savedIp = await startup.getSavedIp();
   String savedPort = await startup.getSavedPort();
   bool isMuted = await startup.getMutedSetting();
@@ -37,8 +39,7 @@ void main() async {
   //more ufcs go here
   bool virtualJoystick = await startup.getVirtualjoystickSetting();
   int innactivityTime = 15;
-  await startup.cacheSounds();
-
+  
   runApp(
     App(
       savedIp: savedIp,
@@ -50,6 +51,7 @@ void main() async {
       innactivityTime: innactivityTime,
       manageActivity: manageActivity,
       virtualJoystick: virtualJoystick,
+      sounds: sounds,
     ),
   );
 }
@@ -64,6 +66,7 @@ class App extends StatelessWidget {
   final FeedbackType? haptic;
   final bool manageActivity;
   final bool virtualJoystick;
+  final Sounds sounds;
 
   const App({
     super.key,
@@ -76,6 +79,7 @@ class App extends StatelessWidget {
     required this.innactivityTime,
     required this.manageActivity,
     required this.virtualJoystick,
+    required this.sounds,
   });
 
   @override
@@ -86,6 +90,7 @@ class App extends StatelessWidget {
           create: (context) => FeedbackPresenter(
             muted: isMuted,
             haptic: haptic,
+            sounds: sounds,
           ),
         ),
         Provider(
