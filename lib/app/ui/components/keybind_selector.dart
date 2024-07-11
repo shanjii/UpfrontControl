@@ -76,6 +76,7 @@ class KeybindSelector extends StatelessWidget {
     return Card(
       color: DefaultColors.gray2,
       child: InkWell(
+        borderRadius: BorderRadius.circular(12),
         onTap: () {
           if (type == KeyType.key) {
             onAdd(value, currentModifier, position);
