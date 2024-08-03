@@ -7,7 +7,7 @@ class DefaultValues {
   static connection() {
     return ConnectionModel(
       ip: "",
-      port: "4400",
+      port: "5551",
       virtualJoystick: false,
     );
   }
