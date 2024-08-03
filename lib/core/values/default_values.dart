@@ -49,11 +49,7 @@ class DefaultValues {
 
   static f18Keys() {
     return F18KeysModel(
-      num1: ActionModel(
-        key: null,
-        modifier: null,
-        joyKey: 1,
-      ),
+      num1: ActionModel(key: null, modifier: null, joyKey: 1),
     );
   }
 }
