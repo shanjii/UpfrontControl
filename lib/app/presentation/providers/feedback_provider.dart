@@ -25,6 +25,7 @@ class FeedbackProvider {
   }
 
   tapSound() {
+    if (muted) return;
     sounds.playClick();
   }
 }

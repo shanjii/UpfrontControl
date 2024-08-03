@@ -54,7 +54,7 @@ class _SettingsState extends State<OptionsPage> {
                     ],
                   ),
                 ),
-                _title("Button sounds"),
+                _title("Mute sounds"),
                 Container(
                   margin: const EdgeInsets.symmetric(vertical: 10),
                   height: 60,
